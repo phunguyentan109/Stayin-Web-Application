@@ -1,4 +1,3 @@
-require("dotenv").load()
 const jwt = require("jsonwebtoken");
 
 exports.generateToken = (id, viewname, email, profileImg, roles) => {
