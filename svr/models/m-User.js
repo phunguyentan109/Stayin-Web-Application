@@ -16,28 +16,14 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-    profileImg: {
-        type: String,
-        default: "https://images.unsplash.com/photo-1546102597-e1f46ca8bb28?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+    avatar: {
+        cloudId: String,
+        link: {
+            type: String,
+            default: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
+        }
     },
-    room: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Room"
-        }
-    ],
-    price: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Price"
-        }
-    ],
-    waiter: [ // this field is for people who have accept the invitation of hiring but hasn't got their rooms
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        }
-    ]
+    phone: String
 });
 
 userSchema.pre("save", async function(next){
@@ -56,15 +42,6 @@ userSchema.pre("save", async function(next){
 userSchema.pre("remove", async function(next){
     try{
         await db.UserRole.deleteMany({user: this._id});
-        await db.Price.deleteMany({_id: {$in: this.price}});
-
-        if(this.room.length > 0){
-            for(let roomId of this.room){
-                let foundRoom = await db.Room.findOne({_id: roomId});
-                await foundRoom.remove();
-            }
-        }
-
         return next();
     }catch(err){
         next(err);

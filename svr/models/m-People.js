@@ -1,24 +1,28 @@
 const mongoose = require("mongoose");
 const db = require("../models");
+const {spliceId} = require("../utils/dbSupport");
 
 const peopleSchema = new mongoose.Schema({
-    profile: {
+    user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    begin: {
+    room_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Room"
+    },
+    jobs: String,
+    birthPlace: {
         type: Date,
         default: Date.now
     }
 })
 
 peopleSchema.pre("remove", async function(next){
-    try{
-        let foundRoom = await db.Room.findById(this.room);
-        foundRoom.people.splice(foundRoom.people.indexOf(this._id), 1);
-        foundRoom.save();
+    try {
+        await spliceId("Room", this.room_id, "people_id", this._id);
         return next();
-    }catch(err){
+    } catch(err) {
         return next(err);
     }
 })
