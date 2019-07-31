@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import Dashboard from "components/views/Dashboard";
-import AppLayout from "contains/Layout/AppLayout";
 
 class DashboardContain extends Component {
     state = {
@@ -12,20 +11,16 @@ class DashboardContain extends Component {
     }
 
     handleChangeIndex = index => {
-      this.setState({ value: index });
+        this.setState({ value: index });
     };
 
     render() {
         const {classes} = this.props;
-        return (
-            <AppLayout {...this.props}>
-                <Dashboard
-                    classes={classes}
-                    handleChange={this.handleChange}
-                    handleChangeIndex={this.handleChangeIndex}
-                />
-            </AppLayout>
-        )
+        return <Dashboard
+            classes={classes}
+            handleChange={this.handleChange}
+            handleChangeIndex={this.handleChangeIndex}
+        />
     }
 }
 
