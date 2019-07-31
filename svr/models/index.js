@@ -11,4 +11,3 @@ module.exports.Bill = require("./m-Bill");
 module.exports.Role = require("./m-Role");
 module.exports.People = require("./m-People");
 module.exports.UserRole = require("./m-UserRole");
-module.exports.Contact = require("./m-Contact");

@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const {spliceId} = require("../utils/dbSupport");
 
 const billSchema = new mongoose.Schema({
-    electricity: {
+    electric: {
         type: Number,
-         default: 0
+        default: 0
     },
     wifi: {
         type: Number,
@@ -13,26 +14,21 @@ const billSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    rent: {
+    house: {
         type: Number,
         default: 0
     },
-    total: {
-        type: Number,
-        default: 0
-    },
-    room: {
+    room_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Room"
     }
 })
 
 billSchema.pre("remove", async function(next){
-    try{
-        let room = await db.Room.findById(this.room);
-        room.bill.remove(this._id);
-        await room.save();
-    }catch(err){
+    try {
+        await spliceId("Room", "room_id", "bill_id", this._id);
+        return next();
+    } catch(err) {
         next(err);
     }
 })

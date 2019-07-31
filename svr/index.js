@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mw = require("./middleware");
 const hdl = require("./handlers");
+require("./seed")();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

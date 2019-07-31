@@ -1,9 +1,6 @@
-module.exports = {
-    Error: require("./h-Error"),
-    User: require("./h-User"),
-    People: require("./h-People"),
-    Price: require("./h-Price"),
-    Role: require("./h-Role"),
-    Room: require("./h-Room"),
-    Contact: require("./h-Contact")
-};
+module.exports.Error = require("./h-Error");
+module.exports.User = require("./h-User");
+module.exports.People = require("./h-People");
+module.exports.Price = require("./h-Price");
+module.exports.Role = require("./h-Role");
+module.exports.Room = require("./h-Room");

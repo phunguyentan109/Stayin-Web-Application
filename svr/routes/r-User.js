@@ -7,6 +7,5 @@ router.route("/login").post(hdl.User.logIn);
 
 router.use("/rooms", require("./r-Room"));
 router.use("/prices", require("./r-Price"));
-router.use("/contacts", require("./r-Contact"));
 
 module.exports = router;
