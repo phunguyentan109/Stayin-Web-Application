@@ -59,4 +59,4 @@ const routes = [
 
 export {sidebar};
 
-export default [...sidebar, ...routes];
+export default [...routes, ...sidebar];
