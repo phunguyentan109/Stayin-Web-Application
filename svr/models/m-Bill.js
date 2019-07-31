@@ -24,7 +24,7 @@ const billSchema = new mongoose.Schema({
     }
 })
 
-userSchema.pre("remove", async function(next){
+billSchema.pre("remove", async function(next){
     try {
         await spliceId("Room", "room_id", "bill_id", this._id);
         return next();

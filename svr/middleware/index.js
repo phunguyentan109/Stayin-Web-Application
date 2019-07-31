@@ -1,3 +1,1 @@
 module.exports.User = require("./mw-User");
-module.exports.Room = require("./mw-Room");
-module.exports.Price = require("./mw-Price");
