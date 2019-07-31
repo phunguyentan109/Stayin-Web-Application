@@ -1,4 +1,4 @@
-const db = require("../model");
+const db = require("../models");
 
 /*
     Remove a record's id from a document's collumn (which contains an array) of

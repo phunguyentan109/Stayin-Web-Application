@@ -5,7 +5,7 @@ const mw = require("../middleware");
 
 router.route("/")
 .get(hdl.Price.getAll)
-.post(mw.Price.init, hdl.Price.create);
+.post(hdl.Price.create);
 
 router.route("/:price_id")
 .delete(hdl.Price.remove)

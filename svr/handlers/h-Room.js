@@ -1,5 +1,5 @@
 const db = require("../models");
-const ut = require("../ut");
+// const ut = require("../ut");
 
 exports.getAll = async(req, res, next) => {
     try{
@@ -21,8 +21,8 @@ exports.create = async(req, res, next) => {
         listPrice[0].room.push(createdRoom._id);
         listPrice[0].save();
 
-        await ut.addRoleToUser(220, req.params.user_id);
-        await ut.pushIdToCol("User", "room", req.params.user_id, createdRoom._id);
+        // await ut.addRoleToUser(220, req.params.user_id);
+        // await ut.pushIdToCol("User", "room", req.params.user_id, createdRoom._id);
         return res.status(200).json(createdRoom);
     }catch(err){
         return next(err);
