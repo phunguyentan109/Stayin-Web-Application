@@ -1,68 +1,39 @@
 const mongoose = require("mongoose");
 const db = require("./index");
+const {spliceId} = require("../utils/dbSupport");
 
 const roomSchema = new mongoose.Schema({
-    number: {
-        type: Number,
+    name: {
+        type: String,
+        unique: true,
         required: true
     },
-    people: [
+    people_id: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "People"
         }
     ],
-    bill: [
+    billDate: Date,
+    bill_id: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Bill"
         }
     ],
-    price: {
+    price_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Price"
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
     }
-})
-
-roomSchema.pre("save", async function(next){
-    try{
-        if(this.isModified("number")){
-            let foundRoom = await db.Room.findOne({number: this.number, user: this.user});
-            if(foundRoom){
-                return next({
-                    status: 400,
-                    message: "The number is already used!"
-                });
-            }
-        }
-        next();
-    }catch(err){
-        return next(err);
-    }
-})
+});
 
 roomSchema.pre("remove", async function(next){
-    try{
-        let foundUser = await db.User.findById(this.user);
-        if(foundUser){
-            foundUser.room.splice(foundUser.room.indexOf(this._id), 1);
-            foundUser.save();
-        }
-
-        let foundPrice = await db.Price.findById(this.price);
-        if(foundPrice){
-            foundPrice.room.splice(foundPrice.room.indexOf(this._id), 1);
-            foundPrice.save();
-        }
-
-        db.People.deleteMany({"_id": {$in: this.people}});
-        db.Bill.deleteMany({"_id": {$in: this.bill}});
+    try {
+        await spliceId("Bill", this.bill_id, "room_id", this._id);
+        await spliceId("Price", this.price_id, "room_id", this._id);
+        await db.Bill.deleteMany({_id: {$in: this.bill_id}});
         return next();
-    }catch(err){
+    } catch(err) {
         return next(err);
     }
 })
