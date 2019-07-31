@@ -37,8 +37,8 @@ function Header({ ...props }) {
   function makeBrand() {
     var name;
     props.routes.map(prop => {
-      if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
-        name = props.rtlActive ? prop.rtlName : prop.name;
+      if (window.location.href.indexOf(prop.path) !== -1) {
+        name = prop.name;
       }
       return null;
     });

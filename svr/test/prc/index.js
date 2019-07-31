@@ -1,5 +1,5 @@
 async function exec(req, res, prcs, length){
-    try{
+    try {
         await prcs[0](req, res, err => {if(err) throw err});
         prcs.splice(0, 1);
 
@@ -8,7 +8,7 @@ async function exec(req, res, prcs, length){
         } else {
             return await exec(req, res, prcs, length);
         }
-    }catch(err){
+    } catch(err) {
         return err;
     }
 }
@@ -20,6 +20,3 @@ module.exports.exec = async(req, res, ...prcs) => {
 module.exports.User = require("./prc-User");
 module.exports.Price = require("./prc-Price");
 module.exports.Room = require("./prc-Room");
-module.exports.mwUser = require("./prc-mw-User");
-module.exports.Contact = require("./prc-Contact");
-module.exports.mwContact = require("./prc-mw-Contact");
