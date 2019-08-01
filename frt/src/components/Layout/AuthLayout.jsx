@@ -4,8 +4,8 @@ import {Grid} from "@material-ui/core";
 
 import "assets/css/components/stayin-style.css";
 
-const AuthLayout = ({bg, bgColor, ...props}) => (
-    <div className="reset authBg" style={{backgroundImage: `url(${bg})`}}>
+const AuthLayout = ({bg, bgColor, heading, ...props}) => (
+    <div className="authBg" style={{backgroundImage: `url(${bg})`}}>
         <div style={{backgroundColor: `${bgColor}`}}>
             <Grid
                 container
@@ -14,19 +14,18 @@ const AuthLayout = ({bg, bgColor, ...props}) => (
                 alignItems="center"
                 className="authNavbar"
             >
-                <Link to="/">Stayin</Link>
+                <Link to="/">Staywell</Link>
                 <Link to="/register"><i className="fas fa-user-plus" ></i> Create an account</Link>
             </Grid>
-            <div className="container stayin-container">
-                <div>
-                    {/* <h1>{heading}</h1>
-                    {error.message && (<div className="alert alert-danger">{error.message}</div>)}
-                    <AuthForm {...form} sendChange={sendChange} sendSubmit={sendSubmit}/>
-                    <Link to={footer.url} className="stayin-link">{footer.text}</Link> */}
-                    {props.children}
-                </div>
+            <div id="content">
+                <h1>Welcome to Staywell,</h1>
+                <h4>Please enter your account to continue.</h4>
+                {/* {error.message && (<div className="alert alert-danger">{error.message}</div>)} */}
+                {props.children}
             </div>
-            {/* <AuthCrebar /> */}
+            <div className="authCredit">
+                <p>©2018, designed and coded with all my <i className="fas fa-heartbeat"></i> and <i className="fas fa-coffee"></i> | Phu Nguyen</p>
+            </div>
         </div>
     </div>
 );

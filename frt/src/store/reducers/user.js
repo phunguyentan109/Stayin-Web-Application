@@ -6,15 +6,12 @@ const DEFAULT_STATE = {
 }
 
 export default (state = DEFAULT_STATE, action) => {
-    switch(action.type){
+    const {type, user} = action;
+    switch(type){
         case ADD_USER:
             return {
-                isAuthenticated: !!Object.keys(action.userData).length,
-                data: {
-                    viewname: action.userData.viewname,
-                    profileImg: action.userData.profileImg,
-                    id: action.userData.id
-                }
+                isAuthenticated: !!Object.keys(user).length,
+                data: user
             };
         default:
             return state;

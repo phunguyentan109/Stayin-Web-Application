@@ -6,15 +6,11 @@ const Page = ({location, ...props}) => (
     <div>
         <Switch>
             {
-                routes.map((route, index) => {
-                    if (route.redirect) {
-                        return <Redirect exact from={route.path} to={route.pathTo} key={index} />
-                    } else {
-                        return <Route path={route.path} key={index} render={ ({match}) => (
-                            <route.component {...props} {...route.display} match={match} />
-                        )}/>
-                    }
-                })
+                routes.map((route, index) => (
+                    <Route path={route.path} key={index} render={ ({match}) => (
+                        <route.component {...props} {...route.display} match={match} />
+                    )}/>
+                ))
             }
             <Redirect exact from={location.pathname} to={"/home"} />
         </Switch>

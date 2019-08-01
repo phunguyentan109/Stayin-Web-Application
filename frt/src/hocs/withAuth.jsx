@@ -4,7 +4,10 @@ export default function withAuth(WrappedComponent) {
     function Authentication(props) {
         const [state, setState] = useState({})
 
-        const hdChange = e => setState({[e.target.name]: e.target.value});
+        const hdChange = e => {
+            const {name, value} = e.target;
+            setState(prev => ({ ...prev, [name]: value }));
+        }
 
         const hdSubmit = async(e) => {
             e.preventDefault();
@@ -12,6 +15,7 @@ export default function withAuth(WrappedComponent) {
         }
 
         return <WrappedComponent
+            {...props}
             hdChange={hdChange}
             hdSubmit={hdSubmit}
         />
