@@ -43,7 +43,7 @@ import {
 import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
 const Dashboard = ({classes, ...props}) => (
-    <AppLayoutContain>
+    <AppLayoutContain {...props}>
         <div>
             <GridContainer>
                 <GridItem xs={12} sm={6} md={3}>

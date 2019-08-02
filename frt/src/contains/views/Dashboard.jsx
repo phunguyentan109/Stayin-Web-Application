@@ -16,9 +16,8 @@ class DashboardContain extends Component {
     };
 
     render() {
-        const {classes} = this.props;
         return <Dashboard
-            classes={classes}
+            {...this.props}
             handleChange={this.handleChange}
             handleChangeIndex={this.handleChangeIndex}
         />

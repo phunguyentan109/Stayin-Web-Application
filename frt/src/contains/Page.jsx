@@ -7,8 +7,8 @@ const Page = ({location, ...props}) => (
         <Switch>
             {
                 routes.map((route, index) => (
-                    <Route path={route.path} key={index} render={ ({match, location}) => (
-                        <route.component {...props} {...route.display} match={match} location={location} />
+                    <Route path={route.path} key={index} render={ (propsB) => (
+                        <route.component {...propsB} {...route.display}/>
                     )}/>
                 ))
             }

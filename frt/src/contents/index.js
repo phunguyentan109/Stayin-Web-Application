@@ -5,6 +5,7 @@ import Dashboard from "@material-ui/icons/Dashboard";
 
 import dashboard from "./display/Dashboard";
 import login from "./display/Login";
+import register from "./display/Register";
 
 const sidebar = [
     {
@@ -56,6 +57,12 @@ const routes = [
         roles: [],
         component: Login,
         display: login
+    },
+    {
+        path: "/register",
+        roles: [],
+        component: Login,
+        display: register
     }
 ]
 

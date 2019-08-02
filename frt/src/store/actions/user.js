@@ -1,6 +1,6 @@
 import {ADD_USER} from "../actionTypes";
 import {apiAppCall, setTokenHeader} from "services/api";
-import {addError, removeError} from "./error";
+import {setError} from "./error";
 
 export const setUser = user => ({type: ADD_USER, user});
 
@@ -24,9 +24,9 @@ export function authUser(route, data) {
             localStorage.setItem("token", token);
             setAuthorizationToken(token);
             dispatch(setUser(user));
-            dispatch(removeError());
+            dispatch(setError());
         } catch(err) {
-            dispatch(addError(err));
+            dispatch(setError(err));
         }
     }
 }
