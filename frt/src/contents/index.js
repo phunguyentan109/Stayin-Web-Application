@@ -1,4 +1,4 @@
-import DashboardContain from "contains/views/Dashboard.jsx";
+import DashboardContain from "contains/views/Dashboard";
 import Login from "components/views/Login";
 
 import Dashboard from "@material-ui/icons/Dashboard";
@@ -14,8 +14,7 @@ const sidebar = [
         name: "Dashboard",
         component: DashboardContain,
         icon: Dashboard,
-        display: dashboard,
-        exact: true
+        display: dashboard
     },
     {
         path: "/people",
