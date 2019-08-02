@@ -11,9 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
-const routes = require("./routes");
-app.use("/api/user", routes.User);
-app.use("/api/user/:user_id", mw.User.isLogin, mw.User.isCorrect, routes.User);
+app.use("/api/user", require("./routes/r-User"));
 
 app.use((req, res, next) => {
     let err = new Error("Route not found!");
