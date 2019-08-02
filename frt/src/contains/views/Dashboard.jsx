@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Dashboard from "components/views/Dashboard";
+import withAccess from "hocs/withAccess";
 
 class DashboardContain extends Component {
     state = {
@@ -24,4 +25,4 @@ class DashboardContain extends Component {
     }
 }
 
-export default DashboardContain;
+export default withAccess(DashboardContain);

@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route, Redirect, withRouter} from "react-router-dom";
+import {Switch, Route, withRouter} from "react-router-dom";
 import routes from "contents/index";
 
 const Page = ({location, ...props}) => (
@@ -7,12 +7,11 @@ const Page = ({location, ...props}) => (
         <Switch>
             {
                 routes.map((route, index) => (
-                    <Route path={route.path} key={index} render={ ({match}) => (
-                        <route.component {...props} {...route.display} match={match} />
+                    <Route path={route.path} key={index} render={ ({match, location}) => (
+                        <route.component {...props} {...route.display} match={match} location={location} />
                     )}/>
                 ))
             }
-            <Redirect exact from={location.pathname} to={"/home"} />
         </Switch>
     </div>
 )

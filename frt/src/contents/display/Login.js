@@ -20,5 +20,6 @@ export default {
     button: {
         cssClass: "signin",
         text: "Get access"
-    }
+    },
+    api: "/api/user/login"
 }
