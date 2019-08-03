@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 async function exec(req, res, prcs, length){
     try {
         await prcs[0](req, res, err => {if(err) throw err});
