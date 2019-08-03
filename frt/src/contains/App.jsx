@@ -10,16 +10,12 @@ import "assets/css/material-dashboard-react.css?v=1.7.0";
 const store = configureStore();
 checkStore(store);
 
-function App() {
-  return (
-        <div className="App">
-            <Provider store={store}>
-                <Router>
-                    <Page />
-                </Router>
-            </Provider>
-        </div>
-    );
-}
+const App = () => (
+    <Provider store={store}>
+        <Router>
+            <Page />
+        </Router>
+    </Provider>
+);
 
 export default App;

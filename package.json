@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"cd svr && node index\" \"cd frt && npm start\""
+    "start": "concurrently \"cd svr && nodemon index\" \"cd frt && npm start\""
   },
   "keywords": [],
   "author": "",

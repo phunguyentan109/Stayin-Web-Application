@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 const db = require("../models");
 
 const priceSchema = new mongoose.Schema({
-    room_id: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Room"
-        }
-    ],
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
     electric: {
         type: Number,
         default: 0,
@@ -28,9 +27,12 @@ const priceSchema = new mongoose.Schema({
         default: 0,
         required: true
     },
-    extra: {
-        type: String
-    }
+    room_id: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Room"
+        }
+    ]
 })
 
 module.exports = mongoose.model("Price", priceSchema);

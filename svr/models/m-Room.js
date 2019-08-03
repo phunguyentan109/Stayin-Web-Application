@@ -31,7 +31,7 @@ roomSchema.pre("remove", async function(next){
     try {
         await spliceId("Bill", this.bill_id, "room_id", this._id);
         await spliceId("Price", this.price_id, "room_id", this._id);
-        await db.Price.deleteMany({_id: {$in: this.price_id}});
+        await db.Bill.deleteMany({_id: {$in: this.bill_id}});
         return next();
     } catch(err) {
         return next(err);
@@ -39,5 +39,3 @@ roomSchema.pre("remove", async function(next){
 })
 
 module.exports = mongoose.model("Room", roomSchema);
-
-

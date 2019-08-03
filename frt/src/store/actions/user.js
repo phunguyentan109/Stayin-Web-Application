@@ -1,6 +1,6 @@
 import {ADD_USER} from "../actionTypes";
 import {apiAppCall, setTokenHeader} from "services/api";
-import {addError, removeError} from "./error";
+import {setError} from "./error";
 
 export const setUser = user => ({type: ADD_USER, user});
 
@@ -19,14 +19,14 @@ export function logOut(){
 export function authUser(route, data) {
     return async(dispatch) => {
         try {
-            let rs = await apiAppCall("post", `/api/user/${route}`, data);
+            let rs = await apiAppCall("post", route, data);
             const {token, ...user} = rs;
             localStorage.setItem("token", token);
             setAuthorizationToken(token);
             dispatch(setUser(user));
-            dispatch(removeError());
+            dispatch(setError());
         } catch(err) {
-            dispatch(addError(err));
+            dispatch(setError(err));
         }
     }
 }

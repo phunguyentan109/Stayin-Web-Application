@@ -7,7 +7,7 @@ exports.generateToken = (id, viewname, email, profileImg, roles) => {
 }
 
 exports.isLogin = (req, res, next) => {
-    try{
+    try {
         const token = req.headers.authorization.split(" ")[1];
         jwt.verify(token, process.env.SECRET, (err, payload) => {
             if(payload){
@@ -16,7 +16,7 @@ exports.isLogin = (req, res, next) => {
                 return next({status: 401, message: "Please login first!"});
             }
         })
-    }catch(err){
+    } catch(err) {
         return next({status: 401, message: "Please login first!"});
     }
 }

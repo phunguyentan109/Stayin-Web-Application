@@ -14,7 +14,7 @@ export default function withAuth(WrappedComponent) {
 
         const hdSubmit = async(e) => {
             e.preventDefault();
-            await authUser("login", state);
+            await authUser(api, state);
         }
 
         return <WrappedComponent
