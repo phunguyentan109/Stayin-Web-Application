@@ -3,14 +3,15 @@ const hdl = require("../../handlers");
 const prc = require("../prc");
 const mw = require("../../middleware");
 
-exports.create = async(user_id, room) => {
+exports.create = async(user_id, room, authorization) => {
     const {req, res} = mock.createMocks({
         url: `/api/user/${user_id}/rooms`,
         method: "POST",
         params: {user_id},
-        body: room
+        body: room,
+        headers: {authorization}
     });
-    return await prc.exec(req, res, hdl.Room.create);
+    return await prc.exec(req, res,mw.User.isCorrect, mw.User.isPermit, hdl.Room.create);
 }
 
 exports.getAll = async(user_id) => {
