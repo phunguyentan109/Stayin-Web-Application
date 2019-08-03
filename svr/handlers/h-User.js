@@ -5,7 +5,7 @@ exports.signUp = async(req, res, next) => {
     try {
         let vname = req.body.email.split("@")[0];
         let user = await db.User.create({viewname: vname, ...req.body});
-        let {_id, viewname, email, avatar} = user;
+        let {_id, viewname, email, active, avatar} = user;
         let role = await db.Role.findOne({code: "001"});
         await db.UserRole.create({role: role._id, user: _id});
         let token = genToken(_id, role);
@@ -21,7 +21,7 @@ exports.signUp = async(req, res, next) => {
 exports.logIn = async(req, res, next) => {
     try {
         let user = await db.User.findOne({email: req.body.email});
-        let {_id, viewname, email, avatar} = user;
+        let {_id, viewname, email, active, avatar} = user;
         let match = await user.comparePassword(req.body.password);
         if(match){
             let role = (await db.UserRole.findOne({user: _id}).populate("role").exec()).role;

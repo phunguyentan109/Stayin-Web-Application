@@ -21,17 +21,23 @@ exports.isLogin = (req, res, next) => {
     }
 }
 
-exports.isCorrect = (req, res, next) => {
+exports.isCorrect = async(req, res, next) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        jwt.verify(token, process.env.SECRET, function(err, payload){
-            if(payload && payload.id === req.params.user_id){
-                return next();
-            } else {
-                return next({status: 401, message: "Unauthorized!"});
-            }
-        })
+        const payload = jwt.verify(token, process.env.SECRET);
+        if(payload && payload._id === req.params.user_id) return next();
+        return next({status: 401, message: "Unauthorized!"});
     } catch(err) {
-        return next({status: 401, message: err.message});
+        return next(err);
+    }
+}
+
+exports.isPermit = async(req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const payload = await jwt.verify(token, process.env.SECRET);
+        return payload.role.code === "000" ? next(): next({status: 405, message: "Action is not permitted!"});
+    } catch(err) {
+        return next(err);
     }
 }
