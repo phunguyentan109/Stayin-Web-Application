@@ -7,7 +7,7 @@ exports.getAll = async(req, res, next) => {
         let list = await db.Room.find({user_id}).populate({
             path: "price_id",
         }).exec();
-        return res.status(200).json(rooms);
+        return res.status(200).json(list);
     }catch(err){
         return next(err);
     }
@@ -15,14 +15,7 @@ exports.getAll = async(req, res, next) => {
 
 exports.create = async(req, res, next) => {
     try{
-        let listPrice = await db.Price.find({user: req.params.user_id});
-        req.body.user = req.params.user_id;
-        req.body.price = listPrice[0]._id;
         let createdRoom = await db.Room.create(req.body);
-
-        listPrice[0].room.push(createdRoom._id);
-        listPrice[0].save();
-
         return res.status(200).json(createdRoom);
     }catch(err){
         return next(err);
@@ -42,9 +35,7 @@ exports.remove = async(req, res, next) => {
 exports.update = async(req, res, next) => {
     try{
         let foundRoom = await db.Room.findById(req.params.room_id);
-        const {people_id, name} = req.body;
-        foundRoom.name = name;
-        foundRoom.people_id = people_id;
+        foundRoom.name = req.body.name;
         
         await foundRoom.save();
         return res.status(200).json(foundRoom);
