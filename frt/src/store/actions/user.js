@@ -19,7 +19,7 @@ export function logOut(){
 export function authUser(route, data) {
     return async(dispatch) => {
         try {
-            let rs = await apiAppCall("post", `/api/user/${route}`, data);
+            let rs = await apiAppCall("post", route, data);
             const {token, ...user} = rs;
             localStorage.setItem("token", token);
             setAuthorizationToken(token);
