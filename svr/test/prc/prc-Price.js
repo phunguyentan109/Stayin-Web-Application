@@ -3,40 +3,43 @@ const hdl = require("../../handlers");
 const prc = require("../prc");
 const mw = require("../../middleware")
 
-exports.create = async(user_id, price) => {
+exports.create = async(user_id, price, authorization) => {
     const {req, res} = mock.createMocks({
-        method: "POST",
         url: `/user/${user_id}/prices`,
+        method: "POST",
         params: {user_id},
-        body: price
+        body: price,
+        headers: {authorization}
     });
-    return await prc.exec(req, res, mw.Price.init, hdl.Price.create);
+    return await prc.exec(req, res, mw.User.isCorrect, mw.User.isPermit, hdl.Price.create);
 }
 
 exports.getAll = async(user_id) => {
     const {req, res} = mock.createMocks({
-        method: "GET",
         url: `/user/${user_id}/prices`,
+        method: "GET",
         params: {user_id}
     });
     return await prc.exec(req, res, hdl.Price.getAll);
 }
 
-exports.update = async(user_id, price_id, price) => {
+exports.update = async(user_id, price_id, price, authorization) => {
     const {req, res} = mock.createMocks({
-        method: "PUT",
         url: `/user/${user_id}/prices/${price_id}`,
+        method: "PUT",
         params: {user_id, price_id},
-        body: price
+        body: price,
+        headers: {authorization}
     });
-    return await prc.exec(req, res, hdl.Price.update);
+    return await prc.exec(req, res, mw.User.isCorrect, mw.User.isPermit, hdl.Price.update);
 }
 
-exports.remove = async(user_id, price_id) => {
+exports.remove = async(user_id, price_id, authorization) => {
     const {req, res} = mock.createMocks({
+        url: `/user/${user_id}/prices/${price_id}, authorization`,
         method: "DELETE",
-        url: `/user/${user_id}/prices/${price_id}`,
-        params: {user_id, price_id}
+        params: {user_id, price_id},
+        headers: {authorization}
     });
-    return await prc.exec(req, res, hdl.Price.remove);
+    return await prc.exec(req, res, mw.User.isCorrect, mw.User.isPermit, hdl.Price.remove);
 }

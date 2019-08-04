@@ -29,7 +29,8 @@ const priceSchema = new mongoose.Schema({
         required: true
     },
     extra: {
-        type: String
+        type: Number,
+        default: 0
     }
 })
 
