@@ -6,10 +6,13 @@ exports.signUp = async(req, res, next) => {
     try {
         let vname = req.body.email.split("@")[0];
         let user = await db.User.create({viewname: vname, ...req.body});
+        // add role for user
         let {_id, viewname, email, active, avatar} = user;
         let role = await db.Role.findOne({code: "001"});
         await db.UserRole.create({role: role._id, user: _id});
+        // gen token for storing on client
         let token = genToken(_id, role);
+        //send activate mail
         mail.send(mail.options.activate(email, viewname, _id));
         return res.status(200).json({_id, viewname, avatar, email, role, active, token});
     } catch(err) {
@@ -40,5 +43,16 @@ exports.logIn = async(req, res, next) => {
             status: 400,
             message: "Invalid email/password."
         })
+    }
+}
+
+exports.getOne = async(req, res, next) => {
+    try {
+        let user = await db.User.findById(req.params.user_id);
+        let {_id, viewname, email, active, avatar} = user;
+        let role = (await db.UserRole.findOne({user: _id}).populate("role").exec()).role;
+        return res.status(200).json({_id, viewname, avatar, email, role, active});
+    } catch(err) {
+        return next(err);
     }
 }

@@ -9,6 +9,7 @@ import dashboard from "./display/Dashboard";
 import login from "./display/Login";
 import register from "./display/Register";
 import activate from "./display/Activate";
+import activated from "./display/Activated";
 
 const sidebar = [
     {
@@ -71,6 +72,12 @@ const routes = [
         roles: [],
         component: ActivateContain,
         display: activate
+    },
+    {
+        path: "/activate/:user_id",
+        roles: [],
+        component: ActivateContain,
+        display: activated
     }
 ]
 

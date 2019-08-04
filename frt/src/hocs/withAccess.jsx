@@ -6,20 +6,19 @@ export default function withAccess(WrappedComponent) {
         const guestPath = ["/login", "/register"];
 
         useEffect(() => {
+            const {history} = props;
+            const {pathname} = props.location;
             if(user.isAuthenticated) {
-                if(!user.active) props.history.push("/activate");
-                if(guestPath.indexOf(props.location.pathname) !== -1) props.history.push("/");
+                if(!user.data.active) history.push("/activate");
+                if(guestPath.indexOf(pathname) !== -1 || pathname === "/activate") history.push("/");
             } else {
-                if(guestPath.indexOf(props.location.pathname) === -1) props.history.push("/login");
+                if(guestPath.indexOf(pathname) === -1 || pathname === "/activate")
+                    history.push("/login");
             }
-        })
+        });
 
         return <WrappedComponent {...props}/>
     }
 
-    function mapState({user}) {
-        return {user}
-    }
-
-    return connect(mapState, null)(Access);
+    return connect(({user}) => ({user}), null)(Access);
 }

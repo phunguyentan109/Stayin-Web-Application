@@ -28,7 +28,7 @@ const AuthLayout = ({bg, bgColor, heading, link, intro, msg, notify, closeNoti, 
             >
                 <Link to="/">Staywell</Link>
                 {
-                    !user.isAuthenticated && (
+                    !user.isAuthenticated && link && (
                         <Link to={link.to}>
                             <i className="fas fa-user-plus" ></i> {link.text}
                         </Link>
