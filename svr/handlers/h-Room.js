@@ -36,7 +36,7 @@ exports.update = async(req, res, next) => {
     try{
         let foundRoom = await db.Room.findById(req.params.room_id);
         foundRoom.name = req.body.name;
-        
+
         await foundRoom.save();
         return res.status(200).json(foundRoom);
     } catch(err){

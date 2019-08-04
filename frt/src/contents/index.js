@@ -1,10 +1,14 @@
-import DashboardContain from "contains/views/Dashboard.jsx";
+import DashboardContain from "contains/views/Dashboard";
+import ActivateContain from "contains/views/Activate";
+
 import Login from "components/views/Login";
 
 import Dashboard from "@material-ui/icons/Dashboard";
 
 import dashboard from "./display/Dashboard";
 import login from "./display/Login";
+import register from "./display/Register";
+import activate from "./display/Activate";
 
 const sidebar = [
     {
@@ -13,8 +17,7 @@ const sidebar = [
         name: "Dashboard",
         component: DashboardContain,
         icon: Dashboard,
-        display: dashboard,
-        exact: true
+        display: dashboard
     },
     {
         path: "/people",
@@ -56,6 +59,18 @@ const routes = [
         roles: [],
         component: Login,
         display: login
+    },
+    {
+        path: "/register",
+        roles: [],
+        component: Login,
+        display: register
+    },
+    {
+        path: "/activate",
+        roles: [],
+        component: ActivateContain,
+        display: activate
     }
 ]
 

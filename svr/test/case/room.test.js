@@ -15,7 +15,7 @@ describe("ROOM HANDLER TESTS", function(){
     })
 
     describe("1. Create new room", function(){
-        
+
         it("Create room with user account", async function(){
             let rs = await prc.Room.create(logUser._id, room, authorization);
 

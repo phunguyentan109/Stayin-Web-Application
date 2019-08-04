@@ -3,11 +3,11 @@ import bg from "assets/img/loginBg.jpg"
 export default {
     bg,
     bgColor: "rgba(0, 0, 0, 0.5)",
-    heading: "Welcome to Staywell,",
-    intro: "Please enter your account to continue.",
+    heading: "Sign up",
+    intro: "Please enter your account to complete your registration.",
     link: {
-        to: "/register",
-        text: "Create an account"
+        to: "/login",
+        text: "Already a member?"
     },
     input: [
         {
@@ -20,11 +20,17 @@ export default {
             placeholder: "Password",
             name: "password",
             icon: "fas fa-key"
+        },
+        {
+            type: "password",
+            placeholder: "Confirm Password",
+            name: "conpassword",
+            icon: "fas fa-key"
         }
     ],
     button: {
-        cssClass: "signin",
-        text: "Get access"
+        cssClass: "signup",
+        text: "Create account"
     },
-    api: "/api/user/login"
+    api: "/api/user/signup"
 }

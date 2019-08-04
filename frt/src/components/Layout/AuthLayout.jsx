@@ -1,12 +1,24 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Grid} from "@material-ui/core";
+import AddAlert from "@material-ui/icons/AddAlert";
+import Snackbar from "components/Snackbar/Snackbar.jsx";
 
 import "assets/css/components/stayin-style.css";
+import "assets/css/views/views.css";
 
-const AuthLayout = ({bg, bgColor, heading, ...props}) => (
+const AuthLayout = ({bg, bgColor, heading, link, intro, msg, notify, closeNoti, user, logOut, ...props}) => (
     <div className="authBg" style={{backgroundImage: `url(${bg})`}}>
         <div style={{backgroundColor: `${bgColor}`}}>
+            <Snackbar
+                place="tc"
+                color="danger"
+                icon={AddAlert}
+                message={msg}
+                open={notify}
+                closeNotification={closeNoti}
+                close
+            />
             <Grid
                 container
                 item
@@ -15,12 +27,23 @@ const AuthLayout = ({bg, bgColor, heading, ...props}) => (
                 className="authNavbar"
             >
                 <Link to="/">Staywell</Link>
-                <Link to="/register"><i className="fas fa-user-plus" ></i> Create an account</Link>
+                {
+                    user.isAuthenticated && (
+                        <Link to={link.to}>
+                            <i className="fas fa-user-plus" ></i> {link.text}
+                        </Link>
+                    )
+                }
+                {
+                    !user.isAuthenticated &&
+                    <Link onClick={logOut}>
+                        <i className="fas fa-user-plus" ></i> Try with different account?
+                    </Link>
+                }
             </Grid>
             <div id="content">
-                <h1>Welcome to Staywell,</h1>
-                <h4>Please enter your account to continue.</h4>
-                {/* {error.message && (<div className="alert alert-danger">{error.message}</div>)} */}
+                {heading && <h1>{heading}</h1>}
+                {intro && <h4>{intro}</h4>}
                 {props.children}
             </div>
             <div className="authCredit">

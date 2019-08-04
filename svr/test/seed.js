@@ -17,6 +17,18 @@ exports.room = {
     name: "Room 1",
 }
 
+exports.priceData = {
+    electric: 2232,
+    wifi: 100,
+    water: 50,
+    house: 2000,
+    extra: 70
+}
+
+exports.room = {
+    name: "Room 1",
+}
+
 exports.clear = async() => {
     try {
         let foundRoom = await db.Room.findOne({name: "Room 1"});
