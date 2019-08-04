@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import AuthLayout from "components/Layout/AuthLayout";
 import {connect} from "react-redux";
+import {logOut} from "store/actions/user";
 
 function AuthLayoutContain({error, ...props}) {
     const [notify, setNotify] = useState(false);
@@ -29,4 +30,4 @@ function mapState({user, error}) {
     return { user, error }
 }
 
-export default connect(mapState, null)(AuthLayoutContain);
+export default connect(mapState, {logOut})(AuthLayoutContain);

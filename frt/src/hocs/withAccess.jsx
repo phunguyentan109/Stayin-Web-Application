@@ -1,23 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 
 export default function withAccess(WrappedComponent) {
     function Access({user, ...props}) {
         const guestPath = ["/login", "/register"];
 
-        if(user.isAuthenticated) {
-            if(!user.active) props.history.push("/activate");
-            if(guestPath.indexOf(props.location.pathname) !== -1) props.history.push("/");
-        } else {
-            if(guestPath.indexOf(props.location.pathname) === -1) props.history.push("/login");
-        }
+        useEffect(() => {
+            const {history} = props;
+            const {pathname} = props.location;
+            if(user.isAuthenticated) {
+                if(!user.data.active) history.push("/activate");
+                if(guestPath.indexOf(pathname) !== -1 || pathname === "/activate") history.push("/");
+            } else {
+                if(guestPath.indexOf(pathname) === -1 || pathname === "/activate")
+                    history.push("/login");
+            }
+        });
 
         return <WrappedComponent {...props}/>
     }
 
-    function mapState({user}) {
-        return {user}
-    }
-
-    return connect(mapState, null)(Access);
+    return connect(({user}) => ({user}), null)(Access);
 }

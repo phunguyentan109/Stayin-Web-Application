@@ -28,16 +28,16 @@ const AuthLayout = ({bg, bgColor, heading, link, intro, msg, notify, closeNoti, 
             >
                 <Link to="/">Staywell</Link>
                 {
-                    user.isAuthenticated && (
+                    !user.isAuthenticated && link && (
                         <Link to={link.to}>
                             <i className="fas fa-user-plus" ></i> {link.text}
                         </Link>
                     )
                 }
                 {
-                    !user.isAuthenticated &&
-                    <Link onClick={logOut}>
-                        <i className="fas fa-user-plus" ></i> Try with different account?
+                    user.isAuthenticated &&
+                    <Link to="" onClick={logOut}>
+                        <i className="fas fa-door-open" ></i> Try with different account?
                     </Link>
                 }
             </Grid>
