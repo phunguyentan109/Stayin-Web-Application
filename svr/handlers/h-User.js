@@ -1,5 +1,6 @@
 const db = require("../models");
 const {genToken} = require("../utils/token");
+const mail = require("../utils/mail");
 
 exports.signUp = async(req, res, next) => {
     try {
@@ -9,6 +10,7 @@ exports.signUp = async(req, res, next) => {
         let role = await db.Role.findOne({code: "001"});
         await db.UserRole.create({role: role._id, user: _id});
         let token = genToken(_id, role);
+        mail.send(mail.options.activate(email, viewname, _id));
         return res.status(200).json({_id, viewname, avatar, email, role, active, token});
     } catch(err) {
         return next({
