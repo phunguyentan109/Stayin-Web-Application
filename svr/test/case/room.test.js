@@ -30,47 +30,47 @@ describe("ROOM HANDLER TESTS", function(){
         })
     })
 
-    // describe("2. View all Room", function(){
-    //     it("should display all room successfully", async function(){
-    //         let rs = await prc.Room.getAll(logUser._id);
+    describe("2. View all Room", function(){
+        it("should display all room successfully", async function(){
+            let rs = await prc.Room.getAll(logUser._id);
 
-    //         expect(rs).to.be.an("array");
-    //     })
-    // })
+            expect(rs).to.be.an("array");
+        })
+    })
 
-    // describe("3. Update room", function(){
+    describe("3. Update room", function(){
 
-    //     it("should update successfully room", async function(){
-    //         let rs = await prc.Room.update(logUser._id, createdRoom._id, room);
+        it("should update successfully room", async function(){
+            let rs = await prc.Room.update(logUser._id, createdRoom._id, room);
 
-    //         expect(rs).to.have.keys("name");
-    //         expect(rs.name).to.be(room.name);
-    //         expect(rs._id).to.be(createdRoom._id);
-    //     })
+            expect(rs).to.have.keys("name");
+            expect(rs.name).to.be(room.name);
+            expect(rs._id).to.be(createdRoom._id);
+        })
 
-    //     it("should update room with fake user id account", async function(){
-    //         let rs = await prc.Room.update( logUser._id, "123", room);
+        it("should update room with fake user id account", async function(){
+            let rs = await prc.Room.update( logUser._id, "123", room);
 
-    //         expect(rs).to.have.keys("message");
-    //     })
+            expect(rs).to.have.keys("message");
+        })
 
-    // })
+    })
 
-    // describe("4. Delete room", function(){
+    describe("4. Delete room", function(){
 
-    //     it("should delete room successfully", async function(){
-    //         let rs = await prc.Room.remove(logUser._id, {room_id: createdRoom._id});
+        it("should delete room successfully", async function(){
+            let rs = await prc.Room.remove(logUser._id, {room_id: createdRoom._id});
 
-    //         expect(rs._id).to.be(createdRoom._id);
-    //     })
+            expect(rs._id).to.be(createdRoom._id);
+        })
 
-    //     it("should delete room with fake user id account", async function(){
-    //         let rs = await prc.Room.remove(logUser._id, "124");
+        it("should delete room with fake user id account", async function(){
+            let rs = await prc.Room.remove(logUser._id, "124");
 
-    //         expect(rs).to.have.keys("message");
-    //     })
+            expect(rs).to.have.keys("message");
+        })
 
-    // })
+    })
 
     after(async function(){
         await seed.clear();

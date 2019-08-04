@@ -1,8 +1,8 @@
 const db = require("../models");
 
 exports.user = {
-    email: "test@",
-    password: "test"
+    email: "owner@",
+    password: "owner"
 }
 
 exports.priceData = {
