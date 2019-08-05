@@ -1,5 +1,6 @@
 import DashboardContain from "contains/views/Dashboard";
 import ActivateContain from "contains/views/Activate";
+import ActivatedContain from "contains/views/Activated";
 
 import Login from "components/views/Login";
 
@@ -68,16 +69,16 @@ const routes = [
         display: register
     },
     {
+        path: "/activate/:user_id",
+        roles: [],
+        component: ActivatedContain,
+        display: activated
+    },
+    {
         path: "/activate",
         roles: [],
         component: ActivateContain,
         display: activate
-    },
-    {
-        path: "/activate/:user_id",
-        roles: [],
-        component: ActivateContain,
-        display: activated
     }
 ]
 

@@ -23,12 +23,12 @@ function send(to, subject, text) {
 
 const options = {activate};
 
-function activate(to, viewname, id) {
+function activate(to, viewname, id, host) {
 	let subject = "Registration Online Information - Magazine Collection System";
 	let text = `Hi ${viewname}, this mail comes from Staywell,
 
 	Please click to the link below for completing the activation of your account:
-	"${req.headers.host}/activate/${id}"
+	"${host}/activate/${id}"
 
 	And that's all, thank you for your time. Have a good day and see you later.
 

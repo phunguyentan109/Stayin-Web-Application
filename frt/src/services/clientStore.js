@@ -1,7 +1,7 @@
 import {setUser} from "../store/actions/user";
 import {setTokenHeader} from "./api";
 import jwtDecode from "jwt-decode";
-import {apiAppCall} from "services/api";
+import {apiCall} from "services/api";
 
 export async function checkStore(store){
     try {
@@ -12,7 +12,7 @@ export async function checkStore(store){
             if(localStorage.token){
                 setTokenHeader(localStorage.token);
                 let decode = jwtDecode(localStorage.token);
-                let savedUser = await apiAppCall("get", `/api/user/${decode._id}`, decode);
+                let savedUser = await apiCall("get", `/api/user/${decode._id}`, decode);
                 store.dispatch(setUser(savedUser ? savedUser : {}));
             }
         }
