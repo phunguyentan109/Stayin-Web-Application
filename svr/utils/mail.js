@@ -1,12 +1,13 @@
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const emoji = require("node-emoji");
 
 exports.genToken = async() => {
 	let buf = await crypto.randomBytes(20);
 	return buf.toString("hex");
 }
 
-function send(to, subject, text) {
+async function send(to, subject, text) {
 	let transport = nodemailer.createTransport({
 		service: "Gmail",
 		auth: {
@@ -18,17 +19,18 @@ function send(to, subject, text) {
         from: process.env.GMAILUSER,
 		to, subject, text
     }
-	transport.sendMail(mailOptions);
+	await transport.sendMail(mailOptions);
 }
 
 const options = {activate};
 
 function activate(to, viewname, id, host) {
-	let subject = "Registration Online Information - Magazine Collection System";
-	let text = `Hi ${viewname}, this mail comes from Staywell,
+	let subject = emoji.emojify(`:closed_lock_with_key: Activate your account - Staywell`);
+	let text = `
+	Good day ${viewname}, this mail comes from Staywell,
 
 	Please click to the link below for completing the activation of your account:
-	"${host}/activate/${id}"
+	https://${host}/activate/${id}
 
 	And that's all, thank you for your time. Have a good day and see you later.
 

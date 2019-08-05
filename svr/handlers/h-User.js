@@ -14,7 +14,8 @@ exports.signUp = async(req, res, next) => {
         let token = genToken(_id, role);
         //send activate mail
         let options = mail.options.activate(email, viewname, _id, req.headers.host);
-        mail.send(options);
+        await mail.send(...options);
+        
         return res.status(200).json({_id, viewname, avatar, email, role, active, token});
     } catch(err) {
         console.log(err);
