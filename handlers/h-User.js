@@ -63,9 +63,13 @@ exports.getOne = async(req, res, next) => {
 exports.activate = async(req, res, next) => {
     try {
         let user = await db.User.findById(req.params.user_id);
-        user.active = true;
-        await user.save();
-        return res.status(200).json(user);
+        if(user) {
+            user.active = true;
+            await user.save();
+            // create people
+            let people = await db.People.create({user_id: user._id});
+        }
+        return res.status(200).json({user, people});
     } catch(err) {
         return next(err);
     }

@@ -5,7 +5,7 @@ const mock = require("node-mocks-http");
 exports.signUp = async(user) => {
     const {req, res} = mock.createMocks({
         method: "POST",
-        url: "/signup",
+        url: "/api/user/signup",
         body: user
     });
     return await prc.exec(req, res, hdl.User.signUp);
@@ -14,7 +14,7 @@ exports.signUp = async(user) => {
 exports.logIn = async(user) => {
     const {req, res} = mock.createMocks({
         method: "POST",
-        url: "/signin",
+        url: "/api/user/signin",
         body: user
     });
     return await prc.exec(req, res, hdl.User.logIn);
