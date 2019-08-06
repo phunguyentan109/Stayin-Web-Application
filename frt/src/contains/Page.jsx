@@ -1,8 +1,8 @@
 import React from "react";
-import {Switch, Route, withRouter} from "react-router-dom";
+import {Switch, Route, withRouter, Redirect} from "react-router-dom";
 import routes from "contents/index";
 
-const Page = () => {
+const Page = (props) => {
     return (
         <Switch>
             {
@@ -17,6 +17,7 @@ const Page = () => {
                     )}/>
                 })
             }
+            <Redirect path={props.location.pathname} to="/"/>
         </Switch>
     )
 }
