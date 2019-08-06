@@ -8,7 +8,7 @@ export function setTokenHeader(token){
     }
 }
 
-export async function apiAppCall(method, path, data){
+export async function apiCall(method, path, data){
     try {
         return (await axios[method](path, data)).data;
     } catch(err) {
@@ -16,7 +16,7 @@ export async function apiAppCall(method, path, data){
     }
 }
 
-export async function apiAppFdCall(method, url, data) {
+export async function apiFdCall(method, url, data) {
     try {
         return (await axios({
             method : method,

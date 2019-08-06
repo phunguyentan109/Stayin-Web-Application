@@ -7,7 +7,7 @@ const Activate = ({title, message, button, ...props}) => (
             <h1>{title}</h1>
             <hr/>
             <h3>{message}</h3>
-            <button>Resend email</button>
+            {button && <button>{button}</button>}
         </div>
     </AuthLayoutContain>
 )
