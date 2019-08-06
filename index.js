@@ -5,7 +5,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mw = require("./middleware");
 const hdl = require("./handlers");
+const path = require('path');
 require("./seed")();
+
+app.use(express.static(path.join(__dirname, 'frt/build')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,5 +23,6 @@ app.use((req, res, next) => {
 });
 
 app.use(hdl.Error.handle);
+
 
 app.listen(process.env.PORT, () => console.log(`[ SERVER IS STARTED ON PORT ${process.env.PORT} ]`));
