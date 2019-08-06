@@ -22,7 +22,10 @@ app.use((req, res, next) => {
     next(err);
 });
 
-app.use(hdl.Error.handle);
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/frt/build/index.html'));
+});
 
+app.use(hdl.Error.handle);
 
 app.listen(process.env.PORT, () => console.log(`[ SERVER IS STARTED ON PORT ${process.env.PORT} ]`));
