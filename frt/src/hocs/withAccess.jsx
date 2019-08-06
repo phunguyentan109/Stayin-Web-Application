@@ -9,11 +9,10 @@ export default function withAccess(WrappedComponent) {
             const {history} = props;
             const {pathname} = props.location;
             if(user.isAuthenticated) {
-                if(!user.data.active) history.push("/activate");
-                if(guestPath.indexOf(pathname) !== -1 || pathname === "/activate") history.push("/");
+                if(!user.data.active) return history.push("/activate");
+                if(guestPath.indexOf(pathname) !== -1 || pathname === "/activate") return history.push("/");
             } else {
-                if(guestPath.indexOf(pathname) === -1 || pathname === "/activate")
-                    history.push("/login");
+                if(guestPath.indexOf(pathname) === -1) return history.push("/login");
             }
         });
 

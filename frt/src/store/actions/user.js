@@ -1,5 +1,5 @@
 import {ADD_USER} from "../actionTypes";
-import {apiAppCall, setTokenHeader} from "services/api";
+import {apiCall, setTokenHeader} from "services/api";
 import {setError} from "./error";
 
 export const setUser = user => ({type: ADD_USER, user});
@@ -20,7 +20,7 @@ export function logOut(){
 export function authUser(route, data) {
     return async(dispatch) => {
         try {
-            let rs = await apiAppCall("post", route, data);
+            let rs = await apiCall("post", route, data);
             const {token, ...user} = rs;
             localStorage.setItem("token", token);
             // client store data
