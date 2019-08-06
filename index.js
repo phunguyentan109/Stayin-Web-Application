@@ -16,15 +16,16 @@ app.use(cors());
 
 app.use("/api/user", require("./routes/r-User"));
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/frt/build/index.html'));
+});
+
 app.use((req, res, next) => {
     let err = new Error("Route not found!");
     err.status = 404;
     next(err);
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/frt/build/index.html'));
-});
 
 app.use(hdl.Error.handle);
 
