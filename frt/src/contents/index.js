@@ -1,10 +1,14 @@
 import DashboardContain from "contains/views/Dashboard";
 import ActivateContain from "contains/views/Activate";
 import ActivatedContain from "contains/views/Activated";
+import ManagePeopleContain from "contains/views/ManagePeople";
 
 import Login from "components/views/Login";
 
 import Dashboard from "@material-ui/icons/Dashboard";
+import Person from "@material-ui/icons/Person";
+import Home from "@material-ui/icons/Home";
+import AttachMoney from "@material-ui/icons/AttachMoney";
 
 import dashboard from "./display/Dashboard";
 import login from "./display/Login";
@@ -25,16 +29,8 @@ const sidebar = [
         path: "/people",
         roles: [],
         name: "Manage People",
-        component: DashboardContain,
-        icon: Dashboard,
-        display: dashboard
-    },
-    {
-        path: "/account",
-        roles: [],
-        name: "Manage Account",
-        component: DashboardContain,
-        icon: Dashboard,
+        component: ManagePeopleContain,
+        icon: Person,
         display: dashboard
     },
     {
@@ -42,7 +38,7 @@ const sidebar = [
         roles: [],
         name: "Manage Room",
         component: DashboardContain,
-        icon: Dashboard,
+        icon: Home,
         display: dashboard
     },
     {
@@ -50,7 +46,7 @@ const sidebar = [
         roles: [],
         name: "Manage Price",
         component: DashboardContain,
-        icon: Dashboard,
+        icon: AttachMoney,
         display: dashboard
     }
 ]
