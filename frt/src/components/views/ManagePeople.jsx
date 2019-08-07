@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import AppLayoutContain from "contains/Layout/AppLayout";
 import GridItem from "components/Grid/GridItem.jsx";
-import Table from "components/Table/Table.jsx";
+import PeopleTable from "components/Table/PeopleTable.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
@@ -49,12 +49,35 @@ const ManagePeople = ({classes, ...props}) => (
                     </p>
                 </CardHeader>
                 <CardBody>
-                    <Table
+                    <PeopleTable
                         tableHeaderColor="primary"
-                        tableHead={["Name", "Email", "Age", "Phone", "Status"]}
+                        tableHead={["ID", "Name", "Age", "Job", "Email", "Phone Number", "Options"]}
                         tableData={[
-                            ["Pham Hieu", "example@example.com", "22 years old", "0980312556", "Living"],
-                            ["Hieu Nguyen", "example@example.com", "22 years old", "0980312556", "Waiting"]
+                            {
+                                user_id: {
+                                    email: "example@example.com",
+                                    avatar: {
+                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
+                                    },
+                                    phone: "2354374676",
+                                    viewname: "Nguyen Tran Thien Hieu"
+                                },
+                                age: "20",
+                                job: "Worker",
+                                room_id: "a"
+                            },
+                            {
+                                user_id: {
+                                    email: "example@example.com",
+                                    avatar: {
+                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
+                                    },
+                                    phone: "2354374676",
+                                    viewname: "Nguyen Tan Phu"
+                                },
+                                age: "22",
+                                job: "Student"
+                            }
                         ]}
                     />
                 </CardBody>

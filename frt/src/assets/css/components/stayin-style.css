@@ -133,3 +133,47 @@
       font-size: 14px; }
     .authInput > input.focus {
       background-color: #ffffff30; }
+
+.custom-cell {
+  min-width: 200px;
+  display: flex !important;
+  align-items: center;
+  flex-wrap: nowrap; }
+  .custom-cell.people-name img {
+    margin-right: 15px;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px; }
+  .custom-cell.people-name div {
+    display: flex;
+    flex-direction: column; }
+    .custom-cell.people-name div span {
+      margin-top: 5px; }
+      .custom-cell.people-name div span i {
+        margin-right: 5px; }
+
+.options {
+  min-width: 100px;
+  flex-wrap: nowrap; }
+  .options > i {
+    font-size: 18px;
+    color: #cacaca;
+    cursor: pointer;
+    padding-right: 18px;
+    border-radius: 5px;
+    transition: .5s; }
+    .options > i.edit {
+      color: #cfcfcf; }
+      .options > i.edit:hover {
+        color: #9dc8e3; }
+    .options > i.remove {
+      color: #f4b7b7; }
+      .options > i.remove:hover {
+        color: #ef9292; }
+
+.status {
+  font-weight: 500 !important; }
+  .status.stateWait {
+    color: #daac6f; }
+  .status.stateSuccess {
+    color: #8bc68b; }
