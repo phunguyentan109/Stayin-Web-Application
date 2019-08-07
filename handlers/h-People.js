@@ -2,7 +2,7 @@ const db = require("../models");
 
 exports.get = async(req, res, next) => {
     try {
-        let people = await db.People.find().populate("room_id").exec();
+        let people = await db.People.find().populate("room_id").populate("user_id").exec();
         return res.status(200).json(people);
     } catch(err) {
         return next(err);

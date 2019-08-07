@@ -1,4 +1,5 @@
 const db = require("../models");
+const {casDelete} = require("../utils/dbSupport");
 
 exports.user = {
     email: "staywellsystem7@gmail.com",
@@ -19,8 +20,7 @@ exports.room = {
 
 exports.clear = async() => {
     try {
-        let foundUser = await db.User.findOne({email: exports.user.email});
-        if(foundUser) await foundUser.remove();
+        await casDelete("User", "email", exports.user.email);
 
         let foundRoom = await db.Room.findOne({name: "Room 1"});
         if(foundRoom) await foundRoom.remove();
