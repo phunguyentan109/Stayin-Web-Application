@@ -151,6 +151,20 @@
       margin-top: 5px; }
       .custom-cell.people-name div span i {
         margin-right: 5px; }
+  .custom-cell.room-name img {
+    margin-right: 15px;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px; }
+  .custom-cell.room-name div {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #65656578; }
+    .custom-cell.room-name div span {
+      font-style: italic;
+      margin-left: 5px;
+      margin-top: 5px; }
 
 .options {
   min-width: 100px;

@@ -2,6 +2,7 @@ import DashboardContain from "contains/views/Dashboard";
 import ActivateContain from "contains/views/Activate";
 import ActivatedContain from "contains/views/Activated";
 import ManagePeopleContain from "contains/views/ManagePeople";
+import ManageRoomContain from "contains/views/ManageRoom";
 
 import Login from "components/views/Login";
 
@@ -37,7 +38,7 @@ const sidebar = [
         path: "/room",
         roles: [],
         name: "Manage Room",
-        component: DashboardContain,
+        component: ManageRoomContain,
         icon: Home,
         display: dashboard
     },
