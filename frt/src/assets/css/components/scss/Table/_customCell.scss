@@ -26,6 +26,27 @@
         }
     }
 
+    &.room-name {
+        img {
+            margin-right: 15px;
+            border-radius: 5px;
+            width: 30px;
+            height: 30px;
+        }
+        div{
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            background-color: #65656578;
+            span {
+                font-style: italic;
+                margin-left: 5px;
+                margin-top: 5px;
+
+            }
+        }
+
+    }
 }
 
 .options {
