@@ -51,12 +51,24 @@ exports.assignId = async(findSchema, findId, assignCol, assignId) => {
 /*
     Casade delete a list of record by using a list of ID
 */
-exports.casadeDeleteMany = async(schema, listId) => {
+exports.casDeleteMany = async(schema, listId) => {
     try {
         for(let id of listId){
             let foundDoc = await db[schema].findById(id);
             if(foundDoc) await foundDoc.remove();
         }
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+/*
+    Casade delete one record depend on collumn value
+*/
+exports.casDelete = async(findSchema, findCol, findVal) => {
+    try {
+        let fDoc = await db[findSchema].findOne({[findCol]: findVal});
+        if(fDoc) await fDoc.remove();
     } catch(err) {
         console.log(err);
     }

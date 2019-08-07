@@ -17,7 +17,7 @@ const AppLayout = ({classes, st, hdDrawerToggle, mainPanel, ...rest}) => {
         <div className={classes.wrapper}>
             <Sidebar
                 routes={sidebar}
-                logoText={"Stayin"}
+                logoText={"Staywell"}
                 logo={logo}
                 image={st.image}
                 handleDrawerToggle={hdDrawerToggle}
