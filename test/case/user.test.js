@@ -1,6 +1,6 @@
 const expect = require("expect.js");
 const prc = require("../prc");
-const {user, ...sample} = require("../seed");
+const {user, ...sample} = require("../sample");
 
 describe("USER HANDLER TESTS", function(){
 

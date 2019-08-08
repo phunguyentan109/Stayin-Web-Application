@@ -1,11 +1,11 @@
 const expect = require("expect.js");
 const prc = require("../prc");
-const {user, room, ...seed} = require("../seed");
+const {user, room, ...sample} = require("../sample");
 
 describe("ROOM HANDLER TESTS", function(){
 
     before(async function(){
-        await seed.clear();
+        await sample.clear();
         logUser = await prc.User.logIn({...user});
 
         authorization = `Bearer ${logUser.token}`;
@@ -71,7 +71,7 @@ describe("ROOM HANDLER TESTS", function(){
     })
 
     after(async function(){
-        await seed.clear();
+        await sample.clear();
     })
 
 })

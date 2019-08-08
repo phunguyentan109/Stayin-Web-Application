@@ -6,4 +6,4 @@ function ManageRoomContain(props) {
     return <ManageRoom {...props}/>
 }
 
-export default ManageRoomContain;
+export default withAccess(ManageRoomContain);
