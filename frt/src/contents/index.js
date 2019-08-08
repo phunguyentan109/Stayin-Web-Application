@@ -19,7 +19,7 @@ import activated from "./display/Activated";
 
 const sidebar = [
     {
-        path: "/",
+        path: "/dashboard",
         roles: [],
         name: "Dashboard",
         component: DashboardContain,
@@ -76,9 +76,12 @@ const routes = [
         roles: [],
         component: ActivateContain,
         display: activate
+    },
+    {
+        path: "/", to: "/dashboard", redirect: true
     }
 ]
 
 export {sidebar};
 
-export default [...routes, ...sidebar];
+export default [...routes, ...sidebar ];
