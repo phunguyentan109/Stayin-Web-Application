@@ -21,8 +21,8 @@ const RoomTable = ({tableData, cssRow, cssCell, ...props}) => (
                     )
                 }
             </TableCell>
-            <TableCell className={cssCell}>{row.bill_date} </TableCell>
-            <TableCell className={cssCell}>{row.price_id.type} </TableCell>
+            <TableCell className={cssCell}>{row.bill_date}</TableCell>
+            <TableCell className={cssCell}>{row.price_id.type}</TableCell>
             <TableCell className={`${cssCell} options`}>
                 <div>
                     <i className="fas fa-times remove"></i>
