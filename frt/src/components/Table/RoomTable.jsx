@@ -21,7 +21,15 @@ const RoomTable = ({tableData, cssRow, cssCell, ...props}) => (
                     )
                 }
             </TableCell>
-            <TableCell className={cssCell}>{row.bill_date}</TableCell>
+            <TableCell className={`${cssCell} bill-date`}>
+                <div>
+                    {i === 0 && <span></span>}
+                    {i === 1 && <span className="near"></span>}
+                    {i === 2 && <span className="expire"></span>}
+                    {row.bill_date}
+                    {i === 1 && <i className="fas fa-hand-holding-usd"></i>}
+                </div>
+            </TableCell>
             <TableCell className={cssCell}>{row.price_id.type}</TableCell>
             <TableCell className={`${cssCell} options`}>
                 <div>
