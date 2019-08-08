@@ -1,10 +1,16 @@
 import DashboardContain from "contains/views/Dashboard";
 import ActivateContain from "contains/views/Activate";
 import ActivatedContain from "contains/views/Activated";
+import ManagePeopleContain from "contains/views/ManagePeople";
+import ManageRoomContain from "contains/views/ManageRoom";
+import ManagePriceContain from "contains/views/ManagePrice";
 
 import Login from "components/views/Login";
 
 import Dashboard from "@material-ui/icons/Dashboard";
+import Person from "@material-ui/icons/Person";
+import Home from "@material-ui/icons/Home";
+import AttachMoney from "@material-ui/icons/AttachMoney";
 
 import dashboard from "./display/Dashboard";
 import login from "./display/Login";
@@ -14,7 +20,7 @@ import activated from "./display/Activated";
 
 const sidebar = [
     {
-        path: "/",
+        path: "/dashboard",
         roles: [],
         name: "Dashboard",
         component: DashboardContain,
@@ -25,32 +31,24 @@ const sidebar = [
         path: "/people",
         roles: [],
         name: "Manage People",
-        component: DashboardContain,
-        icon: Dashboard,
-        display: dashboard
-    },
-    {
-        path: "/account",
-        roles: [],
-        name: "Manage Account",
-        component: DashboardContain,
-        icon: Dashboard,
+        component: ManagePeopleContain,
+        icon: Person,
         display: dashboard
     },
     {
         path: "/room",
         roles: [],
         name: "Manage Room",
-        component: DashboardContain,
-        icon: Dashboard,
+        component: ManageRoomContain,
+        icon: Home,
         display: dashboard
     },
     {
         path: "/price",
         roles: [],
         name: "Manage Price",
-        component: DashboardContain,
-        icon: Dashboard,
+        component: ManagePriceContain,
+        icon: AttachMoney,
         display: dashboard
     }
 ]
@@ -79,9 +77,12 @@ const routes = [
         roles: [],
         component: ActivateContain,
         display: activate
+    },
+    {
+        path: "/", to: "/dashboard", redirect: true
     }
 ]
 
 export {sidebar};
 
-export default [...routes, ...sidebar];
+export default [...routes, ...sidebar ];

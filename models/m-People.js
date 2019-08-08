@@ -11,6 +11,7 @@ const peopleSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Room"
     },
+    age: Number,
     jobs: String,
     birthPlace: {
         type: Date,

@@ -10,11 +10,12 @@ export default function withAccess(WrappedComponent) {
             const {pathname} = props.location;
             if(user.isAuthenticated) {
                 if(!user.data.active) return history.push("/activate");
-                if(guestPath.indexOf(pathname) !== -1 || pathname === "/activate") return history.push("/");
+                if(guestPath.indexOf(pathname) !== -1 || pathname === "/activate") return history.push("/dashboard");
             } else {
                 if(guestPath.indexOf(pathname) === -1) return history.push("/login");
             }
-        });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [props]);
 
         return <WrappedComponent {...props}/>
     }
