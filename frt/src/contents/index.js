@@ -3,6 +3,7 @@ import ActivateContain from "contains/views/Activate";
 import ActivatedContain from "contains/views/Activated";
 import ManagePeopleContain from "contains/views/ManagePeople";
 import ManageRoomContain from "contains/views/ManageRoom";
+import ManagePriceContain from "contains/views/ManagePrice";
 
 import Login from "components/views/Login";
 
@@ -46,7 +47,7 @@ const sidebar = [
         path: "/price",
         roles: [],
         name: "Manage Price",
-        component: DashboardContain,
+        component: ManagePriceContain,
         icon: AttachMoney,
         display: dashboard
     }
