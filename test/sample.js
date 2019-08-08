@@ -6,9 +6,9 @@ exports.user = {
     password: "test"
 }
 
-exports.priceData = {
+exports.price = {
     electric: 2232,
-    wifi: 100,
+    wifi: 1,
     water: 50,
     house: 2000,
     extra: 70
@@ -27,6 +27,9 @@ exports.clear = async() => {
 
         let foundFakeRoom = await db.Room.findOne({name: "fake name"});
         if(foundFakeRoom) await foundFakeRoom.remove();
+
+        let foundPrice = await db.Price.findOne({wifi: 1});
+        if(foundPrice) await foundPrice.remove();
     } catch(err) {
         console.log(err);
     }

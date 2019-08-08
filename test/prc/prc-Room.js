@@ -23,21 +23,23 @@ exports.getAll = async(user_id) => {
     return await prc.exec(req, res, hdl.Room.getAll);
 }
 
-exports.remove = async(user_id, room_id) => {
+exports.remove = async(user_id, room_id, authorization) => {
     const {req, res} = mock.createMocks({
         url: `/api/user/${user_id}/rooms/${room_id}`,
         method: "DELETE",
-        params: {user_id, room_id}
+        params: {user_id, room_id},
+        headers: {authorization}
     });
-    return await prc.exec(req, res, hdl.Room.remove);
+    return await prc.exec(req, res, mw.User.isCorrect, mw.User.isPermit, hdl.Room.remove);
 }
 
-exports.update = async(user_id, room_id, room) => {
+exports.update = async(user_id, room_id, room, authorization) => {
     const {req, res} = mock.createMocks({
         url: `/api/user/${user_id}/rooms/${room_id}`,
         method: "PUT",
         params: {user_id, room_id},
-        body: room
+        body: room,
+        headers: {authorization}
     });
-    return await prc.exec(req, res, hdl.Room.update);
+    return await prc.exec(req, res, mw.User.isCorrect, mw.User.isPermit, hdl.Room.update);
 }
