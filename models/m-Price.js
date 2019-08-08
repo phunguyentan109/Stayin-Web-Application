@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const db = require("../models");
 
 const priceSchema = new mongoose.Schema({
+    type: {
+        type: String,
+        unique: true,
+        required: true
+    },
     room_id: [
         {
             type: mongoose.Schema.Types.ObjectId,

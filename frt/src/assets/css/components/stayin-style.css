@@ -160,11 +160,13 @@
     width: 30px;
     height: 30px;
     border-radius: 5px;
-    background-color: #65656578; }
+    background-color: #cfcfcf59;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
     .custom-cell.room-name div span {
-      font-style: italic;
-      margin-left: 5px;
-      margin-top: 5px; }
+      font-size: 11px;
+      color: gray; }
 
 .options {
   min-width: 100px;

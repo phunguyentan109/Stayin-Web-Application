@@ -10,17 +10,18 @@ const RoomTable = ({tableData, cssRow, cssCell, ...props}) => (
             <TableCell className={cssCell}>{i+1}</TableCell>
             <TableCell className={cssCell}>{row.room_Name} </TableCell>
             <TableCell className={`${cssCell} custom-cell room-name`}>
-                
                 <img src={row.user_id.avatar.link} alt=""/>
                 <img src={row.user_id.avatar.link} alt=""/>
                 <img src={row.user_id.avatar.link} alt=""/>
                 <img src={row.user_id.avatar.link} alt=""/>
                 <img src={row.user_id.avatar.link} alt=""/>
-                <div>
-                    <span>
-                        {row.user_id.total>5 ? `+${row.user_id.total-5}` : ""}
-                    </span>
-                </div>
+                {
+                    row.people_id.user_id.length > 5 && (
+                        <div>
+                            <span>{`+${row.people_id.user_id.length - 5}`}</span>
+                        </div>
+                    )
+                }
             </TableCell>
             <TableCell className={cssCell}>{row.bill_date} </TableCell>
             <TableCell className={`${cssCell} options`}>
