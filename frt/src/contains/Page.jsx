@@ -15,6 +15,7 @@ const Page = (props) => {
                     )}/>
                 })
             }
+            <Redirect exact from={props.location.pathname} to={'/dashboard'}/>
         </Switch>
     )
 }

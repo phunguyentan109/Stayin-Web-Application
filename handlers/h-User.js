@@ -67,10 +67,15 @@ exports.activate = async(req, res, next) => {
             user.active = true;
             await user.save();
             // create people
-            let people = await db.People.create({user_id: user._id});
+            people = await db.People.create({user_id: user._id});
+            return res.status(200).json({user, people});
         }
-        return res.status(200).json({user, people});
+        return next({
+            status: 500,
+            message: "Oops! Something went wrong!"
+        })
     } catch(err) {
+        console.log(err);
         return next(err);
     }
 }
