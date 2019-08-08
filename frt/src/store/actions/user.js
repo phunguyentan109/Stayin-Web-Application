@@ -34,3 +34,18 @@ export function authUser(route, data) {
         }
     }
 }
+
+export function activateUser(id) {
+    return async(dispatch) => {
+        try {
+            sessionStorage.clear();
+            let user = await apiCall("get", `/api/user/${id}`);
+            if(user) {
+                sessionStorage.setItem("auth", JSON.stringify(user));
+                dispatch(setUser(user));
+            }
+        } catch(err) {
+            dispatch(setError(err));
+        }
+    }
+}

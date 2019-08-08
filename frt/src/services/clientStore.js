@@ -12,7 +12,7 @@ export async function checkStore(store){
             if(localStorage.token){
                 setTokenHeader(localStorage.token);
                 let decode = jwtDecode(localStorage.token);
-                let savedUser = await apiCall("get", `/api/user/${decode._id}`, decode);
+                let savedUser = await apiCall("get", `/api/user/${decode._id}`);
                 if(savedUser) {
                     sessionStorage.setItem("auth", JSON.stringify(savedUser));
                     store.dispatch(setUser(savedUser));
@@ -22,6 +22,7 @@ export async function checkStore(store){
     } catch(err) {
         //if the token is tampered, change authenticate to false
         store.dispatch(setUser({}));
+        localStorage.clear();
         console.log(err);
     }
 }
