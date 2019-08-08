@@ -7,17 +7,14 @@ const Page = (props) => {
         <Switch>
             {
                 routes.map((route, index) => {
-                    if(route.path === "/") {
-                        return <Route path={route.path} exact key={index} render={(props) => (
-                            <route.component {...props} {...route.display}/>
-                        )}/>
+                    if(route.redirect) {
+                        return <Redirect exact from={route.path} to={route.to} key={index}/>
                     }
                     return <Route path={route.path} key={index} render={(props) => (
                         <route.component {...props} {...route.display}/>
                     )}/>
                 })
             }
-            <Redirect path={props.location.pathname} to="/"/>
         </Switch>
     )
 }

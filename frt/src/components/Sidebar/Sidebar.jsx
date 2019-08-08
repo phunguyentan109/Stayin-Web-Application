@@ -45,7 +45,6 @@ const Sidebar = ({ ...props }) => {
     var links = (
         <List className={classes.list}>
             {routes.map((prop, key) => {
-                var activePro = " ";
                 var listItemClasses;
                 listItemClasses = classNames({
                     [" " + classes[color]]: activeRoute(prop.path)
@@ -57,31 +56,25 @@ const Sidebar = ({ ...props }) => {
                 return (
                     <NavLink
                         to={prop.path}
-                        className={activePro + classes.item}
+                        className={classes.item}
                         activeClassName="active"
                         key={key}
                     >
                         <ListItem button className={classes.itemLink + listItemClasses}>
                             {typeof prop.icon === "string" ? (
                                 <Icon
-                                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                                        [classes.itemIconRTL]: props.rtlActive
-                                    })}
+                                    className={classNames(classes.itemIcon, whiteFontClasses)}
                                 >
                                     {prop.icon}
                                 </Icon>
                             ) : (
                                 <prop.icon
-                                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                                        [classes.itemIconRTL]: props.rtlActive
-                                    })}
+                                    className={classNames(classes.itemIcon, whiteFontClasses)}
                                 />
                             )}
                             <ListItemText
                                 primary={props.rtlActive ? prop.rtlName : prop.name}
-                                className={classNames(classes.itemText, whiteFontClasses, {
-                                    [classes.itemTextRTL]: props.rtlActive
-                                })}
+                                className={classNames(classes.itemText, whiteFontClasses)}
                                 disableTypography={true}
                             />
                         </ListItem>
