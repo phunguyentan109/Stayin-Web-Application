@@ -54,8 +54,13 @@ const ManageRoom = ({classes, ...props}) => (
                         tableHeaderColor="primary"
                         tableHead={["ID", "Room Name", "People", "Bill Date", "Options"]}
                         tableData={[
-                            {   
+                            {
                                 room_Name: "Room 101",
+                                people_id: {
+                                    user_id: [
+                                        "", "", ""
+                                    ]
+                                },
                                 user_id: {
                                     total: 5,
                                     avatar: {
@@ -66,6 +71,11 @@ const ManageRoom = ({classes, ...props}) => (
                             },
                             {
                                 room_Name: "Room 202",
+                                people_id: {
+                                    user_id: [
+                                        "", "", "", "", "", ""
+                                    ]
+                                },
                                 user_id: {
                                     total: 8,
                                     avatar: {
