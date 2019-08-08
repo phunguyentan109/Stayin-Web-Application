@@ -1,11 +1,11 @@
 const expect = require("expect.js");
 const prc = require("../prc");
-const {user, price, ...seed} = require("../seed");
+const {user, price, ...sample} = require("../sample");
 
 describe("PRICE HANDLER TESTS", function(){
 
     before(async function(){
-        await seed.clear();
+        await sample.clear();
         logUser = await prc.User.logIn({...user});
 
         authorization = `Bearer ${logUser.token}`;
@@ -77,6 +77,6 @@ describe("PRICE HANDLER TESTS", function(){
     })
 
     after(async function(){
-        await seed.clear();
+        await sample.clear();
     })
 })

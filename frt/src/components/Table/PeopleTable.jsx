@@ -2,6 +2,7 @@ import React from "react";
 import withTable from "hocs/withTable";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
+import PropTypes from "prop-types";
 
 const PeopleTable = ({tableData, cssRow, cssCell, ...props}) => (
     tableData.map((row, i) => (
@@ -30,5 +31,9 @@ const PeopleTable = ({tableData, cssRow, cssCell, ...props}) => (
         </TableRow>
     ))
 )
+
+PeopleTable.propTypes = {
+    tableData: PropTypes.arrayOf(PropTypes.object)
+}
 
 export default withTable(PeopleTable);

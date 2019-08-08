@@ -2,34 +2,32 @@ import React from "react";
 import withTable from "hocs/withTable";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-
+import {inCurrency} from "services/utils";
+import PropTypes from "prop-types";
 
 const PriceTable = ({tableData, cssRow, cssCell, ...props}) => (
     tableData.map((row, i) => (
-        <TableRow className={cssRow}>
+        <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
-            <TableCell className={cssCell}>{row.room_Name} </TableCell>
-            <TableCell className={`${cssCell} custom-cell room-name`}>
-                <img src="https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100" alt=""/>
-                <img src="https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100" alt=""/>
-                <img src="https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100" alt=""/>
-                <img src="https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100" alt=""/>
-                <img src="https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100" alt=""/>
-                {
-                    row.people_id.user_id.length > 5 && (
-                        <div>
-                            <span>{`+${row.people_id.user_id.length - 5}`}</span>
-                        </div>
-                    )
-                }
-            </TableCell>
-            <TableCell className={cssCell}>{row.bill_date} </TableCell>
+            {
+                row.map((m, i) => (
+                    <TableCell className={cssCell} key={i}>
+                        { i !== 0 ? inCurrency(m*1000) : m }
+                    </TableCell>
+                ))
+            }
             <TableCell className={`${cssCell} options`}>
-                <i className="fas fa-times remove"></i>
-                <i className="fas fa-eraser edit"></i>
+                <div>
+                    <i className="fas fa-times remove"></i>
+                    <i className="fas fa-eraser edit"></i>
+                </div>
             </TableCell>
         </TableRow>
     ))
 )
+
+PriceTable.propTypes = {
+    tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+}
 
 export default withTable(PriceTable);

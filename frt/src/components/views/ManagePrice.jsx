@@ -6,7 +6,7 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import withStyles from "@material-ui/core/styles/withStyles";
-import PriceTable from "components/Table/RoomTable.jsx";
+import PriceTable from "components/Table/PriceTable.jsx";
 
 
 const styles = {
@@ -44,34 +44,18 @@ const ManagePrice = ({classes, ...props}) => (
         <GridItem xs={12} sm={12} md={12}>
             <Card>
                 <CardHeader color="primary">
-                    <h4 className={classes.cardTitleWhite}>Room List</h4>
+                    <h4 className={classes.cardTitleWhite}>Price List</h4>
                     <p className={classes.cardCategoryWhite}>
-                        List of room in your apartments
+                        Price of room in your apartments
                     </p>
                 </CardHeader>
                 <CardBody>
                     <PriceTable
                         tableHeaderColor="primary"
-                        tableHead={["ID", "Room Name", "People", "Bill Date", "Options"]}
+                        tableHead={["ID", "Type", "Electric", "Water", "House", "Wifi", "Extra", "Options"]}
                         tableData={[
-                            {
-                                room_Name: "Room 101",
-                                people_id: {
-                                    user_id: [
-                                        "", "", ""
-                                    ]
-                                },
-                                bill_date: "29/7/2019"
-                            },
-                            {
-                                room_Name: "Room 202",
-                                people_id: {
-                                    user_id: [
-                                        "", "", "", "", "", "",""
-                                    ]
-                                },
-                                bill_date: "31/7/2019"
-                            }
+                            ["Price 01", "3.5", "100", "30", "3000", "300"],
+                            ["Price 02", "4", "50", "80", "4000", "0"]
                         ]}
                     />
                 </CardBody>

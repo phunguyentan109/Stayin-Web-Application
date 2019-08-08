@@ -6,4 +6,4 @@ function ManagePriceContain(props) {
     return <ManagePrice {...props}/>
 }
 
-export default ManagePriceContain;
+export default withAccess(ManagePriceContain);

@@ -54,8 +54,7 @@ export default function withTable(WrappedComponent) {
             "rose",
             "gray"
         ]),
-        tableHead: PropTypes.arrayOf(PropTypes.string),
-        tableData: PropTypes.arrayOf(PropTypes.object)
+        tableHead: PropTypes.arrayOf(PropTypes.string)
     };
 
     return withStyles(tableStyle)(CustomTable);

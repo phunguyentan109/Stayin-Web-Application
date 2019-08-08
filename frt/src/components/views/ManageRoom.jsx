@@ -52,7 +52,7 @@ const ManageRoom = ({classes, ...props}) => (
                 <CardBody>
                     <RoomTable
                         tableHeaderColor="primary"
-                        tableHead={["ID", "Room Name", "People", "Bill Date", "Options"]}
+                        tableHead={["ID", "Room Name", "People", "Bill Date", "Type", "Options"]}
                         tableData={
                             [
                                 {
@@ -73,7 +73,10 @@ const ManageRoom = ({classes, ...props}) => (
                                         }
                                     }
                                 ],
-                                bill_date: "29/7/2019"
+                                bill_date: "29/7/2019",
+                                price_id: {
+                                    type: "Price 001"
+                                }
                             },
                             {
                                 room_Name: "Room 202",
@@ -119,9 +122,19 @@ const ManageRoom = ({classes, ...props}) => (
                                                 link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
                                             }
                                         }
+                                    },
+                                    {
+                                        user_id: {
+                                            avatar: {
+                                                link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
+                                            }
+                                        }
                                     }
                                 ],
-                                bill_date: "31/7/2019"
+                                bill_date: "31/7/2019",
+                                price_id: {
+                                    type: "Price 002"
+                                }
                             }
                         ]}
                     />
