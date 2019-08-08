@@ -13,7 +13,10 @@ export async function checkStore(store){
                 setTokenHeader(localStorage.token);
                 let decode = jwtDecode(localStorage.token);
                 let savedUser = await apiCall("get", `/api/user/${decode._id}`, decode);
-                store.dispatch(setUser(savedUser ? savedUser : {}));
+                if(savedUser) {
+                    sessionStorage.setItem("auth", JSON.stringify(savedUser));
+                    store.dispatch(setUser(savedUser));
+                }
             }
         }
     } catch(err) {
