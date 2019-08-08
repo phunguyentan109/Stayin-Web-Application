@@ -2,7 +2,7 @@ const db = require("../models");
 
 exports.getAll = async(req, res, next) => {
     try{
-        let prices = await db.Price.find();
+        let prices = await db.Price.find().select("-room_id");
         return res.status(200).json(prices);
     } catch(err){
         return next(err);
