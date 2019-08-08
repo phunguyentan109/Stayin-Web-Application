@@ -5,7 +5,7 @@ import TableCell from "@material-ui/core/TableCell";
 
 const PeopleTable = ({tableData, cssRow, cssCell, ...props}) => (
     tableData.map((row, i) => (
-        <TableRow className={cssRow}>
+        <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
             <TableCell className={`${cssCell} custom-cell people-name`}>
                 <img src={row.user_id.avatar.link} alt=""/>
@@ -13,7 +13,7 @@ const PeopleTable = ({tableData, cssRow, cssCell, ...props}) => (
                     {row.user_id.viewname}
                     <span className={`status ${row.room_id ? "stateSuccess" :  "stateWait"}`}>
                         <i className={`fas ${row.room_id ? "fa-home" : "fa-hourglass-start"}`} />
-                        {row.room_id ? "Staying" : "Waiting"}
+                        {row.room_id ? `Staying at room ${row.room_id.name}` : "Waiting"}
                     </span>
                 </div>
             </TableCell>
@@ -22,8 +22,10 @@ const PeopleTable = ({tableData, cssRow, cssCell, ...props}) => (
             <TableCell className={cssCell}>{row.user_id.email}</TableCell>
             <TableCell className={cssCell}>{row.user_id.phone}</TableCell>
             <TableCell className={`${cssCell} options`}>
-                <i className="fas fa-times remove"></i>
-                <i className="fas fa-eraser edit"></i>
+                <div>
+                    <i className="fas fa-times remove"></i>
+                    <i className="fas fa-edit edit"></i>
+                </div>
             </TableCell>
         </TableRow>
     ))

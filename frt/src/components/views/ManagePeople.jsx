@@ -64,7 +64,9 @@ const ManagePeople = ({classes, ...props}) => (
                                 },
                                 age: "20",
                                 job: "Worker",
-                                room_id: "a"
+                                room_id: {
+                                    name: "ABC"
+                                }
                             },
                             {
                                 user_id: {

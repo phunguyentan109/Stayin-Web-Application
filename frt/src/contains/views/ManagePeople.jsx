@@ -6,4 +6,4 @@ function ManagePeopleContain(props) {
     return <ManagePeople {...props}/>
 }
 
-export default ManagePeopleContain;
+export default withAccess(ManagePeopleContain);

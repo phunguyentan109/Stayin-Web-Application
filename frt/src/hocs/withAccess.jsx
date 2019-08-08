@@ -8,13 +8,16 @@ export default function withAccess(WrappedComponent) {
         useEffect(() => {
             const {history} = props;
             const {pathname} = props.location;
+            console.log("check " + pathname);
+            console.log(user.isAuthenticated);
             if(user.isAuthenticated) {
                 if(!user.data.active) return history.push("/activate");
-                if(guestPath.indexOf(pathname) !== -1 || pathname === "/activate") return history.push("/");
+                if(guestPath.indexOf(pathname) !== -1 || pathname === "/activate") return history.push("/dashboard");
             } else {
                 if(guestPath.indexOf(pathname) === -1) return history.push("/login");
             }
-        });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [props]);
 
         return <WrappedComponent {...props}/>
     }
