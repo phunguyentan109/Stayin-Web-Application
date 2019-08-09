@@ -3,7 +3,6 @@ const router = express.Router({mergeParams: true});
 const hdl = require("../handlers");
 const mw = require("../middleware");
 
-
 router.route("/")
 .get(hdl.Room.getAll)
 .post(mw.User.isCorrect, mw.User.isPermit ,hdl.Room.create);
