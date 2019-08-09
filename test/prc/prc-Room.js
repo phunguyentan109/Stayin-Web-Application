@@ -11,7 +11,7 @@ exports.create = async(user_id, room, authorization) => {
         body: room,
         headers: {authorization}
     });
-    return await prc.exec(req, res,mw.User.isCorrect, mw.User.isPermit, hdl.Room.create);
+    return await prc.exec(req, res, mw.User.isCorrect, mw.User.isPermit, hdl.Room.create);
 }
 
 exports.getAll = async(user_id) => {
