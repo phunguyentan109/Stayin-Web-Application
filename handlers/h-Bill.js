@@ -31,13 +31,14 @@ exports.remove = async(req, res, next) => {
 exports.update  = async(req, res, next) => {
     try {
         let updatedBill = await db.Bill.findById(req.params.bill_id);
-        let {electric, wifi, water, house, extra} = req.body;
+        let {electric, wifi, water, house, extra, inContract} = req.body;
 
         updatedBill.electric = electric;
         updatedBill.water = water;
         updatedBill.house = house;
         updatedBill.wifi = wifi;
         updatedBill.extra = extra;
+        updatedBill.inContract = inContract;
         await updatedBill.save();
         return res.status(200).json(updatedBill);
     } catch(err) {

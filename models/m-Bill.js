@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const {spliceId} = require("../utils/dbSupport");
+const db = require("../models");
 
 const billSchema = new mongoose.Schema({
     room_id: {
@@ -25,6 +26,10 @@ const billSchema = new mongoose.Schema({
     extra: {
         type: Number,
         default: 0
+    },
+    inContract: {
+        type: Boolean,
+        default: true
     }
 })
 

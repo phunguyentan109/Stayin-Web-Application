@@ -12,7 +12,7 @@ const PriceTable = ({tableData, cssRow, cssCell, ...props}) => (
             {
                 row.map((m, i) => (
                     <TableCell className={cssCell} key={i}>
-                        { i !== 0 ? inCurrency(m*1000) : m }
+                        { i !== 0 && i !==6 ? inCurrency(m*1000) :m }
                     </TableCell>
                 ))
             }
