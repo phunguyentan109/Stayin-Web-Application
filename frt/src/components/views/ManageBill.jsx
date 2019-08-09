@@ -52,10 +52,10 @@ const ManageBill = ({classes, ...props}) => (
                 <CardBody>
                     <BillTable
                         tableHeaderColor="primary"
-                        tableHead={["ID", "Electric", "Water", "House", "Wifi", "Extra", "Options"]}
+                        tableHead={["ID", "Electric", "Water", "House", "Wifi", "Extra", "Contract Info", "Options"]}
                         tableData={[
-                            ["350", "100", "3000", "300", "300"],
-                            ["400", "50", "8000", "400", "0"]
+                            ["350", "100", "3000", "300", "300", "true"],
+                            ["400", "50", "8000", "400", "0", "false"]
                         ]}
                     />
                 </CardBody>

@@ -19,12 +19,13 @@ describe("PRICE HANDLER TESTS", function(){
             let rs = await prc.Price.create(logUser._id, price, authorization);
             createdPrice = rs;
 
-            expect(rs).to.have.keys("electric", "wifi", "water", "house", "extra", "_id");
+            expect(rs).to.have.keys("electric", "wifi", "water", "house", "extra", "duration", "_id");
             expect(rs.electric).to.be(price.electric);
             expect(rs.wifi).to.be(price.wifi);
             expect(rs.water).to.be(price.water);
             expect(rs.house).to.be(price.house);
             expect(rs.extra).to.be(price.extra);
+            expect(rs.duration).to.be(price.duration);
         })
 
         it("Should create new price with fake user id account", async function(){
@@ -46,12 +47,13 @@ describe("PRICE HANDLER TESTS", function(){
         it("Update price successfully", async function(){
             let rs = await prc.Price.update(logUser._id, createdPrice._id, price, authorization);
 
-            expect(rs).to.have.keys("electric", "wifi", "water", "house", "extra");
+            expect(rs).to.have.keys("electric", "wifi", "water", "house", "extra", "duration");
             expect(rs.electric).to.be(price.electric);
             expect(rs.wifi).to.be(price.wifi);
             expect(rs.water).to.be(price.water);
             expect(rs.house).to.be(price.house);
             expect(rs.extra).to.be(price.extra);
+            expect(rs.duration).to.be(price.duration);
             expect(rs._id).to.be(createdPrice._id);
         })
 

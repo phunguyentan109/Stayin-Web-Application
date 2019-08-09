@@ -17,7 +17,8 @@ exports.price = {
     water: 50,
     house: 2000,
     extra: 70,
-    type: "priceTest"
+    type: "priceTest",
+    duration: 6
 }
 
 exports.bill = {
@@ -26,6 +27,7 @@ exports.bill = {
     water: 50,
     house: 2000,
     extra: 70,
+    inContract: true
 }
 
 exports.room = {

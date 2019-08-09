@@ -12,7 +12,7 @@ const BillTable = ({tableData, cssRow, cssCell, ...props}) => (
             {
                 row.map((m, i) => (
                     <TableCell className={cssCell} key={i}>
-                        { i !== 0 ? inCurrency(m*1000) : m }
+                        { i !== 5 ? inCurrency(m*1000) : m }
                     </TableCell>
                 ))
             }
