@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import AppLayout from "components/Layout/AppLayout";
-import image from "assets/img/sidebar-2.jpg";
+import image from "assets/img/sidebar-4.jpg";
 
 let ps;
 
