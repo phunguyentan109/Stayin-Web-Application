@@ -1,12 +1,12 @@
 const expect = require("expect.js");
 const prc = require("../prc");
-const {user, price, ...sample} = require("../sample");
+const {owner, price, ...sample} = require("../sample");
 
 describe("PRICE HANDLER TESTS", function(){
 
     before(async function(){
         await sample.clear();
-        logUser = await prc.User.logIn({...user});
+        logUser = await prc.User.logIn(owner);
 
         authorization = `Bearer ${logUser.token}`;
 
@@ -14,11 +14,11 @@ describe("PRICE HANDLER TESTS", function(){
     })
 
     describe("1. Create new price", function(){
-        
+
         it("Create price with user account", async function(){
             let rs = await prc.Price.create(logUser._id, price, authorization);
             createdPrice = rs;
-            
+
             expect(rs).to.have.keys("electric", "wifi", "water", "house", "extra", "_id");
             expect(rs.electric).to.be(price.electric);
             expect(rs.wifi).to.be(price.wifi);
@@ -45,7 +45,7 @@ describe("PRICE HANDLER TESTS", function(){
     describe("3. Update price", function(){
         it("Update price successfully", async function(){
             let rs = await prc.Price.update(logUser._id, createdPrice._id, price, authorization);
-            
+
             expect(rs).to.have.keys("electric", "wifi", "water", "house", "extra");
             expect(rs.electric).to.be(price.electric);
             expect(rs.wifi).to.be(price.wifi);
@@ -57,7 +57,7 @@ describe("PRICE HANDLER TESTS", function(){
 
         it("Update price with fake user id account", async function(){
             let rs = await prc.Price.update("123", createdPrice._id, price, authorization);
-            
+
             expect(rs).to.have.keys("status", "message");
         })
     })
