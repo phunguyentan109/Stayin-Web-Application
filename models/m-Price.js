@@ -36,6 +36,10 @@ const priceSchema = new mongoose.Schema({
     extra: {
         type: Number,
         default: 0
+    },
+    duration: {
+        type: Number,
+        default: 6
     }
 })
 
