@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const {spliceId} = require("../utils/dbSupport");
 
 const billSchema = new mongoose.Schema({
-    electric: {
-        type: Number,
-        default: 0
+    room_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Room"
     },
-    wifi: {
+    electric: {
         type: Number,
         default: 0
     },
@@ -18,18 +18,23 @@ const billSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    room_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Room"
+    wifi: {
+        type: Number,
+        default: 0
+    },
+    extra: {
+        type: Number,
+        default: 0
     }
 })
 
 billSchema.pre("remove", async function(next){
     try {
-        await spliceId("Room", "room_id", "bill_id", this._id);
+        await spliceId("Room", this._id);
+        await db.Room.deleteMany({_id: {$in: this.room_id}});
         return next();
-    } catch(err) {
-        next(err);
+    } catch (err) {
+        return next(err);
     }
 })
 

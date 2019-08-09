@@ -4,3 +4,4 @@ module.exports.People = require("./h-People");
 module.exports.Price = require("./h-Price");
 module.exports.Role = require("./h-Role");
 module.exports.Room = require("./h-Room");
+module.exports.Bill = require("./h-Bill");

@@ -11,5 +11,6 @@ router.route("/:user_id/activate").put(hdl.User.activate);
 
 router.use("/:user_id/rooms", mw.User.isLogin, mw.User.isCorrect, require("./r-Room"));
 router.use("/:user_id/prices", mw.User.isLogin, mw.User.isCorrect, require("./r-Price"));
+router.use("/:user_id/bills", mw.User.isLogin, mw.User.isCorrect, require("./r-Bill"));
 
 module.exports = router;
