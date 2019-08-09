@@ -1,15 +1,14 @@
 const expect = require("expect.js");
 const prc = require("../prc");
-const {user, room, ...sample} = require("../sample");
+const {owner, room, ...sample} = require("../sample");
 
 describe("ROOM HANDLER TESTS", function(){
 
     before(async function(){
         await sample.clear();
-        logUser = await prc.User.logIn({...user});
+        logUser = await prc.User.logIn(owner);
 
         authorization = `Bearer ${logUser.token}`;
-
         //createdRoom
         createdRoom = "";
     })

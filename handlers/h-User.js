@@ -18,7 +18,6 @@ exports.signUp = async(req, res, next) => {
 
         return res.status(200).json({_id, viewname, avatar, email, role, active, token});
     } catch(err) {
-        console.log(err);
         return next({
             status: 400,
             message: err.code === 11000 ? "Sorry, that email/password is taken or invalid" : err.message
