@@ -52,10 +52,9 @@ const ManageRoom = ({classes, ...props}) => (
                 <CardBody>
                     <RoomTable
                         tableHeaderColor="primary"
-                        tableHead={["ID", "Room Name", "People", "Bill Date", "Type", "Options"]}
-                        tableData={
-                            [
-                                {
+                        tableHead={["ID", "Room Name", "People", "Bill Date", "Price Type", "Options"]}
+                        tableData={[
+                            {
                                 room_Name: "Room 101",
                                 people_id: [
                                     {
@@ -102,6 +101,43 @@ const ManageRoom = ({classes, ...props}) => (
                                             }
                                         }
                                     },
+                                    {
+                                        user_id: {
+                                            avatar: {
+                                                link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        user_id: {
+                                            avatar: {
+                                                link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        user_id: {
+                                            avatar: {
+                                                link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        user_id: {
+                                            avatar: {
+                                                link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
+                                            }
+                                        }
+                                    }
+                                ],
+                                bill_date: "31/7/2019",
+                                price_id: {
+                                    type: "Price 002"
+                                }
+                            },
+                            {
+                                room_Name: "Room 202",
+                                people_id: [
                                     {
                                         user_id: {
                                             avatar: {
