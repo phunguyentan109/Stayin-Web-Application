@@ -20,6 +20,14 @@ exports.price = {
     type: "priceTest"
 }
 
+exports.bill = {
+    electric: 2232,
+    wifi: 1,
+    water: 50,
+    house: 2000,
+    extra: 70,
+}
+
 exports.room = {
     name: "Room 1",
 }
@@ -29,6 +37,7 @@ exports.clear = async() => {
         await casDelete("User", "email", exports.user.email);
         await casDelete("Room", "name", exports.room.name);
         await casDelete("Price", "type", exports.price.type);
+        await casDelete("Bill", "type", exports.bill.type);
     } catch(err) {
         console.log(err);
     }

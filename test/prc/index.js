@@ -22,3 +22,4 @@ module.exports.exec = async(req, res, ...prcs) => {
 module.exports.User = require("./prc-User");
 module.exports.Price = require("./prc-Price");
 module.exports.Room = require("./prc-Room");
+module.exports.Bill = require("./prc-Bill");
