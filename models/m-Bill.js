@@ -25,6 +25,10 @@ const billSchema = new mongoose.Schema({
     extra: {
         type: Number,
         default: 0
+    },
+    inContract: {
+        type: Boolean,
+        default: true
     }
 })
 
