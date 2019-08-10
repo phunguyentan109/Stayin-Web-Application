@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const {spliceId} = require("../utils/dbSupport");
+const db = require("../models");
 
 const billSchema = new mongoose.Schema({
     room_id: {

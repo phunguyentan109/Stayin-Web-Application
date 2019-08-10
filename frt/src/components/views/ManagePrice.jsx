@@ -52,10 +52,10 @@ const ManagePrice = ({classes, ...props}) => (
                 <CardBody>
                     <PriceTable
                         tableHeaderColor="primary"
-                        tableHead={["ID", "Type", "Electric", "Water", "House", "Wifi", "Extra", "Options"]}
+                        tableHead={["ID", "Type", "Electric", "Water", "House", "Wifi", "Extra", "Duration", "Options"]}
                         tableData={[
-                            ["Price 01", "3.5", "100", "30", "3000", "300"],
-                            ["Price 02", "4", "50", "80", "4000", "0"]
+                            ["Price 01", "3.5", "100", "30", "3000", "300", "6"],
+                            ["Price 02", "4", "50", "80", "4000", "0", "6"]
                         ]}
                     />
                 </CardBody>
