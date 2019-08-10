@@ -2,9 +2,20 @@
 
 @import "./scss/Bar/_authNavbar";
 @import "./scss/Bar/_authCredit";
+@import "./scss/Bar/_confirmBar";
+@import "./scss/Bar/_asBar";
+
+@import "./scss/Card/_card";
+@import "./scss/Card/_header";
+
+@import "./scss/Grid/_priceContainer";
 
 @import "./scss/Layout/_authLayout";
 @import "./scss/Form/_authForm";
+
+@import "./scss/Checkbox/_priceBox";
+
+@import "./scss/Input/_formInput";
 @import "./scss/Input/_authInput";
 
 @import "./scss/Table/_customCell";

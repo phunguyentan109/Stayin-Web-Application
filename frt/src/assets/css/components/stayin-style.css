@@ -35,6 +35,72 @@
     padding-right: 5px;
     color: #17a2b8; }
 
+.confirm-bar {
+  display: flex;
+  align-items: center; }
+  @media screen and (max-width: 700px) {
+    .confirm-bar {
+      flex-direction: column-reverse; } }
+  .confirm-bar button {
+    min-width: 96px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    margin-right: 10px;
+    background-color: #e5e5e5;
+    cursor: pointer; }
+    .confirm-bar button > i {
+      margin-right: 5px; }
+    .confirm-bar button:nth-of-type(1) {
+      background-color: #8BC34A; }
+    .confirm-bar button:nth-of-type(2) {
+      color: gray; }
+  .confirm-bar > p {
+    color: gray;
+    font-size: 13px; }
+
+.as-bar {
+  display: flex;
+  align-items: center;
+  margin-top: 20px; }
+  .as-bar button {
+    margin-right: 10px; }
+  .as-bar div {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d3d3d3;
+    padding-bottom: 10px; }
+    .as-bar div > i {
+      color: gray;
+      margin-right: 10px; }
+    .as-bar div > input {
+      font-family: "Roboto", sans-serif;
+      width: 400px;
+      border: none; }
+      .as-bar div > input::placeholder {
+        color: #d3d3d3; }
+
+.custom-card {
+  margin-top: 0 !important; }
+
+.custom-header {
+  padding-top: 15px;
+  padding-left: 15px; }
+  .custom-header > h5 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 22px; }
+  .custom-header > p {
+    margin: 0;
+    color: gray;
+    font-size: 13px; }
+
+.price-container {
+  overflow-y: scroll;
+  height: 180px; }
+
 .authBg {
   background-position: center;
   background-repeat: no-repeat;
@@ -102,6 +168,52 @@
     .authForm + a:hover {
       color: white;
       text-decoration: underline; }
+
+.price-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #c0c0c0;
+  border-radius: 5px;
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+  .price-box > i {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 22px;
+    color: gray; }
+  .price-box div {
+    display: flex;
+    flex-direction: column; }
+    .price-box div > p {
+      margin: 0;
+      font-weight: 400;
+      font-size: 14px; }
+    .price-box div > small {
+      font-size: 11px; }
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px; }
+  .form-input > label {
+    margin-right: 10px;
+    margin-bottom: 5px;
+    font-size: 12px; }
+  .form-input > input, .form-input textarea {
+    border-radius: 3px;
+    padding: 8px 10px;
+    border: 1px solid #c0c0c0;
+    line-height: 2;
+    outline: none;
+    font-family: "Roboto", sans-serif;
+    color: #555555; }
+    .form-input > input::placeholder, .form-input textarea::placeholder {
+      line-height: 2;
+      color: #b8b8b8;
+      font-family: "Roboto", sans-serif !important; }
+    .form-input > input:focus, .form-input textarea:focus {
+      border-color: #9f9f9f; }
 
 .authInput > i, .authInput > input {
   padding: 7px 10px;

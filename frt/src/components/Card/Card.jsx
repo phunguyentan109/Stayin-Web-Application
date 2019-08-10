@@ -27,7 +27,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import cardStyle from "assets/jss/material-dashboard-react/components/cardStyle.jsx";
 
-function Card({ ...props }) {
+function Card({customCss, ...props }) {
   const {
     classes,
     className,
@@ -45,7 +45,7 @@ function Card({ ...props }) {
     [className]: className !== undefined
   });
   return (
-    <div className={cardClasses} {...rest}>
+    <div className={`${cardClasses} ${customCss ? customCss: ""}`} {...rest}>
       {children}
     </div>
   );
