@@ -32,6 +32,7 @@ exports.bill = {
 
 exports.room = {
     name: "Room 1",
+    desc: "Wide: 10, Long: 5"
 }
 
 exports.clear = async() => {

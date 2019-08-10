@@ -18,8 +18,9 @@ describe("ROOM HANDLER TESTS", function(){
         it("Create room with user account", async function(){
             let rs = await prc.Room.create(logUser._id, room, authorization);
             createdRoom = rs;
-            expect(rs).to.have.keys("name", "_id");
+            expect(rs).to.have.keys("name", "desc", "_id");
             expect(rs.name).to.be(room.name);
+            expect(rs.desc).to.be(room.desc);
         })
 
         it("Should create new room with fake user id account", async function(){
@@ -41,8 +42,9 @@ describe("ROOM HANDLER TESTS", function(){
 
         it("Should update successfully room", async function(){
             let rs = await prc.Room.update(logUser._id, createdRoom._id, room, authorization);
-            expect(rs).to.have.keys("name");
+            expect(rs).to.have.keys("name", "desc");
             expect(rs.name).to.be(room.name);
+            expect(rs.desc).to.be(room.desc);
             expect(rs._id).to.be(createdRoom._id);
         })
 

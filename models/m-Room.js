@@ -8,6 +8,7 @@ const roomSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    desc: String,
     people_id: [
         {
             type: mongoose.Schema.Types.ObjectId,

@@ -35,8 +35,9 @@ exports.remove = async(req, res, next) => {
 exports.update = async(req, res, next) => {
     try{
         let foundRoom = await db.Room.findById(req.params.room_id);
-        let {name} = req.body;
+        let {name, desc} = req.body;
         foundRoom.name = name;
+        foundRoom.desc = desc;
 
         await foundRoom.save();
         return res.status(200).json(foundRoom);
