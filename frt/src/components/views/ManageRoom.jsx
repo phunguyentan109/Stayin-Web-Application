@@ -11,7 +11,8 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import PriceCheckbox from "components/Checkbox/PriceCheckbox";
 import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
-
+import ConfirmBar from "components/Bar/ConfirmBar";
+import ASBar from "components/Bar/ASBar";
 
 const styles = {
     cardCategoryWhite: {
@@ -47,15 +48,23 @@ const ManageRoom = ({classes, ...props}) => (
     <AppLayoutContain {...props}>
         <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
+                <Card plain>
+                    <CardHeader plain color="primary">
+                        <h4 className={classes.cardTitleWhite}>
+                            Create New Room
+                        </h4>
+                        <p className={classes.cardCategoryWhite}>
+                            Here is a subtitle for this table
+                        </p>
+                    </CardHeader>
+                </Card>
+            </GridItem>
+            <GridItem xs={12} sm={12} md={12}>
                 <Card customCss="custom-card">
                     <CardBody>
                         <GridContainer>
                             <GridItem xs={12} sm={12} md={12}>
-                                <div>
-                                    <button>Confirm</button>
-                                    <button>Cancel</button>
-                                    <p>Enter information and select "Confirm" to complete or "Cancel" to exit</p>
-                                </div>
+                                <ConfirmBar />
                             </GridItem>
                         </GridContainer>
                     </CardBody>
@@ -98,27 +107,30 @@ const ManageRoom = ({classes, ...props}) => (
                     />
                     <CardBody>
                         <GridContainer customCss="price-container">
-                            <GridItem xs={12} sm={12} md={3}>
+                            <GridItem xs={12} sm={6} md={3}>
                                 <PriceCheckbox />
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={3}>
+                            <GridItem xs={12} sm={6} md={3}>
                                 <PriceCheckbox />
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={3}>
+                            <GridItem xs={12} sm={6} md={3}>
                                 <PriceCheckbox />
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={3}>
+                            <GridItem xs={12} sm={6} md={3}>
                                 <PriceCheckbox />
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={3}>
+                            <GridItem xs={12} sm={6} md={3}>
                                 <PriceCheckbox />
                             </GridItem>
                         </GridContainer>
                     </CardBody>
                 </Card>
             </GridItem>
+        </GridContainer>
+
+        <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
-                <Card className="plain">
+                <Card>
                     <CardHeader color="primary">
                         <h4 className={classes.cardTitleWhite}>Room List</h4>
                         <p className={classes.cardCategoryWhite}>
@@ -126,6 +138,7 @@ const ManageRoom = ({classes, ...props}) => (
                         </p>
                     </CardHeader>
                     <CardBody>
+                        <ASBar/>
                         <RoomTable
                             tableHeaderColor="primary"
                             tableHead={["ID", "Room Name", "People", "Bill Date", "Price Type", "Options"]}
