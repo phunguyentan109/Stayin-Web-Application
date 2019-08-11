@@ -100,6 +100,8 @@ const ManageBill = ({classes, formIsOpen, toggleForm, ...props}) => (
                                         placeholder="2"
                                         required
                                     />
+                                </GridItem>
+                                <GridItem xs={6} sm={12} md={6}>
                                     <FormInput
                                         type="number"
                                         label="House/Month"
