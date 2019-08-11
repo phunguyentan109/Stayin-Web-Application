@@ -112,7 +112,7 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                         <CardBody>
                             <GridContainer customCss="price-container">
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceBox />
+                                    <PriceBox/>
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
                                     <PriceBox />
@@ -139,28 +139,22 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                         <CardBody>
                             <GridContainer customCss="people-container">
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PeopleBox/>
+                                    <PeopleBox
+                                        remove
+                                        link="https://source.unsplash.com/120x120"
+                                    />
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PeopleBox/>
+                                    <PeopleBox
+                                        remove
+                                        link="https://source.unsplash.com/140x140"
+                                    />
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PeopleBox/>
-                                </GridItem>
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PeopleBox/>
-                                </GridItem>
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PeopleBox/>
-                                </GridItem>
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PeopleBox/>
-                                </GridItem>
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PeopleBox/>
-                                </GridItem>
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PeopleBox/>
+                                    <PeopleBox
+                                        remove
+                                        link="https://source.unsplash.com/160x160"
+                                    />
                                 </GridItem>
                             </GridContainer>
                         </CardBody>
@@ -170,12 +164,41 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                     <Card customCss="custom-card">
                         <CustomCardHeader
                             title="Waiter List"
-                            subtitle="This is all the people don't have room"
+                            subtitle="This is all the people who don't have room"
                         />
                         <CardBody>
-                            <GridItem xs={12} sm={6} md={4}>
-
-                            </GridItem>
+                            <GridContainer customCss="people-container">
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/100x100"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/150x150"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/250x250"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/200x200"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/300x300"
+                                    />
+                                </GridItem>
+                            </GridContainer>
                         </CardBody>
                     </Card>
                 </GridItem>

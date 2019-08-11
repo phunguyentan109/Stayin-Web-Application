@@ -19,7 +19,6 @@
 
             > button {
                 position: absolute;
-                background-color: #b047477a;
                 border: none;
                 outline: none;
                 cursor: pointer;
@@ -29,11 +28,23 @@
                 right: 3px;
                 transition: .2s;
 
-                > i {
-                    font-size: 11px;
-                    color: white;
+                &.remove {
+                    background-color: #b047477a;
+
+                    > i {
+                        font-size: 11px;
+                        color: white;
+                    }
                 }
 
+                &.add {
+                    background-color: #8ee78e8a;
+
+                    > i {
+                        font-size: 11px;
+                        color: white;
+                    }
+                }
             }
         }
 
@@ -64,6 +75,8 @@
 
         button {
             background-color: red;
+            // &.remove {
+            // }
         }
 
     }
