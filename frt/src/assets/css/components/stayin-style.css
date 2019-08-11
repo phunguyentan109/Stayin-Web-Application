@@ -258,7 +258,9 @@
       width: 70px;
       height: 70px;
       border-radius: 55%;
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      box-shadow: 3px 3px 2px #848181;
+      border: none; }
     .people-box > div:nth-of-type(1) > button {
       position: absolute;
       border: none;
@@ -294,8 +296,10 @@
       font-size: 12px;
       font-weight: 400;
       color: #a1a1a1; }
-  .people-box:hover button {
-    background-color: red; }
+  .people-box:hover > div:nth-of-type(1) > button.remove {
+    background-color: #d16969; }
+  .people-box:hover > div:nth-of-type(1) > button.add {
+    background-color: #7dc87d; }
 
 .form-input {
   display: flex;
