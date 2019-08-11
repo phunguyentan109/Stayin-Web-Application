@@ -3,7 +3,7 @@ import ManageRoom from "components/views/ManageRoom";
 import withAccess from "hocs/withAccess";
 
 function ManageRoomContain(props) {
-    const [formIsOpen, setOpenForm] = useState(false);
+    const [formIsOpen, setOpenForm] = useState(true);
 
     const toggleForm = () => setOpenForm(prev => !prev);
 

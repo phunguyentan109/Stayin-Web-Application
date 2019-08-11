@@ -13,7 +13,7 @@ import tableStyle from "assets/jss/material-dashboard-react/components/tableStyl
 export default function withTable(WrappedComponent) {
     function CustomTable({classes, tableHead, tableHeaderColor, ...props}) {
         return (
-            <div className={classes.tableResponsive}>
+            <div className={`${classes.tableResponsive} table-interact-separate`}>
                 <Table className={classes.table}>
                     {tableHead !== undefined ? (
                         <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
@@ -32,7 +32,11 @@ export default function withTable(WrappedComponent) {
                         </TableHead>
                     ) : null}
                     <TableBody>
-                        <WrappedComponent cssRow={classes.tableRowBody} cssCell={classes.tableCell} {...props} />
+                        <WrappedComponent
+                            cssRow={classes.tableRowBody}
+                            cssCell={classes.tableCell}
+                            {...props}
+                        />
                     </TableBody>
                 </Table>
             </div>

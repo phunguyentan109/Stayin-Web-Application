@@ -8,11 +8,12 @@ import CardBody from "components/Card/CardBody.jsx";
 import withStyles from "@material-ui/core/styles/withStyles";
 import RoomTable from "components/Table/RoomTable.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
-import PriceCheckbox from "components/Checkbox/PriceCheckbox";
+import PriceBox from "components/Box/PriceBox";
 import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
 import ConfirmBar from "components/Bar/ConfirmBar";
 import ASBar from "components/Bar/ASBar";
+import PeopleBox from "components/Box/PeopleBox";
 
 const styles = {
     cardCategoryWhite: {
@@ -111,21 +112,70 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                         <CardBody>
                             <GridContainer customCss="price-container">
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox />
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox />
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox />
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox />
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox />
                                 </GridItem>
                             </GridContainer>
+                        </CardBody>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                    <Card customCss="custom-card">
+                        <CustomCardHeader
+                            title="People Assigned List"
+                            subtitle="This is all the people assigned for this room"
+                        />
+                        <CardBody>
+                            <GridContainer customCss="people-container">
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox/>
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox/>
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox/>
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox/>
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox/>
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox/>
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox/>
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox/>
+                                </GridItem>
+                            </GridContainer>
+                        </CardBody>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                    <Card customCss="custom-card">
+                        <CustomCardHeader
+                            title="Waiter List"
+                            subtitle="This is all the people don't have room"
+                        />
+                        <CardBody>
+                            <GridItem xs={12} sm={6} md={4}>
+
+                            </GridItem>
                         </CardBody>
                     </Card>
                 </GridItem>
