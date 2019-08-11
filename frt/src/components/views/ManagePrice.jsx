@@ -64,7 +64,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                     <CardBody>
                         <GridContainer>
                             <GridItem xs={12} sm={12} md={12}>
-                                <ConfirmBar 
+                                <ConfirmBar
                                     cancel={toggleForm}
                                 />
                             </GridItem>
@@ -80,7 +80,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                     />
                     <CardBody>
                         <GridContainer>
-                            <GridItem xs={6} sm={12} md={6}>
+                            <GridItem xs={6} sm={12} md={4}>
                                 <FormInput
                                     type="text"
                                     label="Type"
@@ -99,7 +99,9 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                                     placeholder="100"
                                     required
                                 />
-                                <FormInput
+                            </GridItem>
+                            <GridItem xs={6} sm={12} md={4}>
+                            <FormInput
                                     type="number"
                                     label="Water/People"
                                     placeholder="80"
@@ -117,13 +119,14 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                                     placeholder="300"
                                     required
                                 />
+                            </GridItem>
+                            <GridItem xs={6} sm={12} md={4}>
                                 <FormInput
                                     type="number"
                                     label="Duration"
                                     placeholder="6"
                                     required
                                 />
-
                             </GridItem>
                         </GridContainer>
                     </CardBody>
@@ -131,7 +134,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
             </GridItem>
         </GridContainer>
     }
-        
+
     {
         formIsOpen || <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
@@ -157,7 +160,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
             </GridItem>
         </GridContainer>
     }
-        
+
     </AppLayoutContain>
 );
 
