@@ -11,6 +11,7 @@ import PriceTable from "components/Table/PriceTable.jsx";
 import ConfirmBar from "components/Bar/ConfirmBar";
 import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
+import ASBar from "components/Bar/ASBar";
 
 const styles = {
     cardCategoryWhite: {
@@ -42,9 +43,10 @@ const styles = {
     }
 };
 
-const ManagePrice = ({classes, ...props}) => (
+const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
     <AppLayoutContain {...props}>
-        <GridContainer>
+    {
+        formIsOpen && <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
                 <Card plain>
                     <CardHeader plain color="primary">
@@ -62,13 +64,15 @@ const ManagePrice = ({classes, ...props}) => (
                     <CardBody>
                         <GridContainer>
                             <GridItem xs={12} sm={12} md={12}>
-                                <ConfirmBar />
+                                <ConfirmBar 
+                                    cancel={toggleForm}
+                                />
                             </GridItem>
                         </GridContainer>
                     </CardBody>
                 </Card>
             </GridItem>
-            <GridItem xs={12} sm={12} md={5}>
+            <GridItem xs={12} sm={12} md={12}>
                 <Card customCss="custom-card">
                     <CustomCardHeader
                         title="New Price Information"
@@ -76,7 +80,7 @@ const ManagePrice = ({classes, ...props}) => (
                     />
                     <CardBody>
                         <GridContainer>
-                            <GridItem xs={12} sm={12} md={12}>
+                            <GridItem xs={6} sm={12} md={6}>
                                 <FormInput
                                     type="text"
                                     label="Type"
@@ -126,8 +130,10 @@ const ManagePrice = ({classes, ...props}) => (
                 </Card>
             </GridItem>
         </GridContainer>
-
-        <GridContainer>
+    }
+        
+    {
+        formIsOpen || <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
                 <Card>
                     <CardHeader color="primary">
@@ -137,6 +143,7 @@ const ManagePrice = ({classes, ...props}) => (
                         </p>
                     </CardHeader>
                     <CardBody>
+                        <ASBar create={toggleForm}/>
                         <PriceTable
                             tableHeaderColor="primary"
                             tableHead={["ID", "Type", "Electric", "Water", "House", "Wifi", "Extra", "Duration", "Options"]}
@@ -149,6 +156,8 @@ const ManagePrice = ({classes, ...props}) => (
                 </Card>
             </GridItem>
         </GridContainer>
+    }
+        
     </AppLayoutContain>
 );
 
