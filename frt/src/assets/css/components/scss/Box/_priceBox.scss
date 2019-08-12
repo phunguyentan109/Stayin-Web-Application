@@ -6,6 +6,11 @@
     padding: 8px;
     margin-top: 10px;
     margin-bottom: 10px;
+    position: relative;
+
+    &.select {
+        border: 2px solid #b7b7b7;
+    }
 
     > i {
         margin-left: 20px;
@@ -26,6 +31,17 @@
 
         > small {
             font-size: 11px;
+        }
+    }
+
+    > span {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+
+        > i {
+            color: gray;
+            font-size: 15px;
         }
     }
 }

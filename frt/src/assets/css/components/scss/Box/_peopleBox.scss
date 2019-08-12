@@ -74,7 +74,6 @@
     }
 
     &:hover {
-
         > div:nth-of-type(1) {
             > button {
                 &.remove {
@@ -86,11 +85,5 @@
                 }
             }
         }
-
-        // button {
-        //     // &.remove {
-        //     // }
-        // }
-
     }
 }

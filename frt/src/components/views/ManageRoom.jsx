@@ -112,7 +112,7 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                         <CardBody>
                             <GridContainer customCss="price-container">
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceBox/>
+                                    <PriceBox select/>
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
                                     <PriceBox />

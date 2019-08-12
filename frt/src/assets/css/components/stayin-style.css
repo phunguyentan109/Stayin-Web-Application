@@ -146,8 +146,9 @@
     font-size: 13px; }
 
 .price-container {
-  overflow-y: scroll;
-  height: 180px; }
+  overflow-y: auto;
+  height: 180px;
+  max-height: 180px; }
 
 .people-container {
   padding-top: 10px;
@@ -230,7 +231,10 @@
   border-radius: 5px;
   padding: 8px;
   margin-top: 10px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  position: relative; }
+  .price-box.select {
+    border: 2px solid #b7b7b7; }
   .price-box > i {
     margin-left: 20px;
     margin-right: 20px;
@@ -245,6 +249,13 @@
       font-size: 14px; }
     .price-box div > small {
       font-size: 11px; }
+  .price-box > span {
+    position: absolute;
+    right: 10px;
+    top: 5px; }
+    .price-box > span > i {
+      color: gray;
+      font-size: 15px; }
 
 .people-box {
   display: flex;
