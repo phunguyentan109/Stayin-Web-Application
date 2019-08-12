@@ -312,6 +312,14 @@
   .people-box:hover > div:nth-of-type(1) > button.add {
     background-color: #7dc87d; }
 
+.empty-box {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  color: gray; }
+
 .form-input {
   display: flex;
   flex-direction: column;
@@ -442,6 +450,10 @@
         color: #f4b7b7; }
         .options div > i.remove:hover {
           color: #ef9292; }
+
+.empty-cell {
+  color: gray;
+  font-style: italic; }
 
 .table-interact-separate {
   margin: 0 !important; }

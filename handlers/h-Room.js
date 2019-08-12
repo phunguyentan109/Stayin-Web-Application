@@ -1,12 +1,8 @@
 const db = require("../models");
 
-exports.getAll = async(req, res, next) => {
+exports.get = async(req, res, next) => {
     try {
-        // let rooms = await db.Room.find({user: req.params.user_id}).select("_id number people price bill").exec();
-        const user_id = req.params.user_id || req.body.user_id;
-        let list = await db.Room.find({user_id}).populate({
-            path: "price_id",
-        }).exec();
+        let list = await db.Room.find().populate("bill_id").populate("price_id").populate("people_id").exec();
         return res.status(200).json(list);
     } catch(err) {
         return next(err);

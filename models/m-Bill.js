@@ -31,7 +31,7 @@ const billSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     }
-})
+}, {timestamps: true})
 
 billSchema.pre("remove", async function(next){
     try {
