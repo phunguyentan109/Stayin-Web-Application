@@ -2,9 +2,11 @@ import React from "react";
 import withTable from "hocs/withTable";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
+import CellOption from "components/Table/CellOption";
+import EmptyCell from "components/Table/EmptyCell";
 import PropTypes from "prop-types";
 
-const PeopleTable = ({tableData, cssRow, cssCell, ...props}) => (
+const PeopleTable = ({tableData, cssRow, cssCell, options, ...props}) => (
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
@@ -18,16 +20,21 @@ const PeopleTable = ({tableData, cssRow, cssCell, ...props}) => (
                     </span>
                 </div>
             </TableCell>
-            <TableCell className={cssCell}>{row.age} years old</TableCell>
-            <TableCell className={cssCell}>{row.job}</TableCell>
-            <TableCell className={cssCell}>{row.user_id.email}</TableCell>
-            <TableCell className={cssCell}>{row.user_id.phone}</TableCell>
-            <TableCell className={`${cssCell} options`}>
-                <div>
-                    <i className="fas fa-times remove"></i>
-                    <i className="fas fa-edit edit"></i>
-                </div>
+            <TableCell className={cssCell}>
+                {row.birthDate ? row.birthDate : <EmptyCell/>} years old
             </TableCell>
+            <TableCell className={cssCell}>
+                { row.job ? row.job : <EmptyCell/> }
+            </TableCell>
+            <TableCell className={cssCell}>{row.user_id.email}</TableCell>
+            <TableCell className={cssCell}>
+                { row.user_id.phone ? row.user_id.phone : <EmptyCell/> }
+            </TableCell>
+            {
+                options && <TableCell className={`${cssCell} options`}>
+                    <CellOption options={options} use={row._id}/>
+                </TableCell>
+            }
         </TableRow>
     ))
 )
