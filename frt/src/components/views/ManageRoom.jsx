@@ -184,6 +184,7 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, hdConfirm, hdBill, form, r
                 </GridItem>
             </GridContainer>
         }
+        
         {
             formIsOpen || <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>

@@ -4,7 +4,7 @@ const hdl = require("../handlers");
 const mw = require("../middleware");
 
 router.route("/")
-.get(hdl.Price.getAll)
+.get(hdl.Price.get)
 .post(mw.User.isCorrect, mw.User.isPermit, hdl.Price.create);
 
 router.route("/:price_id")

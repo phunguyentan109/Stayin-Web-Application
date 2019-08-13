@@ -14,13 +14,13 @@ exports.create = async(user_id, price, authorization) => {
     return await prc.exec(req, res, mw.User.isCorrect, mw.User.isPermit, hdl.Price.create);
 }
 
-exports.getAll = async(user_id) => {
+exports.get = async(user_id) => {
     const {req, res} = mock.createMocks({
         url: `/user/${user_id}/prices`,
         method: "GET",
         params: {user_id}
     });
-    return await prc.exec(req, res, hdl.Price.getAll);
+    return await prc.exec(req, res, hdl.Price.get);
 }
 
 exports.update = async(user_id, price_id, price, authorization) => {

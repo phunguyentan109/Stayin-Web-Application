@@ -4,30 +4,46 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import {inCurrency} from "services/utils";
 import PropTypes from "prop-types";
+import CellOption from "components/Table/CellOption";
+import EmptyCell from "./EmptyCell";
 
-const PriceTable = ({tableData, cssRow, cssCell, ...props}) => (
+const PriceTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...props}) => (
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
-            {
-                row.map((m, i) => (
-                    <TableCell className={cssCell} key={i}>
-                        { i !== 0 && i !==6 ? inCurrency(m*1000) :m }
+                <TableCell className={cssCell}>
+                    {row.type ? row.type : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.electric ? inCurrency(row.electric) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.wifi ? inCurrency(row.wifi) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.water ? inCurrency(row.water) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.house ? inCurrency(row.house) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.extra ? inCurrency(row.extra) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.duration ? row.duration : <EmptyCell/>}
+                </TableCell>
+
+                {
+                    options && <TableCell className={`${cssCell} options`}>
+                        <CellOption options={options} use={row._id}/>
                     </TableCell>
-                ))
-            }
-            <TableCell className={`${cssCell} options`}>
-                <div>
-                    <i className="fas fa-times remove"></i>
-                    <i className="fas fa-eraser edit"></i>
-                </div>
-            </TableCell>
+                }
         </TableRow>
     ))
 )
 
 PriceTable.propTypes = {
-    tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+    tableData: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default withTable(PriceTable);

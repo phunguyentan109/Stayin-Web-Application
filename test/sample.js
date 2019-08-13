@@ -22,11 +22,7 @@ exports.price = {
 }
 
 exports.bill = {
-    electric: 2232,
-    wifi: 1,
-    water: 50,
-    house: 2000,
-    extra: 70,
+    amount: 101,
     inContract: true
 }
 
