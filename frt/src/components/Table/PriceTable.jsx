@@ -5,23 +5,34 @@ import TableCell from "@material-ui/core/TableCell";
 import {inCurrency} from "services/utils";
 import PropTypes from "prop-types";
 import CellOption from "components/Table/CellOption";
+import EmptyCell from "./EmptyCell";
 
 const PriceTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...props}) => (
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
-                <TableCell className={cssCell}>{row.type}</TableCell>
-                <TableCell className={cssCell}>{inCurrency(row.electric)*1000}</TableCell>
-                <TableCell className={cssCell}>{inCurrency(row.wifi)*1000}</TableCell>
-                <TableCell className={cssCell}>{inCurrency(row.water)*1000}</TableCell>
-                <TableCell className={cssCell}>{inCurrency(row.house)*1000}</TableCell>
-                <TableCell className={cssCell}>{inCurrency(row.extra)*1000}</TableCell>
-                <TableCell className={cssCell}>{row.duration}</TableCell>
-                {
-                    row.length === 0
-                    ? <span className="empty-cell">Not yet</span>
-                    : ""
-                }
+                <TableCell className={cssCell}>
+                    {row.type ? row.type : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.electric ? inCurrency(row.electric) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.wifi ? inCurrency(row.wifi) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.water ? inCurrency(row.water) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.house ? inCurrency(row.house) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.extra ? inCurrency(row.extra) : <EmptyCell/>}
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.duration ? row.duration : <EmptyCell/>}
+                </TableCell>
+
                 {
                     options && <TableCell className={`${cssCell} options`}>
                         <CellOption options={options} use={row._id}/>
@@ -32,7 +43,7 @@ const PriceTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...p
 )
 
 PriceTable.propTypes = {
-    tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+    tableData: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default withTable(PriceTable);
