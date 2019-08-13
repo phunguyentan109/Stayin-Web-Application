@@ -64,7 +64,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                     <CardBody>
                         <GridContainer>
                             <GridItem xs={12} sm={12} md={12}>
-                                <ConfirmBar 
+                                <ConfirmBar
                                     cancel={toggleForm}
                                 />
                             </GridItem>
@@ -98,7 +98,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                                     label="Wifi/Month"
                                     placeholder="100"
                                     required
-                                />                                                 
+                                />
                             </GridItem>
                             <GridItem xs={6} sm={12} md={4}>
                             <FormInput
@@ -112,13 +112,13 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                                     label="House/Month"
                                     placeholder="300000"
                                     required
-                                />   
+                                />
                                 <FormInput
                                     type="number"
                                     label="Extra"
                                     placeholder="300"
                                     required
-                                /> 
+                                />
                             </GridItem>
                             <GridItem xs={6} sm={12} md={4}>
                                 <FormInput
@@ -134,7 +134,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
             </GridItem>
         </GridContainer>
     }
-        
+
     {
         formIsOpen || <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
@@ -160,7 +160,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
             </GridItem>
         </GridContainer>
     }
-        
+
     </AppLayoutContain>
 );
 

@@ -5,7 +5,8 @@ import {apiCall} from "services/api";
 
 export async function checkStore(store){
     try {
-        if(sessionStorage.auth){
+        if(localStorage.token && sessionStorage.auth){
+            setTokenHeader(localStorage.token);
             const user = JSON.parse(sessionStorage.auth);
             store.dispatch(setUser(user));
         } else {
@@ -23,6 +24,7 @@ export async function checkStore(store){
         //if the token is tampered, change authenticate to false
         store.dispatch(setUser({}));
         localStorage.clear();
+        setTokenHeader(false);
         console.log(err);
     }
 }

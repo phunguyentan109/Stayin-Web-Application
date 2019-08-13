@@ -1,6 +1,6 @@
 const db = require("../models");
 
-exports.getAll = async(req, res, next) => {
+exports.get = async(req, res, next) => {
     try {
         let list = await db.Room.find().populate("bill_id").populate("price_id").populate("people_id").exec();
         return res.status(200).json(list);

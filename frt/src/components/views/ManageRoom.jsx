@@ -8,11 +8,13 @@ import CardBody from "components/Card/CardBody.jsx";
 import withStyles from "@material-ui/core/styles/withStyles";
 import RoomTable from "components/Table/RoomTable.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
-import PriceCheckbox from "components/Checkbox/PriceCheckbox";
+import PriceBox from "components/Box/PriceBox";
 import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
 import ConfirmBar from "components/Bar/ConfirmBar";
 import ASBar from "components/Bar/ASBar";
+import PeopleBox from "components/Box/PeopleBox";
+import EmptyBox from "components/Box/EmptyBox";
 
 const styles = {
     cardCategoryWhite: {
@@ -44,7 +46,7 @@ const styles = {
     }
 };
 
-const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
+const ManageRoom = ({classes, formIsOpen, toggleForm, hdConfirm, hdBill, form, room, rooms, hdChange, hdRemove, hdEdit, table, ...props}) => (
     <AppLayoutContain {...props}>
         {
             formIsOpen && <GridContainer>
@@ -67,6 +69,7 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                                 <GridItem xs={12} sm={12} md={12}>
                                     <ConfirmBar
                                         cancel={toggleForm}
+                                        confirm={hdConfirm}
                                     />
                                 </GridItem>
                             </GridContainer>
@@ -87,6 +90,9 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                                         label="Room Name"
                                         placeholder="Room Name"
                                         required
+                                        name="name"
+                                        value={room.name}
+                                        onChange={hdChange}
                                     />
                                     <FormInput
                                         type="text"
@@ -96,6 +102,9 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                                             cols: 1,
                                             rows: 1
                                         }}
+                                        name="desc"
+                                        value={room.desc}
+                                        onChange={hdChange}
                                     />
                                 </GridItem>
                             </GridContainer>
@@ -111,19 +120,91 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                         <CardBody>
                             <GridContainer customCss="price-container">
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox select/>
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox />
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox />
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox />
                                 </GridItem>
                                 <GridItem xs={12} sm={6} md={3}>
-                                    <PriceCheckbox />
+                                    <PriceBox />
+                                </GridItem>
+                            </GridContainer>
+                        </CardBody>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                    <Card customCss="custom-card">
+                        <CustomCardHeader
+                            title="People Assigned List"
+                            subtitle="This is all the people assigned for this room"
+                        />
+                        <CardBody>
+                            <GridContainer customCss="people-container">
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        remove
+                                        link="https://source.unsplash.com/120x120"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        remove
+                                        link="https://source.unsplash.com/140x140"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        remove
+                                        link="https://source.unsplash.com/160x160"
+                                    />
+                                </GridItem>
+                            </GridContainer>
+                        </CardBody>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                    <Card customCss="custom-card">
+                        <CustomCardHeader
+                            title="Waiter List"
+                            subtitle="This is all the people who don't have room"
+                        />
+                        <CardBody>
+                            <GridContainer customCss="people-container">
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/100x100"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/150x150"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/250x250"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/200x200"
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={6} md={3}>
+                                    <PeopleBox
+                                        add
+                                        link="https://source.unsplash.com/300x300"
+                                    />
                                 </GridItem>
                             </GridContainer>
                         </CardBody>
@@ -144,130 +225,27 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, ...props}) => (
                         </CardHeader>
                         <CardBody>
                             <ASBar create={toggleForm}/>
-                            <RoomTable
-                                tableHeaderColor="primary"
-                                tableHead={["ID", "Room Name", "People", "Bill Date", "Price Type", "Options"]}
-                                tableData={[
-                                    {
-                                        room_Name: "Room 101",
-                                        people_id: [
+                            {
+                                rooms.length > 0
+                                ? <RoomTable
+                                    tableHeaderColor="primary"
+                                    tableHead={table.header}
+                                    tableData={rooms}
+                                    options={{
+                                        remove: hdRemove,
+                                        edit: hdEdit,
+                                        more: [
                                             {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
+                                                icon: "fas fa-file-invoice-dollar",
+                                                name: "View all bills",
+                                                className: "edit",
+                                                fn: hdBill
                                             }
-                                        ],
-                                        bill_date: "29/7/2019",
-                                        price_id: {
-                                            type: "Price 001"
-                                        }
-                                    },
-                                    {
-                                        room_Name: "Room 202",
-                                        people_id: [
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        bill_date: "31/7/2019",
-                                        price_id: {
-                                            type: "Price 002"
-                                        }
-                                    },
-                                    {
-                                        room_Name: "Room 202",
-                                        people_id: [
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                user_id: {
-                                                    avatar: {
-                                                        link: "https://images.unsplash.com/photo-1563729574084-950da51d3822?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=100&ixlib=rb-1.2.1&q=80&w=100"
-                                                    }
-                                                }
-                                            }
-                                        ],
-                                        bill_date: "31/7/2019",
-                                        price_id: {
-                                            type: "Price 002"
-                                        }
-                                    }
-                                ]}
-                            />
+                                        ]
+                                    }}
+                                />
+                                : <EmptyBox message={table.empty}/>
+                            }
                         </CardBody>
                     </Card>
                 </GridItem>

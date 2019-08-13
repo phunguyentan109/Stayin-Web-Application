@@ -19,6 +19,7 @@ import login from "./display/Login";
 import register from "./display/Register";
 import activate from "./display/Activate";
 import activated from "./display/Activated";
+import manage_room from "./display/ManageRoom";
 
 const sidebar = [
     {
@@ -43,7 +44,7 @@ const sidebar = [
         name: "Manage Room",
         component: ManageRoomContain,
         icon: Home,
-        display: dashboard
+        display: manage_room
     },
     {
         path: "/price",
