@@ -20,6 +20,7 @@ import register from "./display/Register";
 import activate from "./display/Activate";
 import activated from "./display/Activated";
 import manage_room from "./display/ManageRoom";
+import manage_price from "./display/ManagePrice";
 
 const sidebar = [
     {
@@ -52,7 +53,7 @@ const sidebar = [
         name: "Manage Price",
         component: ManagePriceContain,
         icon: AttachMoney,
-        display: dashboard
+        display: manage_price
     },
     {
         path: "/bill",

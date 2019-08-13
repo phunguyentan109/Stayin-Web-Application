@@ -12,6 +12,7 @@ import ConfirmBar from "components/Bar/ConfirmBar";
 import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
 import ASBar from "components/Bar/ASBar";
+import EmptyBox from "components/Box/EmptyBox";
 
 const styles = {
     cardCategoryWhite: {
@@ -43,7 +44,7 @@ const styles = {
     }
 };
 
-const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
+const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, prices, hdChange, hdRemove, hdEdit, table, ...props}) => (
     <AppLayoutContain {...props}>
     {
         formIsOpen && <GridContainer>
@@ -66,6 +67,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                             <GridItem xs={12} sm={12} md={12}>
                                 <ConfirmBar
                                     cancel={toggleForm}
+                                    confirm={hdConfirm}
                                 />
                             </GridItem>
                         </GridContainer>
@@ -86,18 +88,27 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                                     label="Type"
                                     placeholder="Price 001"
                                     required
+                                    name="type"
+                                    value={price.type}
+                                    onChange={hdChange}
                                 />
                                 <FormInput
                                     type="number"
                                     label="Electric/KWH"
                                     placeholder="3.5"
                                     required
+                                    name="electric"
+                                    value={price.electric}
+                                    onChange={hdChange}
                                 />
                                 <FormInput
                                     type="number"
                                     label="Wifi/Month"
                                     placeholder="100"
                                     required
+                                    name="wifi"
+                                    value={price.wifi}
+                                    onChange={hdChange}
                                 />
                             </GridItem>
                             <GridItem xs={6} sm={12} md={4}>
@@ -106,18 +117,27 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                                     label="Water/People"
                                     placeholder="80"
                                     required
+                                    name="water"
+                                    value={price.water}
+                                    onChange={hdChange}
                                 />
                                 <FormInput
                                     type="number"
                                     label="House/Month"
                                     placeholder="300000"
                                     required
+                                    name="house"
+                                    value={price.house}
+                                    onChange={hdChange}
                                 />
                                 <FormInput
                                     type="number"
-                                    label="Extra"
+                                    label="Extra money per people"
                                     placeholder="300"
                                     required
+                                    name="extra"
+                                    value={price.extra}
+                                    onChange={hdChange}
                                 />
                             </GridItem>
                             <GridItem xs={6} sm={12} md={4}>
@@ -126,6 +146,9 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                                     label="Duration"
                                     placeholder="6"
                                     required
+                                    name="duration"
+                                    value={price.duration}
+                                    onChange={hdChange}
                                 />
                             </GridItem>
                         </GridContainer>
@@ -147,14 +170,27 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, ...props}) => (
                     </CardHeader>
                     <CardBody>
                         <ASBar create={toggleForm}/>
-                        <PriceTable
+                        {/* <PriceTable
                             tableHeaderColor="primary"
                             tableHead={["ID", "Type", "Electric", "Water", "House", "Wifi", "Extra", "Duration", "Options"]}
                             tableData={[
                                 ["Price 01", "3.5", "100", "30", "3000", "300", "6"],
                                 ["Price 02", "4", "50", "80", "4000", "0", "6"]
                             ]}
-                        />
+                        /> */}
+                        {
+                            prices.length > 0
+                            ? <PriceTable
+                                tableHeaderColor="primary"
+                                tableHead={table.header}
+                                tableData={prices}
+                                options={{
+                                        remove: hdRemove,
+                                        edit: hdEdit
+                                    }}
+                                />
+                                : <EmptyBox message={table.empty}/>
+                            }
                     </CardBody>
                 </Card>
             </GridItem>
