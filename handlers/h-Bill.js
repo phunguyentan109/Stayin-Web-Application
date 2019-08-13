@@ -20,7 +20,7 @@ exports.create = async(req, res, next) => {
 
 exports.remove = async(req, res, next) => {
     try {
-        let foundBill = await db.Bill.findById({_id: req.params.bill_id});
+        let foundBill = await db.Bill.findById(req.params.bill_id);
         if(foundBill) foundBill.remove();
         return res.status(200).json(foundBill);
     } catch(err) {

@@ -18,7 +18,6 @@ function ManageRoomContain({api, user, ...props}) {
 
     async function hdConfirm() {
         try {
-            console.log(room);
             await apiCall("post", api.create(user._id), room);
             await load();
             setOpenForm(false);
@@ -33,16 +32,31 @@ function ManageRoomContain({api, user, ...props}) {
         return () => {
             isLoaded = true
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     async function load() {
         try {
             let roomList = await apiCall("get", api.get(user._id));
-            console.log(roomList);
             setRooms(roomList);
         } catch(err) {
             console.log(err);
         }
+    }
+
+    async function hdRemove(room_id) {
+        try {
+            if(window.confirm("Are you sure to remove this data?")){
+                await apiCall("delete", api.delete(user._id, room_id));
+                await load();
+            }
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    async function hdEdit(room_id) {
+
     }
 
     return <ManageRoom
@@ -52,7 +66,9 @@ function ManageRoomContain({api, user, ...props}) {
         toggleForm={toggleForm}
         formIsOpen={formIsOpen}
         hdConfirm={hdConfirm}
+        hdRemove={hdRemove}
         hdChange={hdChange}
+        hdEdit={hdEdit}
     />
 }
 

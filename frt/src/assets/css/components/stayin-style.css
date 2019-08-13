@@ -438,7 +438,7 @@
       font-size: 18px;
       color: #cacaca;
       cursor: pointer;
-      padding-right: 18px;
+      margin-right: 18px;
       border-radius: 5px;
       transition: .5s; }
       .options div > i.edit {

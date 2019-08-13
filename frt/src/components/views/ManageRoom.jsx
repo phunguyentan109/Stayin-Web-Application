@@ -46,9 +46,7 @@ const styles = {
     }
 };
 
-const a = () => <i className="fab fa-creative-commons-nc"></i>
-
-const ManageRoom = ({classes, formIsOpen, toggleForm, hdConfirm, form, room, rooms, hdChange, ...props}) => (
+const ManageRoom = ({classes, formIsOpen, toggleForm, hdConfirm, hdBill, form, room, rooms, hdChange, hdRemove, hdEdit, table, ...props}) => (
     <AppLayoutContain {...props}>
         {
             formIsOpen && <GridContainer>
@@ -230,10 +228,22 @@ const ManageRoom = ({classes, formIsOpen, toggleForm, hdConfirm, form, room, roo
                                 rooms.length > 0
                                 ? <RoomTable
                                     tableHeaderColor="primary"
-                                    tableHead={["ID", "Room Name", "People", "Bill Date", "Price Type", "Options"]}
+                                    tableHead={table.header}
                                     tableData={rooms}
+                                    options={{
+                                        remove: hdRemove,
+                                        edit: hdEdit,
+                                        more: [
+                                            {
+                                                icon: "fas fa-file-invoice-dollar",
+                                                name: "View all bills",
+                                                className: "edit",
+                                                fn: hdBill
+                                            }
+                                        ]
+                                    }}
                                 />
-                                : <EmptyBox message="There is no room information to show here."/>
+                                : <EmptyBox message={table.empty}/>
                             }
                         </CardBody>
                     </Card>
