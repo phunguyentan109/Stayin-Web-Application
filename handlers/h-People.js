@@ -18,12 +18,3 @@ exports.remove = async(req, res, next) => {
         return next(err);
     }
 }
-
-exports.update = async(req, res, next) => {
-    try {
-        let updatePeople = await db.People.findByIdAndUpdate(req.params.people_id, req.body, {new: true});
-        return res.status(200).json(updatePeople);
-    } catch(err) {
-        return next(err);
-    }
-}

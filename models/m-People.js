@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const db = require("../models");
-const {spliceId} = require("../utils/dbSupport");
+const {spliceId, casDelete} = require("../utils/dbSupport");
 
 const peopleSchema = new mongoose.Schema({
     user_id: {
@@ -11,9 +11,8 @@ const peopleSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Room"
     },
-    age: Number,
     jobs: String,
-    birthPlace: {
+    birthDate: {
         type: Date,
         default: Date.now
     }
@@ -22,6 +21,7 @@ const peopleSchema = new mongoose.Schema({
 peopleSchema.pre("remove", async function(next){
     try {
         await spliceId("Room", this.room_id, "people_id", this._id);
+        await casDelete("User", "_id", this.user_id);
         return next();
     } catch(err) {
         return next(err);
