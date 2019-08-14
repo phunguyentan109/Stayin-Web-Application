@@ -5,6 +5,7 @@ import TableCell from "@material-ui/core/TableCell";
 import CellOption from "components/Table/CellOption";
 import EmptyCell from "components/Table/EmptyCell";
 import PropTypes from "prop-types";
+import moment from "moment";
 
 const PeopleTable = ({tableData, cssRow, cssCell, options, ...props}) => (
     tableData.map((row, i) => (
@@ -21,7 +22,7 @@ const PeopleTable = ({tableData, cssRow, cssCell, options, ...props}) => (
                 </div>
             </TableCell>
             <TableCell className={cssCell}>
-                {row.birthDate ? row.birthDate : <EmptyCell/>} years old
+                {row.birthDate ? moment().diff(row.birthDate, "years") : <EmptyCell/>} years old
             </TableCell>
             <TableCell className={cssCell}>
                 { row.job ? row.job : <EmptyCell/> }

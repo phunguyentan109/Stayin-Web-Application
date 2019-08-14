@@ -3,7 +3,7 @@ import React from "react";
 const ASBar = ({create, ...props}) => (
     <div className="as-bar">
         <div>
-            <button onClick={create}><i className="fas fa-plus"></i></button>
+            {create && <button onClick={create}><i className="fas fa-plus"></i></button>}
             <button><i className="fas fa-trash"></i></button>
             <p><i className="fas fa-table"></i> <span>Showing 10 entries</span></p>
         </div>
