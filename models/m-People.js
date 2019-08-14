@@ -11,7 +11,7 @@ const peopleSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Room"
     },
-    jobs: String,
+    job: String,
     birthDate: {
         type: Date,
         default: Date.now
