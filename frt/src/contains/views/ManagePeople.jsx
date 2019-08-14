@@ -6,6 +6,7 @@ import {apiCall} from "services/api";
 
 function ManagePeopleContain({api, user, ...props}) {
     const [peopleList, setPeopleList] = useState([]);
+    const [userList, setUserList] = useState([]);
 
     useEffect(() => {
         let isLoad = false;
@@ -16,7 +17,9 @@ function ManagePeopleContain({api, user, ...props}) {
 
     async function load() {
         try {
-            let people = await apiCall("get", api.get(user._id));
+            let people = await apiCall("get", api.people.get(user._id));
+            let users = await apiCall("get", api.account.get());
+            setUserList(users);
             setPeopleList(people);
         } catch(err) {
             console.log(err);
@@ -25,8 +28,19 @@ function ManagePeopleContain({api, user, ...props}) {
 
     async function hdRemove(people_id) {
         try {
-            if(window.confirm("Dop you want to remove this data")){
-                await apiCall("delete", api.delete(user._id, people_id));
+            if(window.confirm("Do you want to remove this data?")){
+                await apiCall("delete", api.people.delete(user._id, people_id));
+                await load();
+            }
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    async function removeUser(user_id) {
+        try {
+            if(window.confirm("Do you want to remove this data?")){
+                await apiCall("delete", api.account.delete(user_id));
                 await load();
             }
         } catch(err) {
@@ -37,7 +51,9 @@ function ManagePeopleContain({api, user, ...props}) {
     return <ManagePeople
         {...props}
         list={peopleList}
+        userList={userList}
         hdRemove={hdRemove}
+        rmUser={removeUser}
     />
 }
 
