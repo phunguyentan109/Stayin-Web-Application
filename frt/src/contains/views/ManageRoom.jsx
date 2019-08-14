@@ -14,6 +14,7 @@ function ManageRoomContain({api, user, ...props}) {
     });
     const [formIsOpen, setOpenForm] = useState(false);
     const [people, setPeople] = useState([]);
+    const [price, setPrice] = useState([]);
 
     const toggleForm = () => setOpenForm(prev => !prev);
 
@@ -45,8 +46,10 @@ function ManageRoomContain({api, user, ...props}) {
         try {
             let roomList = await apiCall("get", api.room.get(user._id));
             let peopleList = await apiCall("get", api.people.get(user._id));
+            let priceList = await apiCall("get", api.price.get(user._id));
             setPeople(peopleList.filter(p => p.room_id === undefined));
             setRooms(roomList);
+            setPrice(priceList);
         } catch(err) {
             console.log(err);
         }
@@ -86,6 +89,7 @@ function ManageRoomContain({api, user, ...props}) {
         room={room}
         rooms={rooms}
         people={people}
+        price={price}
         toggleForm={toggleForm}
         formIsOpen={formIsOpen}
         hdConfirm={hdConfirm}

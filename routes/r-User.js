@@ -15,7 +15,7 @@ router.route("/:user_id")
 router.route("/:user_id/activate").put(hdl.User.activate);
 
 router.use("/:user_id/rooms", mw.User.isLogin, require("./r-Room"));
-router.use("/:user_id/prices", mw.User.isLogin, require("./r-Price"));
+router.use("/:user_id/price", mw.User.isLogin, require("./r-Price"));
 router.use("/:user_id/bills", mw.User.isLogin, require("./r-Bill"));
 router.use("/:user_id/people", mw.User.isLogin, require("./r-People"));
 
