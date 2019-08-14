@@ -22,8 +22,7 @@ exports.price = {
 }
 
 exports.bill = {
-    amount: 101,
-    inContract: true
+    amount: 101
 }
 
 exports.room = {
@@ -36,7 +35,7 @@ exports.clear = async() => {
         await casDelete("User", "email", exports.user.email);
         await casDelete("Room", "name", exports.room.name);
         await casDelete("Price", "type", exports.price.type);
-        await casDelete("Bill", "type", exports.bill.type);
+        await casDelete("Bill", "amount", exports.bill.amount);
     } catch(err) {
         console.log(err);
     }

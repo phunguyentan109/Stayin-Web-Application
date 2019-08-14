@@ -12,6 +12,7 @@ import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
 import ASBar from "components/Bar/ASBar";
 import EmptyBox from "components/Box/EmptyBox";
+import TableCard from "components/Card/TableCard";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "assets/cardHeaderStyle";
@@ -133,38 +134,22 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
     {
         formIsOpen || <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
-                <Card>
-                    <CardHeader color="primary">
-                        <h4 className={classes.cardTitleWhite}>Price List</h4>
-                        <p className={classes.cardCategoryWhite}>
-                            Price of room in your apartments
-                        </p>
-                    </CardHeader>
-                    <CardBody>
-                        <ASBar create={toggleForm}/>
-                        {/* <PriceTable
+                <TableCard {...table.card}>
+                    <ASBar create={toggleForm}/>
+                    {
+                        prices.length > 0
+                        ? <PriceTable
                             tableHeaderColor="primary"
-                            tableHead={["ID", "Type", "Electric", "Water", "House", "Wifi", "Extra", "Duration", "Options"]}
-                            tableData={[
-                                ["Price 01", "3.5", "100", "30", "3000", "300", "6"],
-                                ["Price 02", "4", "50", "80", "4000", "0", "6"]
-                            ]}
-                        /> */}
-                        {
-                            prices.length > 0
-                            ? <PriceTable
-                                tableHeaderColor="primary"
-                                tableHead={table.header}
-                                tableData={prices}
-                                options={{
-                                        remove: hdRemove,
-                                        edit: hdEdit
-                                    }}
-                                />
-                                : <EmptyBox message={table.empty}/>
-                            }
-                    </CardBody>
-                </Card>
+                            tableHead={table.header}
+                            tableData={prices}
+                            options={{
+                                    remove: hdRemove,
+                                    edit: hdEdit
+                                }}
+                            />
+                        : <EmptyBox message={table.empty}/>
+                    }
+                </TableCard>
             </GridItem>
         </GridContainer>
     }
