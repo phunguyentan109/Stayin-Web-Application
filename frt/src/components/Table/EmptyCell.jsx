@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmptyCell = ({data, text}) => (
+const EmptyCell = ({text}) => (
     <span className="empty-cell">{text ? text : "Not yet"}</span>
 )
 

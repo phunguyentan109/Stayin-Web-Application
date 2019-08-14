@@ -9,7 +9,7 @@ const ListPeople = ({people_id}) => people_id.slice(0, 5).map((u, i) =>
     <img src={u.user_id.avatar.link} alt="" key={i}/>
 )
 
-const RoomTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...props}) => (
+const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
