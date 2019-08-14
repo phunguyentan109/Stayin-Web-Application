@@ -1,7 +1,13 @@
 export default {
     api: {
-        get: (user_id) => `/api/user/${user_id}/people`,
-        delete: (user_id, people_id) => `/api/user/${user_id}/people/${people_id}`
+        account: {
+            get: () => `/api/user`,
+            delete: (user_id) => `/api/user/${user_id}` 
+        },
+        people: {
+            get: (user_id) => `/api/user/${user_id}/people`,
+            delete: (user_id, people_id) => `/api/user/${user_id}/people/${people_id}`
+        }
     },
     table: {
         account: {

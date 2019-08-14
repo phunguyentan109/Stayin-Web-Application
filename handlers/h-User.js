@@ -48,6 +48,25 @@ exports.logIn = async(req, res, next) => {
     }
 }
 
+exports.get = async(req, res, next) => {
+    try {
+        let users = await db.User.find({active: false});
+        return res.status(200).json(users);
+    } catch(err) {
+        return next(err);
+    }
+}
+
+exports.remove = async(req, res, next) => {
+    try {
+        let user = await db.User.findById(req.params.user_id);
+        if(user) user.remove();
+        return res.status(200).json(user);
+    } catch(err) {
+        return next(err);
+    }
+}
+
 exports.getOne = async(req, res, next) => {
     try {
         let user = await db.User.findById(req.params.user_id);
