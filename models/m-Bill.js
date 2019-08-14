@@ -3,13 +3,19 @@ const {spliceId} = require("../utils/dbSupport");
 const db = require("../models");
 
 const billSchema = new mongoose.Schema({
-    room_id: {
+    room_id:  {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Room"
     },
     electric: {
-        type: Number,
-        default: 0
+        amount: {
+            type: Number,
+            default: 0
+        },
+        cost: {
+            type: Number,
+            default: 0
+        }
     },
     water: {
         type: Number,
@@ -20,10 +26,6 @@ const billSchema = new mongoose.Schema({
         default: 0
     },
     wifi: {
-        type: Number,
-        default: 0
-    },
-    extra: {
         type: Number,
         default: 0
     },

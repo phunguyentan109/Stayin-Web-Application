@@ -2,7 +2,7 @@ export default {
     api: {
         account: {
             get: () => `/api/user`,
-            delete: (user_id) => `/api/user/${user_id}` 
+            delete: (user_id) => `/api/user/${user_id}`
         },
         people: {
             get: (user_id) => `/api/user/${user_id}/people`,

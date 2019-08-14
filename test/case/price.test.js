@@ -37,7 +37,7 @@ describe("PRICE HANDLER TESTS", function(){
 
     describe("2. View all price", function(){
         it("Display all price successfully", async function(){
-            let rs = await prc.Price.getAll(logUser._id);
+            let rs = await prc.Price.get(logUser._id);
 
             expect(rs).to.be.an("array");
         })

@@ -12,6 +12,13 @@ exports.get = async(req, res, next) => {
 exports.create = async(req, res, next) => {
     try {
         let createdRoom = await db.Room.create(req.body);
+
+        let foundPrice = await db.Price.findById(createdRoom.price_id);
+        if(foundPrice){
+            foundPrice.room_id.push(createdRoom._id);
+            await foundPrice.save();
+        }
+
         return res.status(200).json(createdRoom);
     } catch(err) {
         return next(err);

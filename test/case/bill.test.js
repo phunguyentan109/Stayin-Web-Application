@@ -20,13 +20,8 @@ describe("BILL HANDLER TESTS", function(){
             let rs = await prc.Bill.create(logUser._id, bill, authorization);
             createdBill = rs;
 
-            expect(rs).to.have.keys("electric", "wifi", "water", "house", "extra", "inContract", "_id");
-            expect(rs.electric).to.be(bill.electric);
-            expect(rs.wifi).to.be(bill.wifi);
-            expect(rs.water).to.be(bill.water);
-            expect(rs.house).to.be(bill.house);
-            expect(rs.extra).to.be(bill.extra);
-            expect(rs.inContract).to.be(bill.inContract);
+            expect(rs).to.have.keys("amount", "_id");
+            expect(rs.amount).to.be(bill.amount);
         })
 
         it("Should create new bill with fake user id account", async function(){
@@ -48,12 +43,8 @@ describe("BILL HANDLER TESTS", function(){
         it("Update bill successfully", async function(){
             let rs = await prc.Bill.update(logUser._id, createdBill._id, bill, authorization);
 
-            expect(rs).to.have.keys("electric", "wifi", "water", "house", "extra", "inContract");
-            expect(rs.electric).to.be(bill.electric);
-            expect(rs.wifi).to.be(bill.wifi);
-            expect(rs.water).to.be(bill.water);
-            expect(rs.house).to.be(bill.house);
-            expect(rs.extra).to.be(bill.extra);
+            expect(rs).to.have.keys("amount", "inContract");
+            expect(rs.amount).to.be(bill.amount);
             expect(rs.inContract).to.be(bill.inContract);
             expect(rs._id).to.be(createdBill._id);
         })
