@@ -143,7 +143,7 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                 </GridItem>
             </GridContainer>
         }
-        
+
         {
             formIsOpen || <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
@@ -168,7 +168,7 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                                     ]
                                 }}
                             />
-                            : <EmptyBox message={table.empty}/>
+                            : <EmptyBox message={table.room.empty}/>
                         }
                     </TableCard>
                 </GridItem>
