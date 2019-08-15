@@ -16,7 +16,7 @@ import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
 
-const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, rooms, hdChange, hdRemove, hdEdit, table, people, assignPeople, ...props}) => (
+const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, rooms, hdChange, hdRemove, hdEdit, table, people, assignPeople, price, ...props}) => (
     <AppLayoutContain {...props}>
         {
             formIsOpen && <GridContainer>
@@ -64,21 +64,18 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                         />
                         <CardBody>
                             <GridContainer customCss="price-container">
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PriceBox select/>
-                                </GridItem>
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PriceBox />
-                                </GridItem>
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PriceBox />
-                                </GridItem>
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PriceBox />
-                                </GridItem>
-                                <GridItem xs={12} sm={6} md={3}>
-                                    <PriceBox />
-                                </GridItem>
+                                {
+                                    price.length > 0
+                                    ? price.map((pr, i) => (
+                                        <GridItem xs={12} sm={6} md={3}>
+                                            <PriceBox {...pr} />
+                                        </GridItem>
+                                    ))
+                                    : <EmptyBox
+                                        height="100%"
+                                        message="There is no price to select"
+                                    />
+                                }
                             </GridContainer>
                         </CardBody>
                     </Card>

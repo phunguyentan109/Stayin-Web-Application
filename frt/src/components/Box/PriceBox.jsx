@@ -1,13 +1,16 @@
 import React from "react";
 
-const PriceCheckbox = ({select, ...props}) => (
+const PriceCheckbox = ({select, type, extra, ...props}) => (
     <div className={`price-box ${select ? "select" : ""}`}>
-        <i className="fas fa-tags"></i>
         <div>
-            <p>PriceA</p>
-            <small>Extra - 300 VND</small>
+            <i className="fas fa-tags"></i>
+            <div>
+                <p>{type}</p>
+                <small>Extra - {extra} VND</small>
+            </div>
         </div>
-        {select && <span><i className="fas fa-check-double"></i></span>}
+        {select || <i className="fas fa-circle-notch"></i>}
+        {select && <i className="fas fa-check-circle"></i>}
     </div>
 )
 
