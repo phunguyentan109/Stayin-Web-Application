@@ -30,9 +30,9 @@ const style = {
 };
 
 function GridContainer(props) {
-  const { classes, children, ...rest } = props;
+  const {customCss, classes, children, ...rest } = props;
   return (
-    <Grid container {...rest} className={classes.grid}>
+    <Grid container {...rest} className={`${classes.grid} ${customCss ? customCss : ""}`}>
       {children}
     </Grid>
   );

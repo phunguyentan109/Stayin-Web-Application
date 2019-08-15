@@ -3,5 +3,5 @@ export function inCurrency(num) {
         style: "currency",
         currency: "VND",
         currencyDisplay: "code"
-    }).format(num);
+    }).format(num*1000);
 }

@@ -18,7 +18,6 @@ exports.signUp = async(req, res, next) => {
 
         return res.status(200).json({_id, viewname, avatar, email, role, active, token});
     } catch(err) {
-        console.log(err);
         return next({
             status: 400,
             message: err.code === 11000 ? "Sorry, that email/password is taken or invalid" : err.message
@@ -46,6 +45,25 @@ exports.logIn = async(req, res, next) => {
             status: 400,
             message: "Invalid email/password."
         })
+    }
+}
+
+exports.get = async(req, res, next) => {
+    try {
+        let users = await db.User.find({active: false});
+        return res.status(200).json(users);
+    } catch(err) {
+        return next(err);
+    }
+}
+
+exports.remove = async(req, res, next) => {
+    try {
+        let user = await db.User.findById(req.params.user_id);
+        if(user) user.remove();
+        return res.status(200).json(user);
+    } catch(err) {
+        return next(err);
     }
 }
 

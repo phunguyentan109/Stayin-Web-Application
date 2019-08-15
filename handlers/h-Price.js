@@ -1,6 +1,6 @@
 const db = require("../models");
 
-exports.getAll = async(req, res, next) => {
+exports.get = async(req, res, next) => {
     try{
         let prices = await db.Price.find({user: req.params.user_id});
         return res.status(200).json(prices);
@@ -26,7 +26,16 @@ exports.remove = async(req, res, next) => {
 
 exports.update  = async(req, res, next) => {
     try {
-        let updatedPrice = await db.Price.findByIdAndUpdate(req.params.price_id, req.body, {new: true});
+        let updatedPrice = await db.Price.findById(req.params.price_id);
+        let {electric, wifi, water, house, extra, duration} = req.body;
+
+        updatedPrice.electric = electric;
+        updatedPrice.wifi = wifi;
+        updatedPrice.water = water;
+        updatedPrice.house = house;
+        updatedPrice.extra = extra;
+        updatedPrice.duration = duration;
+        await updatedPrice.save();
         return res.status(200).json(updatedPrice);
     } catch(err) {
         return next(err);

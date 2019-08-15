@@ -17,13 +17,3 @@ exports.create = async(req, res, next) => {
         return res.send(err);
     }
 }
-
-exports.remove = async(req, res, next) => {
-    try{
-        let foundPeople = await db.People.findById(req.params.people_id);
-        foundPeople.remove();
-        return res.status(200).json("Delete successfully!");
-    }catch(err){
-        return res.send(err);
-    }
-}

@@ -4,6 +4,7 @@ import ActivatedContain from "contains/views/Activated";
 import ManagePeopleContain from "contains/views/ManagePeople";
 import ManageRoomContain from "contains/views/ManageRoom";
 import ManagePriceContain from "contains/views/ManagePrice";
+import ManageBillContain from "contains/views/ManagaBill";
 
 import Login from "components/views/Login";
 
@@ -11,12 +12,17 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import Home from "@material-ui/icons/Home";
 import AttachMoney from "@material-ui/icons/AttachMoney";
+import Polymer from "@material-ui/icons/Polymer";
 
 import dashboard from "./display/Dashboard";
 import login from "./display/Login";
 import register from "./display/Register";
 import activate from "./display/Activate";
 import activated from "./display/Activated";
+import manage_room from "./display/ManageRoom";
+import manage_people from "./display/ManagePeople";
+import manage_price from "./display/ManagePrice";
+import manage_bill from "./display/ManageBill";
 
 const sidebar = [
     {
@@ -33,7 +39,7 @@ const sidebar = [
         name: "Manage People",
         component: ManagePeopleContain,
         icon: Person,
-        display: dashboard
+        display: manage_people
     },
     {
         path: "/room",
@@ -41,7 +47,7 @@ const sidebar = [
         name: "Manage Room",
         component: ManageRoomContain,
         icon: Home,
-        display: dashboard
+        display: manage_room
     },
     {
         path: "/price",
@@ -49,7 +55,15 @@ const sidebar = [
         name: "Manage Price",
         component: ManagePriceContain,
         icon: AttachMoney,
-        display: dashboard
+        display: manage_price
+    },
+    {
+        path: "/bill",
+        roles: [],
+        name: "Manage Bill",
+        component: ManageBillContain,
+        icon: Polymer,
+        display: manage_bill
     }
 ]
 

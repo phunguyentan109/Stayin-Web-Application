@@ -8,6 +8,7 @@ const roomSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    desc: String,
     people_id: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -29,15 +30,12 @@ const roomSchema = new mongoose.Schema({
 
 roomSchema.pre("remove", async function(next){
     try {
-        await spliceId("Bill", this.bill_id, "room_id", this._id);
         await spliceId("Price", this.price_id, "room_id", this._id);
-        await db.Price.deleteMany({_id: {$in: this.price_id}});
+        await db.Bill.deleteMany({_id: {$in: this.bill_id}});
         return next();
-    } catch(err) {
+    } catch (err) {
         return next(err);
     }
 })
 
 module.exports = mongoose.model("Room", roomSchema);
-
-
