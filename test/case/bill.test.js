@@ -1,6 +1,7 @@
 const expect = require("expect.js");
 const prc = require("../prc");
-const {owner, bill, room, ...sample} = require("../sample");
+const {owner, bill, room, price, ...sample} = require("../sample");
+const db = require("../../models");
 
 describe("BILL HANDLER TESTS", function(){
 
@@ -9,8 +10,16 @@ describe("BILL HANDLER TESTS", function(){
         logUser = await prc.User.logIn(owner);
 
         authorization = `Bearer ${logUser.token}`;
-
+        
         createdBill = "";
+        
+        createdPrice = await db.Price.create(price);
+        createdRoom = await db.Room.create(room);
+        createdRoom.price_id = createdPrice._id;
+        createdRoom.bill_id.push(createdBill._id);
+        createdPrice.room_id.push(createdRoom._id);
+        await createdPrice.save();
+        await createdRoom.save();
 
     })
 
@@ -19,7 +28,7 @@ describe("BILL HANDLER TESTS", function(){
         it("Create bill with user account", async function(){
             let rs = await prc.Bill.create(logUser._id, bill, authorization);
             createdBill = rs;
-
+            console.log(createdRoom);
             expect(rs).to.have.keys("amount", "_id");
             expect(rs.amount).to.be(bill.amount);
         })
@@ -43,9 +52,8 @@ describe("BILL HANDLER TESTS", function(){
         it("Update bill successfully", async function(){
             let rs = await prc.Bill.update(logUser._id, createdBill._id, bill, authorization);
 
-            expect(rs).to.have.keys("amount", "inContract");
+            expect(rs).to.have.keys("amount");
             expect(rs.amount).to.be(bill.amount);
-            expect(rs.inContract).to.be(bill.inContract);
             expect(rs._id).to.be(createdBill._id);
         })
 

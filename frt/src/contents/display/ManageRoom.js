@@ -10,6 +10,9 @@ export default {
         },
         price: {
             get: (user_id) => `/api/user/${user_id}/price`
+        },
+        bill: {
+            get: (user_id, room_id) => `/api/user/${user_id}/rooms/${room_id}/bill`
         }
     },
     table: {
