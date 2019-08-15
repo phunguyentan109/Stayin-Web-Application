@@ -5,8 +5,8 @@ import TableCell from "@material-ui/core/TableCell";
 import PropTypes from "prop-types";
 import CellOption from "components/Table/CellOption";
 
-const ListPeople = ({people_id}) => people_id.slice(0, 5).map((u, i) =>
-    <img src={u.user_id.avatar.link} alt="" key={i}/>
+const ListPeople = ({people}) =>
+    people.map((u, i) => <img src={u.user_id.avatar.link} alt="" key={i}/>
 )
 
 const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
@@ -17,7 +17,7 @@ const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
             <TableCell className={`${cssCell} custom-cell room-name`}>
                 {
                     row.people_id.length > 0
-                    ? <ListPeople people={row.people_id} />
+                    ? <ListPeople people={row.people_id.length > 5 ? row.people_id.slice(0, 5) : row.people_id} />
                     : <span className="empty-cell">No one is staying in this room</span>
                 }
                 {
