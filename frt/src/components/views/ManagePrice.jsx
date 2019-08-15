@@ -4,7 +4,6 @@ import AppLayoutContain from "contains/Layout/AppLayout";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Card from "components/Card/Card.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import PriceTable from "components/Table/PriceTable.jsx";
 import ConfirmBar from "components/Bar/ConfirmBar";

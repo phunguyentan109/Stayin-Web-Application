@@ -46,7 +46,6 @@ function ManagePriceContain({api, user, ...props}) {
     async function load() {
         try {
             let priceList = await apiCall("get", api.get(user._id));
-            console.log(priceList);
             setPrices(priceList);
         } catch(err) {
             console.log(err);
