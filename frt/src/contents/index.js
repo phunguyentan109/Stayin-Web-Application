@@ -22,6 +22,7 @@ import activated from "./display/Activated";
 import manage_room from "./display/ManageRoom";
 import manage_people from "./display/ManagePeople";
 import manage_price from "./display/ManagePrice";
+import manage_bill from "./display/ManageBill";
 
 const sidebar = [
     {
@@ -62,7 +63,7 @@ const sidebar = [
         name: "Manage Bill",
         component: ManageBillContain,
         icon: Polymer,
-        display: dashboard
+        display: manage_bill
     }
 ]
 

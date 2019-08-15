@@ -15,6 +15,7 @@ import PeopleBox from "components/Box/PeopleBox";
 import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
+import {Link} from "react-router-dom";
 
 const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, rooms, hdChange, hdRemove, hdEdit, table, people, assignPeople, ...props}) => (
     <AppLayoutContain {...props}>
