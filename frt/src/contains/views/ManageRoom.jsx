@@ -70,6 +70,15 @@ function ManageRoomContain({api, user, ...props}) {
         }
     }
 
+    async function hdBill(room_id) {
+        try {
+            // await apiCall("get", api.get(user._id, room_id));
+            props.history.push(`/rooms/${room_id}/bills`);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
     async function hdEdit(room_id) {
 
     }
@@ -105,6 +114,7 @@ function ManageRoomContain({api, user, ...props}) {
         hdRemove={hdRemove}
         hdChange={hdChange}
         hdEdit={hdEdit}
+        hdBill={hdBill}
         assignPeople={assignPeople}
         selectPrice={selectPrice}
     />

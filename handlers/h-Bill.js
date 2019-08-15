@@ -16,7 +16,6 @@ exports.create = async(req, res, next) => {
         // Get this month entered data
         let {amount} = req.body;
         let {room_id} = req.params;
-
         // find previous bill
         let room = await db.Room.findById(room_id).populate("bill_id").populate("price_id").exec();
         let price = room.price_id;
