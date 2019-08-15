@@ -1,7 +1,7 @@
 import React from "react";
 
-const PriceCheckbox = ({select, type, extra, ...props}) => (
-    <div className={`price-box ${select ? "select" : ""}`}>
+const PriceCheckbox = ({select, type, extra, choose, ...props}) => (
+    <div className={`price-box ${select ? "select" : ""}`} onClick={choose}>
         <div>
             <i className="fas fa-tags"></i>
             <div>

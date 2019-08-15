@@ -9,7 +9,7 @@ function ManageRoomContain({api, user, ...props}) {
     const [room, setRoom] = useState({
         name: "",
         desc: "",
-        price_id: [],
+        price_id: "",
         people_id: []
     });
     const [formIsOpen, setOpenForm] = useState(false);
@@ -25,6 +25,8 @@ function ManageRoomContain({api, user, ...props}) {
 
     async function hdConfirm() {
         try {
+            let {people_id} = room;
+            room.people_id = people_id.map(p => p._id);
             await apiCall("post", api.room.create(user._id), room);
             await load();
             setOpenForm(false);
@@ -45,6 +47,7 @@ function ManageRoomContain({api, user, ...props}) {
     async function load() {
         try {
             let roomList = await apiCall("get", api.room.get(user._id));
+            console.log(roomList);
             let peopleList = await apiCall("get", api.people.get(user._id));
             let priceList = await apiCall("get", api.price.get(user._id));
             priceList = priceList.map(pr => ({...pr, select: false}));
@@ -69,6 +72,11 @@ function ManageRoomContain({api, user, ...props}) {
 
     async function hdEdit(room_id) {
 
+    }
+
+    function selectPrice(price_id) {
+        console.log(price_id);
+        return setRoom(prev => ({...prev, price_id}));
     }
 
     function assignPeople(peo, add=true) {
@@ -98,6 +106,7 @@ function ManageRoomContain({api, user, ...props}) {
         hdChange={hdChange}
         hdEdit={hdEdit}
         assignPeople={assignPeople}
+        selectPrice={selectPrice}
     />
 }
 

@@ -256,15 +256,8 @@
         font-size: 11px; }
   .price-box > i {
     color: gray;
-    font-size: 16px;
+    font-size: 17px;
     margin-right: 10px; }
-  .price-box > span {
-    position: absolute;
-    right: 10px;
-    top: 5px; }
-    .price-box > span > i {
-      color: gray;
-      font-size: 15px; }
 
 .people-box {
   display: flex;
