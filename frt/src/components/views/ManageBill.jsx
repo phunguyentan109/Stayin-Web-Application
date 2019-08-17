@@ -17,7 +17,7 @@ import TitleBox from "components/Box/TitleBox";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "assets/cardHeaderStyle";
 
-const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, bill, bills, hdChange, hdRemove, hdEdit, table, ...props}) => (
+const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, bills, hdChange, hdRemove, hdEdit, table, ...props}) => (
     <AppLayoutContain {...props}>
         {
             formIsOpen && <GridContainer>
@@ -40,7 +40,7 @@ const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, bill, bil
                                         placeholder="85"
                                         required
                                         name="electric"
-                                        value={bill.electric.amount}
+                                        value={amount}
                                         onChange={hdChange}
                                     />
                                 </GridItem>

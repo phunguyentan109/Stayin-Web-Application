@@ -1,8 +1,8 @@
 export default {
     api: {
         create: (user_id, room_id) => `/api/user/${user_id}/rooms/${room_id}/bills`,
-        get: (user_id) => `/api/user/${user_id}/bills`,
-        delete: (user_id, bill_id) => `/api/user/${user_id}/bills/${bill_id}`
+        get: (user_id, room_id) => `/api/user/${user_id}/rooms/${room_id}/bills`,
+        delete: (user_id, room_id, bill_id) => `/api/user/${user_id}/rooms/${room_id}/bills/${bill_id}`
     },
     table: {
         bill: {

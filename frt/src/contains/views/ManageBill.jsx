@@ -6,27 +6,20 @@ import {connect} from "react-redux";
 
 function ManageBillContain({api, user, ...props}) {
     const [bills, setBills] = useState([]);
-    const [bill, setBill] = useState({
-        electric: "",
-        wifi: "",
-        water: "",
-        house: "",
-        extra: "",
-        inContract: ""
-    });
+    const [amount, setAmount] = useState(0);
     const [formIsOpen, setOpenForm] = useState(false);
 
     const toggleForm = () => setOpenForm(prev => !prev);
 
     const hdChange = (e) => {
         const {name, value} = e.target;
-        setBill(prev => ({...prev, [name]: value}));
+        setAmount(value);
     }
 
     async function hdConfirm() {
-        const {room_id} = this.props.match.params;
+        const {room_id} = props.match.params;
         try {
-            await apiCall("post", api.create(user._id), room_id);
+            await apiCall("post", api.create(user._id, room_id), {amount});
             await load();
             setOpenForm(false);
         } catch(err) {
@@ -44,19 +37,20 @@ function ManageBillContain({api, user, ...props}) {
     }, []);
 
     async function load() {
+        const {room_id} = props.match.params;
         try {
-            let billList = await apiCall("get", api.get(user._id));
-            console.log(billList);
+            let billList = await apiCall("get", api.get(user._id, room_id));
             setBills(billList);
         } catch(err) {
             console.log(err);
         }
     }
-    
+
     async function hdRemove(bill_id) {
+        const {room_id} = props.match.params;
         try {
             if(window.confirm("Are you sure to remove this data?")){
-                await apiCall("delete", api.delete(user._id, bill_id));
+                await apiCall("delete", api.delete(user._id, room_id, bill_id));
                 await load();
             }
         } catch(err) {
@@ -67,10 +61,10 @@ function ManageBillContain({api, user, ...props}) {
     async function hdEdit(bill_id) {
 
     }
-    
-    return <ManageBill 
+
+    return <ManageBill
         {...props}
-        bill={bill}
+        amount={amount}
         bills={bills}
         toggleForm={toggleForm}
         formIsOpen={formIsOpen}

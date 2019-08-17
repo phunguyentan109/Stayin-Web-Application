@@ -30,7 +30,7 @@ const PriceTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...p
                     {row.extra ? inCurrency(row.extra) : <EmptyCell/>}
                 </TableCell>
                 <TableCell className={cssCell}>
-                    {row.duration ? row.duration : <EmptyCell/>}
+                    {row.duration ? `${row.duration} month(s)` : <EmptyCell/>}
                 </TableCell>
 
                 {
