@@ -38,6 +38,7 @@ exports.pushId = async(findSchema, findId, pushCol, pushId) => {
 */
 exports.assignId = async(findSchema, findId, assignCol, assignId) => {
     try {
+        console.log(findId);
         let foundDoc = await db[findSchema].findById(findId);
         if(foundDoc) {
             foundDoc[assignCol] = assignId;
