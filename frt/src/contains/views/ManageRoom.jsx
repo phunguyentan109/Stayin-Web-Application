@@ -9,11 +9,12 @@ function ManageRoomContain({api, user, ...props}) {
     const [room, setRoom] = useState({
         name: "",
         desc: "",
-        price_id: [],
+        price_id: "",
         people_id: []
     });
     const [formIsOpen, setOpenForm] = useState(false);
     const [people, setPeople] = useState([]);
+    const [price, setPrice] = useState([]);
 
     const toggleForm = () => setOpenForm(prev => !prev);
 
@@ -24,6 +25,8 @@ function ManageRoomContain({api, user, ...props}) {
 
     async function hdConfirm() {
         try {
+            let {people_id} = room;
+            room.people_id = people_id.map(p => p._id);
             await apiCall("post", api.room.create(user._id), room);
             await load();
             setOpenForm(false);
@@ -44,9 +47,13 @@ function ManageRoomContain({api, user, ...props}) {
     async function load() {
         try {
             let roomList = await apiCall("get", api.room.get(user._id));
+            console.log(roomList);
             let peopleList = await apiCall("get", api.people.get(user._id));
+            let priceList = await apiCall("get", api.price.get(user._id));
+            priceList = priceList.map(pr => ({...pr, select: false}));
             setPeople(peopleList.filter(p => p.room_id === undefined));
             setRooms(roomList);
+            setPrice(priceList);
         } catch(err) {
             console.log(err);
         }
@@ -76,6 +83,11 @@ function ManageRoomContain({api, user, ...props}) {
 
     }
 
+    function selectPrice(price_id) {
+        console.log(price_id);
+        return setRoom(prev => ({...prev, price_id}));
+    }
+
     function assignPeople(peo, add=true) {
         if(add){
             let modRoomPeopleId = [...room.people_id, peo];
@@ -95,6 +107,7 @@ function ManageRoomContain({api, user, ...props}) {
         room={room}
         rooms={rooms}
         people={people}
+        price={price}
         toggleForm={toggleForm}
         formIsOpen={formIsOpen}
         hdConfirm={hdConfirm}
@@ -103,6 +116,7 @@ function ManageRoomContain({api, user, ...props}) {
         hdEdit={hdEdit}
         hdBill={hdBill}
         assignPeople={assignPeople}
+        selectPrice={selectPrice}
     />
 }
 

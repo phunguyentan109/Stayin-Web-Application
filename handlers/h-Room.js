@@ -1,8 +1,18 @@
 const db = require("../models");
+const {pushId, assignId} = require("../utils/dbSupport");
 
 exports.get = async(req, res, next) => {
     try {
-        let list = await db.Room.find().populate("bill_id").populate("price_id").populate("people_id").exec();
+        let list = await db.Room.find()
+            .populate("bill_id")
+            .populate("price_id")
+            .populate({
+                path: "people_id",
+                populate: {
+                    path: "user_id"
+                }
+            })
+            .exec();
         return res.status(200).json(list);
     } catch(err) {
         return next(err);
@@ -12,13 +22,12 @@ exports.get = async(req, res, next) => {
 exports.create = async(req, res, next) => {
     try {
         let createdRoom = await db.Room.create(req.body);
-
-        let foundPrice = await db.Price.findById(createdRoom.price_id);
-        if(foundPrice){
-            foundPrice.room_id.push(createdRoom._id);
-            await foundPrice.save();
+        const {price_id, people_id} = req.body;
+        // add room_id to price and people_id
+        await pushId("Price", price_id, "room_id", createdRoom._id);
+        for(let p of people_id) {
+            await assignId("People", p._id, "room_id", createdRoom._id);
         }
-
         return res.status(200).json(createdRoom);
     } catch(err) {
         return next(err);
