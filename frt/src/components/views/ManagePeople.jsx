@@ -7,6 +7,7 @@ import PeopleTable from "components/Table/PeopleTable.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import TableCard from "components/Card/TableCard";
 import ASBar from "components/Bar/ASBar";
+import EmptyBox from "components/Box/EmptyBox";
 
 const ManagePeople = ({classes, table, list, userList, hdRemove, rmUser, ...props}) => (
     <AppLayoutContain {...props}>
@@ -27,12 +28,16 @@ const ManagePeople = ({classes, table, list, userList, hdRemove, rmUser, ...prop
             <GridItem xs={12} sm={12} md={12}>
                 <TableCard {...table.people.card}>
                     <ASBar/>
-                    <PeopleTable
-                        tableHeaderColor="primary"
-                        tableHead={table.people.header}
-                        tableData={list}
-                        options={{remove: hdRemove}}
-                    />
+                    {
+                        list.length > 0
+                        ? <PeopleTable
+                            tableHeaderColor="primary"
+                            tableHead={table.people.header}
+                            tableData={list}
+                            options={{remove: hdRemove}}
+                        />
+                        : <EmptyBox message={table.people.empty}/> 
+                    }
                 </TableCard>
             </GridItem>
         </GridContainer>
