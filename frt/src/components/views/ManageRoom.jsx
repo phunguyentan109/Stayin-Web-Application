@@ -15,7 +15,6 @@ import PeopleBox from "components/Box/PeopleBox";
 import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
-import {Link} from "react-router-dom";
 
 const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, rooms, hdChange, hdRemove, hdEdit, table, people, assignPeople, price, selectPrice, ...props}) => (
     <AppLayoutContain {...props}>
@@ -76,10 +75,12 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                                             />
                                         </GridItem>
                                     ))
-                                    : <EmptyBox
-                                        height="100%"
-                                        message="There is no price to select"
-                                    />
+                                    : <GridItem xs={12} sm={12} md={12}>
+                                        <EmptyBox
+                                            height="100%"
+                                            message="There is no price to select"
+                                        />
+                                    </GridItem>
                                 }
                             </GridContainer>
                         </CardBody>

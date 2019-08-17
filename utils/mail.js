@@ -1,18 +1,29 @@
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const emoji = require("node-emoji");
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
+const {GMAILUSER, CLIENTID, CLIENTSECRET, REFRESHTOKEN, GGOAUTHLINK} = process.env;
 
 exports.genToken = async() => {
 	let buf = await crypto.randomBytes(20);
 	return buf.toString("hex");
 }
 
+const oauth2Client = new OAuth2(CLIENTID, CLIENTSECRET, GGOAUTHLINK);
+oauth2Client.setCredentials({ refresh_token: REFRESHTOKEN });
+const accessToken = oauth2Client.getAccessToken();
+
 async function send(to, subject, text) {
 	let transport = nodemailer.createTransport({
 		service: "Gmail",
 		auth: {
-			user: process.env.GMAILUSER,
-			pass: process.env.GMAILPWD
+			type: "OAuth2",
+			user: GMAILUSER,
+			clientId: CLIENTID,
+			clientSecret: CLIENTSECRET,
+			refreshToken: REFRESHTOKEN,
+			access: accessToken
 		}
 	})
 	let mailOptions = {

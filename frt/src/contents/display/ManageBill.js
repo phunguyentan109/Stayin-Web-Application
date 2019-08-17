@@ -1,6 +1,6 @@
 export default {
     api: {
-        create: (user_id, room_id) => `/api/user/${user_id}/bills/${room_id}`,
+        create: (user_id, room_id) => `/api/user/${user_id}/rooms/${room_id}/bills`,
         get: (user_id) => `/api/user/${user_id}/bills`,
         delete: (user_id, bill_id) => `/api/user/${user_id}/bills/${bill_id}`
     },
@@ -11,7 +11,7 @@ export default {
                 subtitle: "Bill of room in your apartments"
             },
             header: ["ID", "Electric", "Water", "House", "Wifi", "Extra", "Contract Info", "Options"],
-            empty: "There is no price information to show here."
+            empty: "There is no bill information to show here."
         }
     },
     form: {
