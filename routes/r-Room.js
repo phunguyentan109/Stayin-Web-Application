@@ -11,6 +11,6 @@ router.route("/:room_id")
 .delete(hdl.Room.remove)
 .put(hdl.Room.update);
 
-router.use("/:room_id/bills", mw.User.isLogin, mw.User.isCorrect, require("./r-Bill"));
+router.use("/:room_id/bills", mw.User.isCorrect, require("./r-Bill"));
 
 module.exports = router;

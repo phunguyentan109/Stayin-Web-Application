@@ -14,7 +14,7 @@ const roles = [
 ];
 
 const owner = {
-    email: "owner@",
+    email: process.env.GMAILUSER,
     password: "owner",
     viewname: "owner",
     active: true

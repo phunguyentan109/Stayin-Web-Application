@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const db = require("./index");
-const {spliceId} = require("../utils/dbSupport");
+const {spliceId, assignId} = require("../utils/dbSupport");
 
 const roomSchema = new mongoose.Schema({
     name: {
@@ -30,6 +30,9 @@ const roomSchema = new mongoose.Schema({
 
 roomSchema.pre("remove", async function(next){
     try {
+        for(let id of this.people_id){
+            await assignId("People", id, "room_id", false);
+        }
         await spliceId("Price", this.price_id, "room_id", this._id);
         await db.Bill.deleteMany({_id: {$in: this.bill_id}});
         return next();

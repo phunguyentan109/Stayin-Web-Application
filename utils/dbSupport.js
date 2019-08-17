@@ -40,7 +40,7 @@ exports.assignId = async(findSchema, findId, assignCol, assignId) => {
     try {
         let foundDoc = await db[findSchema].findById(findId);
         if(foundDoc) {
-            foundDoc[assignCol] = assignId;
+            foundDoc[assignCol] = assignId ? assignId : undefined;
             await foundDoc.save();
         }
     } catch(err) {
