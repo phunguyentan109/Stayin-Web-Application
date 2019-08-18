@@ -27,9 +27,11 @@ function ManageRoomContain({api, user, ...props}) {
 
     async function hdConfirm() {
         try {
-            let {people_id} = room;
-            room.people_id = people_id.map(p => p._id);
-            await apiCall("post", api.room.create(user._id), room);
+            if(room._id) {
+                await apiCall("put", api.room.edit(user._id, room._id), room);
+            } else {
+                await apiCall("post", api.room.create(user._id), room);
+            }
             await load();
             setOpenForm(false);
         } catch(err) {
@@ -79,7 +81,13 @@ function ManageRoomContain({api, user, ...props}) {
     }
 
     async function hdEdit(room_id) {
-
+        try {
+            let foundRoom = await apiCall("get", api.room.getOne(user._id, room_id));
+            setRoom(foundRoom);
+            setOpenForm(true);
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     function selectPrice(price_id) {
