@@ -7,7 +7,7 @@ exports.user = {
 }
 
 exports.owner = {
-    email: "owner@",
+    email: process.env.GMAILUSER,
     password: "owner"
 }
 

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const db = require("../models");
+const {spliceId} = require("../utils/dbSupport");
 
 const priceSchema = new mongoose.Schema({
     type: {
@@ -40,6 +41,15 @@ const priceSchema = new mongoose.Schema({
     duration: {
         type: Number,
         default: 6
+    }
+})
+
+priceSchema.pre("remove", async function(next){
+    try {
+        await assignId("Room", this.room_id, "price_id", false);
+        return next();
+    } catch (err) {
+        return next(err);
     }
 })
 
