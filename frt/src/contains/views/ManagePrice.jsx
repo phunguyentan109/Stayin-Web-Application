@@ -4,6 +4,7 @@ import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 
+
 function ManagePriceContain({api, user, ...props}) {
     const [prices, setPrices] = useState([]);
     const [price, setPrice] = useState({
@@ -26,7 +27,11 @@ function ManagePriceContain({api, user, ...props}) {
 
     async function hdConfirm() {
         try {
-            await apiCall("post", api.create(user._id), price);
+            if(price._id){
+                await apiCall("put", api.update(user._id, price._id), price);
+            } else {
+                await apiCall("post", api.create(user._id), price);
+            }
             await load();
             setOpenForm(false);
         } catch(err) {
@@ -64,7 +69,13 @@ function ManagePriceContain({api, user, ...props}) {
     }
 
     async function hdEdit(price_id) {
-
+        try {
+            let priceOne = await apiCall("get", api.getOne(user._id, price_id));
+            setPrice(priceOne);
+            setOpenForm(true);
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     return <ManagePrice

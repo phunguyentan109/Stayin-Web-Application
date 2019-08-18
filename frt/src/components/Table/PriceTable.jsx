@@ -21,10 +21,10 @@ const PriceTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...p
                     {row.wifi ? inCurrency(row.wifi) : <EmptyCell/>}
                 </TableCell>
                 <TableCell className={cssCell}>
-                    {row.water ? inCurrency(row.water) : <EmptyCell/>}
+                    {row.house ? inCurrency(row.house) : <EmptyCell/>}
                 </TableCell>
                 <TableCell className={cssCell}>
-                    {row.house ? inCurrency(row.house) : <EmptyCell/>}
+                    {row.water ? inCurrency(row.water) : <EmptyCell/>}
                 </TableCell>
                 <TableCell className={cssCell}>
                     {row.extra ? inCurrency(row.extra) : <EmptyCell/>}

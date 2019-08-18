@@ -410,22 +410,39 @@
       font-size: 11px;
       color: gray; }
 
-.bill-date > div {
+.bill-active > div {
   display: flex;
   align-items: center; }
-  .bill-date > div > span {
+  .bill-active > div > span {
+    width: 13px;
+    height: 13px;
+    border-radius: 20px;
+    margin-right: 8px; }
+    .bill-active > div > span.active {
+      background-color: #3fe35aab; }
+    .bill-active > div > span.unactive {
+      background-color: #d5d5d5; }
+  .bill-active > div > i {
+    margin-left: 10px;
+    color: #ced17c;
+    font-size: 17px; }
+
+.bill-date {
+  display: flex;
+  align-items: center; }
+  .bill-date > span {
     width: 13px;
     height: 13px;
     border-radius: 20px;
     background-color: #d5d5d5;
     margin-right: 8px; }
-    .bill-date > div > span.near {
+    .bill-date > span.near {
       background-color: #fcb431; }
-    .bill-date > div > span.expire {
+    .bill-date > span.expire {
       background-color: #f87272; }
-  .bill-date > div > i {
+  .bill-date > i {
     margin-left: 10px;
-    color: #ced17c;
+    color: #878787;
     font-size: 17px; }
 
 .options {

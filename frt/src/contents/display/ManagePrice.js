@@ -2,7 +2,9 @@ export default {
     api: {
         create: (user_id) => `/api/user/${user_id}/price`,
         get: (user_id) => `/api/user/${user_id}/price`,
-        delete: (user_id, price_id) => `/api/user/${user_id}/price/${price_id}`
+        getOne: (user_id, price_id) => `/api/user/${user_id}/price/${price_id}`,
+        delete: (user_id, price_id) => `/api/user/${user_id}/price/${price_id}`,
+        update: (user_id, price_id) => `/api/user/${user_id}/price/${price_id}`,
     },
     table: {
         price: {

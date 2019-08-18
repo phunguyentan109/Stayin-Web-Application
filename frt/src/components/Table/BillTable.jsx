@@ -26,8 +26,11 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...pr
                 <TableCell className={cssCell}>
                     {row.extra ? inCurrency(row.extra) : <EmptyCell/>}
                 </TableCell>
-                <TableCell className={cssCell}>
-                    {row.inContract ? "active" : "unactive"}
+                <TableCell className={`${cssCell} bill-active`}>
+                    <div>
+                        {row.inContract ? <span className="active"/> : <span className="unactive"/>}
+                        {row.inContract ? "Active" : "Unactive"}
+                    </div>
                 </TableCell>
                 {
                     options && <TableCell className={`${cssCell} options`}>
