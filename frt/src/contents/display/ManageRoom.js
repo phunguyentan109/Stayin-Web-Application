@@ -3,7 +3,9 @@ export default {
         room: {
             create: (user_id) => `/api/user/${user_id}/rooms`,
             get: (user_id) => `/api/user/${user_id}/rooms`,
-            delete: (user_id, room_id) => `/api/user/${user_id}/rooms/${room_id}`
+            getOne: (user_id, room_id) => `/api/user/${user_id}/rooms/${room_id}`,
+            delete: (user_id, room_id) => `/api/user/${user_id}/rooms/${room_id}`,
+            edit: (user_id, room_id) => `/api/user/${user_id}/rooms/${room_id}`
         },
         people: {
             get: (user_id) => `/api/user/${user_id}/people`
