@@ -9,9 +9,19 @@ exports.get = async(req, res, next) => {
     }
 }
 
+exports.getOne = async(req, res, next) => {
+    try{
+        let price = await db.Price.findById({_id: req.params.price_id});
+        return res.status(200).json(price);
+    } catch (err){
+        return next(err);
+    }
+}
+
 exports.create = async(req, res, next) => {
     try {
         let newPrice = await db.Price.create(req.body);
+
         return res.status(200).json(newPrice);
     } catch (err) {
         return next(err);
@@ -21,7 +31,8 @@ exports.create = async(req, res, next) => {
 exports.remove = async(req, res, next) => {
     try {
         let foundPrice = await db.Price.findById({_id: req.params.price_id});
-        if(foundPrice) foundPrice.remove();
+        console.log(foundPrice);
+        if(foundPrice) await foundPrice.remove();
         return res.status(200).json(foundPrice);
     } catch(err) {
         return next(err);
@@ -30,16 +41,8 @@ exports.remove = async(req, res, next) => {
 
 exports.update  = async(req, res, next) => {
     try {
-        let updatedPrice = await db.Price.findById(req.params.price_id);
-        let {electric, wifi, water, house, extra, duration} = req.body;
+        let updatedPrice = await db.Price.findByIdAndUpdate(req.params.price_id, req.body, {new: true});
 
-        updatedPrice.electric = electric;
-        updatedPrice.wifi = wifi;
-        updatedPrice.water = water;
-        updatedPrice.house = house;
-        updatedPrice.extra = extra;
-        updatedPrice.duration = duration;
-        await updatedPrice.save();
         return res.status(200).json(updatedPrice);
     } catch(err) {
         return next(err);

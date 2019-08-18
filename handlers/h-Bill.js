@@ -11,6 +11,15 @@ exports.get = async(req, res, next) => {
     }
 }
 
+exports.getOne = async(req, res, next) => {
+    try{
+        let bills = await db.Bill.find({_id: req.params.bill_id});
+        return res.status(200).json(bills);
+    } catch(err){
+        return next(err);
+    }
+}
+
 exports.create = async(req, res, next) => {
     try {
         // Get this month entered data
@@ -41,6 +50,10 @@ exports.create = async(req, res, next) => {
 
         // save bill_id to room
         await pushId("Room", room_id, "bill_id", newBill._id);
+        // save room_id to bill
+        newBill.room_id = req.params.room_id;
+        await newBill.save();
+
         return res.status(200).json(newBill);
     } catch (err) {
         console.log(err);
@@ -51,7 +64,7 @@ exports.create = async(req, res, next) => {
 exports.remove = async(req, res, next) => {
     try {
         let foundBill = await db.Bill.findById(req.params.bill_id);
-        if(foundBill) foundBill.remove();
+        if(foundBill) await foundBill.remove();
         return res.status(200).json(foundBill);
     } catch(err) {
         return next(err);

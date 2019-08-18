@@ -40,11 +40,13 @@ exports.create = async(req, res, next) => {
     try {
         let createdRoom = await db.Room.create(req.body);
         const {price_id, people_id} = req.body;
+
         // add room_id to price and people_id
         await pushId("Price", price_id, "room_id", createdRoom._id);
         for(let id of people_id) {
             await assignId("People", id, "room_id", createdRoom._id);
         }
+
         return res.status(200).json(createdRoom);
     } catch(err) {
         return next(err);
