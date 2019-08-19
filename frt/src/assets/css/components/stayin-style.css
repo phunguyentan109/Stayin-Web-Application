@@ -436,22 +436,22 @@
     color: #ced17c;
     font-size: 17px; }
 
-.bill-date {
+.bill-date > div {
   display: flex;
   align-items: center; }
-  .bill-date > span {
+  .bill-date > div > span {
     width: 13px;
     height: 13px;
     border-radius: 20px;
     background-color: #d5d5d5;
     margin-right: 8px; }
-    .bill-date > span.near {
+    .bill-date > div > span.near {
       background-color: #fcb431; }
-    .bill-date > span.expire {
+    .bill-date > div > span.expire {
       background-color: #f87272; }
-  .bill-date > i {
+  .bill-date > div > i {
     margin-left: 10px;
-    color: #878787;
+    color: #ced17c;
     font-size: 17px; }
 
 .options {

@@ -15,8 +15,8 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...pr
                     <div>
                         {row.electric.cost ? inCurrency(row.electric.cost) : <EmptyCell/>}
                         <span>
-                            <i class="fas fa-bolt"/>
-                            {row.electric.amount ? `${row.electric.amount} KW` : <EmptyCell/>} 
+                            <i className="fas fa-bolt"/>
+                            {row.electric.amount ? `${row.electric.amount} KW` : <EmptyCell/>}
                         </span>
                     </div>
                 </TableCell>
@@ -37,6 +37,9 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...pr
                         {row.inContract ? <span className="active"/> : <span className="unactive"/>}
                         {row.inContract ? "Active" : "Unactive"}
                     </div>
+                </TableCell>
+                <TableCell className={cssCell}>
+                    {row.pay ? "Paid" : "unpaid"}
                 </TableCell>
                 {
                     options && <TableCell className={`${cssCell} options`}>

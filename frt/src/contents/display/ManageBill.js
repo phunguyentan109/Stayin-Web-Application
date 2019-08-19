@@ -12,7 +12,7 @@ export default {
                 title: "Bill List",
                 subtitle: "Bill of room in your apartments"
             },
-            header: ["ID", "Electric", "Water", "House", "Wifi", "Total", "Contract Info", "Options"],
+            header: ["ID", "Electric", "Water", "House", "Wifi", "Total", "Contract Info", "Payment Status", "Options"],
             empty: "There is no bill information to show here."
         }
     },
