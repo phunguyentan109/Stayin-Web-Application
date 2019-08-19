@@ -31,8 +31,7 @@ exports.create = async(req, res, next) => {
 exports.remove = async(req, res, next) => {
     try {
         let foundPrice = await db.Price.findById({_id: req.params.price_id});
-        console.log(foundPrice);
-        if(foundPrice) await foundPrice.remove();
+        if(foundPrice) foundPrice.remove();
         return res.status(200).json(foundPrice);
     } catch(err) {
         return next(err);

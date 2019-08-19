@@ -4,32 +4,35 @@ import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 
+const DEFAULT_BILL = {
+    electric: {
+        amount: 0
+    }
+}
 
 function ManageBillContain({api, user, ...props}) {
     const [bills, setBills] = useState([]);
-    const [amount, setAmount] = useState(0);
+    const [bill, setBill] = useState(DEFAULT_BILL);
     const [formIsOpen, setOpenForm] = useState(false);
-    const [bill, setBill] = useState({
-        electric: {
-            amount: "",
-            cost: ""
-        }
-    });
 
     const toggleForm = () => setOpenForm(prev => !prev);
 
     const hdChange = (e) => {
-        const {name, value} = e.target;
-        setBill(value);
+        const {value} = e.target;
+        setBill(prev => ({
+            ...prev,
+            electric: { amount: value }
+        }));
     }
 
     async function hdConfirm() {
         const {room_id} = props.match.params;
+        const {amount} = bill.electric;
         try {
             if(bill._id){
-                await apiCall("put", api.update(user._id, room_id, bill._id), bill.electric.amount)
+                await apiCall("put", api.update(user._id, room_id, bill._id), {amount})
             } else {
-                await apiCall("post", api.create(user._id, room_id), bill.electric.amount);
+                await apiCall("post", api.create(user._id, room_id), {amount});
             }
             await load();
             setOpenForm(false);
@@ -52,6 +55,7 @@ function ManageBillContain({api, user, ...props}) {
         try {
             let billList = await apiCall("get", api.get(user._id, room_id));
             setBills(billList);
+            setBill(DEFAULT_BILL);
         } catch(err) {
             console.log(err);
         }
@@ -82,7 +86,7 @@ function ManageBillContain({api, user, ...props}) {
 
     return <ManageBill
         {...props}
-        amount={bill}
+        amount={bill.electric.amount}
         bills={bills}
         toggleForm={toggleForm}
         formIsOpen={formIsOpen}

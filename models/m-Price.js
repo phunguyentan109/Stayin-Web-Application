@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const db = require("../models");
-const {spliceId} = require("../utils/dbSupport");
+const {assignId} = require("../utils/dbSupport");
 
 const priceSchema = new mongoose.Schema({
     type: {

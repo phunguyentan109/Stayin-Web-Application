@@ -24,7 +24,7 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...pr
                     {row.wifi ? inCurrency(row.wifi) : <EmptyCell/>}
                 </TableCell>
                 <TableCell className={cssCell}>
-                    {row.extra ? inCurrency(row.extra) : <EmptyCell/>}
+                    {inCurrency(row.electric.cost + row.water + row.house + row.wifi)}
                 </TableCell>
                 <TableCell className={`${cssCell} bill-active`}>
                     <div>
