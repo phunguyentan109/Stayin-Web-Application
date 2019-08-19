@@ -11,8 +11,14 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...pr
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
-                <TableCell className={cssCell}>
-                    {row.electric.cost ? inCurrency(row.electric.cost) : <EmptyCell/>}
+                <TableCell className={`${cssCell} custom-cell bill-electric`}>
+                    <div>
+                        {row.electric.cost ? inCurrency(row.electric.cost) : <EmptyCell/>}
+                        <span>
+                            <i class="fas fa-bolt"/>
+                            {row.electric.amount ? `${row.electric.amount} KW` : <EmptyCell/>} 
+                        </span>
+                    </div>
                 </TableCell>
                 <TableCell className={cssCell}>
                     {row.water ? inCurrency(row.water) : <EmptyCell/>}
