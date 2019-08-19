@@ -7,7 +7,8 @@ import {connect} from "react-redux";
 const DEFAULT_BILL = {
     electric: {
         amount: 0
-    }
+    }, 
+    pay: false
 }
 
 function ManageBillContain({api, user, ...props}) {
@@ -73,6 +74,16 @@ function ManageBillContain({api, user, ...props}) {
         }
     }
 
+    async function hdChangePay(bill_id) {
+        try {
+            let {room_id} = props.match.params;
+            await apiCall("put", api.updatePay(user._id, room_id, bill_id), {pay: !bill.pay});
+            await load();
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     async function hdEdit(bill_id) {
         try {
             let {room_id} = props.match.params;
@@ -94,6 +105,7 @@ function ManageBillContain({api, user, ...props}) {
         hdRemove={hdRemove}
         hdChange={hdChange}
         hdEdit={hdEdit}
+        hdChangePay={hdChangePay}
     />
 }
 

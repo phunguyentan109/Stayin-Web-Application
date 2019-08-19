@@ -79,18 +79,35 @@ exports.update  = async(req, res, next) => {
         // get room's price
         let room = await db.Room.findById(room_id).populate("price_id").exec();
         let {electric} = room.price_id;
-        
+
         // get last month used electric amount
-        let prevAmount = bill.electric.amount - (bill.electric.cost / electric);  
-        
+        let prevAmount = bill.electric.amount - (bill.electric.cost / electric);
+
         // update bill data
         let {amount} = req.body;
         bill.electric = {
             amount: amount,
             cost: (amount - prevAmount) * electric
-        }; 
+        };
         await bill.save();
-        
+
+        return res.status(200).json(bill);
+    } catch(err) {
+        return next(err);
+    }
+}
+
+exports.updatePay  = async(req, res, next) => {
+    try {
+        const {bill_id, room_id} = req.params;
+        let bill = await db.Bill.findById(bill_id);
+
+        // update pay
+        let {pay} = req.body;
+        bill.pay = pay;
+
+        await bill.save();
+
         return res.status(200).json(bill);
     } catch(err) {
         return next(err);

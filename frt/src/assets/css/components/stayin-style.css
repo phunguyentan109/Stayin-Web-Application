@@ -393,15 +393,6 @@
       margin-top: 5px; }
       .custom-cell.people-name div span i {
         margin-right: 5px; }
-  .custom-cell.bill-electric div {
-    display: flex;
-    flex-direction: column; }
-    .custom-cell.bill-electric div span {
-      margin-top: 5px;
-      color: #a8a8a8e3; }
-      .custom-cell.bill-electric div span i {
-        color: #d3d3d3e3;
-        margin-right: 5px; }
   .custom-cell.room-name img {
     margin-right: 15px;
     border-radius: 5px;
@@ -419,6 +410,20 @@
       font-size: 11px;
       color: gray; }
 
+.bill-electric {
+  display: flex !important;
+  align-items: center;
+  flex-wrap: nowrap; }
+  .bill-electric div {
+    display: flex;
+    flex-direction: column; }
+    .bill-electric div span {
+      margin-top: 5px;
+      color: #a8a8a8e3; }
+      .bill-electric div span i {
+        color: #d3d3d3e3;
+        margin-right: 5px; }
+
 .bill-active > div {
   display: flex;
   align-items: center; }
@@ -435,6 +440,19 @@
     margin-left: 10px;
     color: #ced17c;
     font-size: 17px; }
+
+.bill-pay > div {
+  display: flex;
+  align-items: center; }
+  .bill-pay > div > span {
+    width: 16px;
+    height: 16px;
+    border-radius: 20px;
+    margin-right: 8px; }
+    .bill-pay > div > span > i {
+      margin-left: -10px;
+      color: #ced17c;
+      font-size: 20px; }
 
 .bill-date > div {
   display: flex;
