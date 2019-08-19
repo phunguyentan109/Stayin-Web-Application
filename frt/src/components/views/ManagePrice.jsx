@@ -37,7 +37,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                 <FormInput
                                     type="text"
                                     label="Type"
-                                    placeholder="Price 001"
+                                    placeholder="Enter the price's name"
                                     required
                                     name="type"
                                     value={price.type}
@@ -46,16 +46,17 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                 <FormInput
                                     type="number"
                                     label="Electric/KWH"
-                                    placeholder="3.5"
+                                    placeholder="Enter the electric price per kilo"
                                     required
                                     name="electric"
                                     value={price.electric}
                                     onChange={hdChange}
+                                    disabled={price.room_id && price.room_id.length > 0}
                                 />
                                 <FormInput
                                     type="number"
                                     label="Wifi/Month"
-                                    placeholder="100"
+                                    placeholder="Enter the price of wifi"
                                     required
                                     name="wifi"
                                     value={price.wifi}
@@ -65,8 +66,8 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                             <GridItem xs={6} sm={12} md={4}>
                             <FormInput
                                     type="number"
-                                    label="Water/People"
-                                    placeholder="80"
+                                    label="Water/Person"
+                                    placeholder="Enter the price of water"
                                     required
                                     name="water"
                                     value={price.water}
@@ -75,7 +76,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                 <FormInput
                                     type="number"
                                     label="House/Month"
-                                    placeholder="300000"
+                                    placeholder="Enter the house price"
                                     required
                                     name="house"
                                     value={price.house}
@@ -83,8 +84,8 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                 />
                                 <FormInput
                                     type="number"
-                                    label="Extra money per people"
-                                    placeholder="300"
+                                    label="Extra money"
+                                    placeholder="Extra money per person"
                                     required
                                     name="extra"
                                     value={price.extra}
@@ -95,11 +96,12 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                 <FormInput
                                     type="number"
                                     label="Duration"
-                                    placeholder="6"
+                                    placeholder="Enter here the month number of contract"
                                     required
                                     name="duration"
                                     value={price.duration}
                                     onChange={hdChange}
+                                    disabled={price.room_id && price.room_id.length > 0}
                                 />
                             </GridItem>
                         </GridContainer>
