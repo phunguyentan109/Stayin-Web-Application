@@ -33,72 +33,82 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                     />
                     <CardBody>
                         <GridContainer>
-                            <GridItem xs={6} sm={12} md={4}>
+                            <GridItem xs={6} sm={12} md={6}>
                                 <FormInput
                                     type="text"
-                                    label="Type"
-                                    placeholder="Price 001"
+                                    label="Price tags"
+                                    placeholder="Enter the price's tags"
                                     required
                                     name="type"
                                     value={price.type}
                                     onChange={hdChange}
                                 />
-                                <FormInput
-                                    type="number"
-                                    label="Electric/KWH"
-                                    placeholder="3.5"
-                                    required
-                                    name="electric"
-                                    value={price.electric}
-                                    onChange={hdChange}
-                                />
-                                <FormInput
-                                    type="number"
-                                    label="Wifi/Month"
-                                    placeholder="100"
-                                    required
-                                    name="wifi"
-                                    value={price.wifi}
-                                    onChange={hdChange}
-                                />
                             </GridItem>
-                            <GridItem xs={6} sm={12} md={4}>
-                            <FormInput
-                                    type="number"
-                                    label="Water/People"
-                                    placeholder="80"
-                                    required
-                                    name="water"
-                                    value={price.water}
-                                    onChange={hdChange}
-                                />
+                            <GridItem xs={12} sm={12} md={3}>
                                 <FormInput
                                     type="number"
-                                    label="House/Month"
-                                    placeholder="300000"
-                                    required
-                                    name="house"
-                                    value={price.house}
-                                    onChange={hdChange}
-                                />
-                                <FormInput
-                                    type="number"
-                                    label="Extra money per people"
-                                    placeholder="300"
+                                    label="Extra money"
+                                    placeholder="Extra money per person"
                                     required
                                     name="extra"
                                     value={price.extra}
                                     onChange={hdChange}
                                 />
                             </GridItem>
-                            <GridItem xs={6} sm={12} md={4}>
+                            <GridItem xs={6} sm={12} md={3}>
                                 <FormInput
                                     type="number"
                                     label="Duration"
-                                    placeholder="6"
+                                    placeholder="Enter here the month number of contract"
                                     required
                                     name="duration"
                                     value={price.duration}
+                                    onChange={hdChange}
+                                    disabled={price.room_id && price.room_id.length > 0}
+                                />
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={3}>
+                                <FormInput
+                                    type="number"
+                                    label="Water/Person"
+                                    placeholder="Enter the price of water"
+                                    required
+                                    name="water"
+                                    value={price.water}
+                                    onChange={hdChange}
+                                />
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={3}>
+                                <FormInput
+                                    type="number"
+                                    label="House/Month"
+                                    placeholder="Enter the house price"
+                                    required
+                                    name="house"
+                                    value={price.house}
+                                    onChange={hdChange}
+                                />
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={3}>
+                                <FormInput
+                                    type="number"
+                                    label="Electric/KWH"
+                                    placeholder="Enter the electric price per kilo"
+                                    required
+                                    name="electric"
+                                    value={price.electric}
+                                    onChange={hdChange}
+                                    disabled={price.room_id && price.room_id.length > 0}
+                                />
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={3}>
+                                <FormInput
+                                    type="number"
+                                    label="Wifi/Month"
+                                    placeholder="Enter the price of wifi"
+                                    required
+                                    name="wifi"
+                                    value={price.wifi}
                                     onChange={hdChange}
                                 />
                             </GridItem>
