@@ -396,10 +396,12 @@
   .custom-cell.bill-electric div {
     display: flex;
     flex-direction: column; }
-    .custom-cell.bill-electric div span {
+    .custom-cell.bill-electric div > span {
       margin-top: 5px;
-      color: #a8a8a8e3; }
-      .custom-cell.bill-electric div span i {
+      font-weight: 500;
+      color: #a2a2a2e3;
+      font-size: 11px; }
+      .custom-cell.bill-electric div > span i {
         color: #d3d3d3e3;
         margin-right: 5px; }
   .custom-cell.room-name img {

@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 const defaultRoom = {
     name: "",
     desc: "",
-    price_id: "",
+    price_id: null,
     people_id: []
 }
 

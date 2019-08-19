@@ -30,7 +30,7 @@ const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
                 }
             </TableCell>
             <TableCell className={`${cssCell} bill-date`}>
-                { row.bill_id.length > 0 ? <span></span> : <EmptyCell/> }
+                { row.bill_id.length > 0 && row.people_id.length > 0 ? <span></span> : <EmptyCell/> }
             </TableCell>
             <TableCell className={cssCell}>
                 { row.price_id ? row.price_id.type : <EmptyCell/> }

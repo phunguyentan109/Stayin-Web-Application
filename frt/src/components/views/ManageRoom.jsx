@@ -121,16 +121,23 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                             <GridContainer customCss="people-container">
                                 {
                                     people.length > 0
-                                    ? people.map((p, i) => (
-                                        <GridItem xs={12} sm={6} md={3} key={i}>
-                                            <PeopleBox
-                                                link={p.user_id.avatar.link}
-                                                name={p.user_id.viewname}
-                                                job={p.job}
-                                                add={assignPeople.bind(this, p)}
+                                    ? room.price_id && room.price_id.length > 0
+                                        ? people.map((p, i) => (
+                                            <GridItem xs={12} sm={6} md={3} key={i}>
+                                                <PeopleBox
+                                                    link={p.user_id.avatar.link}
+                                                    name={p.user_id.viewname}
+                                                    job={p.job}
+                                                    add={assignPeople.bind(this, p)}
+                                                />
+                                            </GridItem>
+                                        ))
+                                        : <GridItem xs={12} sm={12} md={12}>
+                                            <EmptyBox
+                                                height="100%"
+                                                message="Please select the room's price first."
                                             />
                                         </GridItem>
-                                    ))
                                     : <GridItem xs={12} sm={12} md={12}>
                                         <EmptyBox
                                             height="100%"
