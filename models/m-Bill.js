@@ -32,13 +32,17 @@ const billSchema = new mongoose.Schema({
     inContract: {
         type: Boolean,
         default: true
+    },
+    pay: {
+        type: Boolean,
+        default: false
     }
 }, {timestamps: true})
 
 billSchema.pre("remove", async function(next){
     try {
         await spliceId("Room", this.room_id, "bill_id", this._id);
-        
+
         return next();
     } catch (err) {
         return next(err);

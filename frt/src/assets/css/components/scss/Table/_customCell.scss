@@ -99,29 +99,31 @@
 }
 
 .bill-date {
-    display: flex;
-    align-items: center;
+    > div {
+        display: flex;
+        align-items: center;
 
-    > span {
-        width: 13px;
-        height: 13px;
-        border-radius: 20px;
-        background-color: #d5d5d5;
-        margin-right: 8px;
+        > span {
+            width: 13px;
+            height: 13px;
+            border-radius: 20px;
+            background-color: #d5d5d5;
+            margin-right: 8px;
 
-        &.near {
-            background-color: #fcb431;
+            &.near {
+                background-color: #fcb431;
+            }
+
+            &.expire {
+                background-color: #f87272;
+            }
         }
 
-        &.expire {
-            background-color: #f87272;
+        > i {
+            margin-left: 10px;
+            color: #ced17c;
+            font-size: 17px;
         }
-    }
-
-    > i {
-        margin-left: 10px;
-        color: #878787;
-        font-size: 17px;
     }
 }
 
