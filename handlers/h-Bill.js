@@ -13,8 +13,8 @@ exports.get = async(req, res, next) => {
 
 exports.getOne = async(req, res, next) => {
     try{
-        let bills = await db.Bill.find({_id: req.params.bill_id});
-        return res.status(200).json(bills);
+        let bill = await db.Bill.findById(req.params.bill_id);
+        return res.status(200).json(bill);
     } catch(err){
         return next(err);
     }
@@ -40,7 +40,7 @@ exports.create = async(req, res, next) => {
         let bill = {
             electric: {
                 amount: amount,
-                cost: amount - prevAmount * price.electric
+                cost: (amount - prevAmount) * price.electric
             },
             water: price.water * room.people_id.length,
             house: price.house + (price.extra * (room.people_id.length - 1)),
@@ -73,13 +73,25 @@ exports.remove = async(req, res, next) => {
 
 exports.update  = async(req, res, next) => {
     try {
-        let updatedBill = await db.Bill.findById(req.params.bill_id);
-        let {amount, inContract} = req.body;
+        const {bill_id, room_id} = req.params;
+        let bill = await db.Bill.findById(bill_id);
 
-        updatedBill.amount = amount;
-        updatedBill.inContract = inContract;
-        await updatedBill.save();
-        return res.status(200).json(updatedBill);
+        // get room's price
+        let room = await db.Room.findById(room_id).populate("price_id").exec();
+        let {electric} = room.price_id;
+        
+        // get last month used electric amount
+        let prevAmount = bill.electric.amount - (bill.electric.cost / electric);  
+        
+        // update bill data
+        let {amount} = req.body;
+        bill.electric = {
+            amount: amount,
+            cost: (amount - prevAmount) * electric
+        }; 
+        await bill.save();
+        
+        return res.status(200).json(bill);
     } catch(err) {
         return next(err);
     }
