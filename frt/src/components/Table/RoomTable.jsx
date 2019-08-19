@@ -4,6 +4,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import PropTypes from "prop-types";
 import CellOption from "components/Table/CellOption";
+import EmptyCell from "components/Table/EmptyCell";
 
 const ListPeople = ({people}) =>
     people.map((u, i) => <img src={u.user_id.avatar.link} alt="" key={i}/>
@@ -18,7 +19,7 @@ const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
                 {
                     row.people_id.length > 0
                     ? <ListPeople people={row.people_id.length > 5 ? row.people_id.slice(0, 5) : row.people_id} />
-                    : <span className="empty-cell">No one is staying in this room</span>
+                    : <EmptyCell text="No one is staying in this room"/>
                 }
                 {
                     row.people_id.length > 5 && (
@@ -29,18 +30,10 @@ const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
                 }
             </TableCell>
             <TableCell className={`${cssCell} bill-date`}>
-                {
-                    row.bill_id.length > 0
-                    ? <span></span>
-                    : <span className="empty-cell">Not yet</span>
-                }
+                { row.bill_id.length > 0 ? <span></span> : <EmptyCell/> }
             </TableCell>
             <TableCell className={cssCell}>
-                {
-                    row.price_id
-                    ? row.price_id.type
-                    : <span className="empty-cell">Not yet</span>
-                }
+                { row.price_id ? row.price_id.type : <EmptyCell/> }
             </TableCell>
             {
                 options && <TableCell className={`${cssCell} options`}>

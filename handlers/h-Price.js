@@ -21,7 +21,6 @@ exports.getOne = async(req, res, next) => {
 exports.create = async(req, res, next) => {
     try {
         let newPrice = await db.Price.create(req.body);
-
         return res.status(200).json(newPrice);
     } catch (err) {
         return next(err);
