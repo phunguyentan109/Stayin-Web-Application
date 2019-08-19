@@ -4,18 +4,19 @@ import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 
+const DEFAULT_PRICE = {
+    type: "",
+    electric: "",
+    wifi: "",
+    water: "",
+    house: "",
+    extra: "",
+    duration: ""
+}
 
 function ManagePriceContain({api, user, ...props}) {
     const [prices, setPrices] = useState([]);
-    const [price, setPrice] = useState({
-        type: "",
-        electric: "",
-        wifi: "",
-        water: "",
-        house: "",
-        extra: "",
-        duration: ""
-    });
+    const [price, setPrice] = useState(DEFAULT_PRICE);
     const [formIsOpen, setOpenForm] = useState(false);
 
     const toggleForm = () => setOpenForm(prev => !prev);
@@ -52,6 +53,7 @@ function ManagePriceContain({api, user, ...props}) {
         try {
             let priceList = await apiCall("get", api.get(user._id));
             setPrices(priceList);
+            setPrice(DEFAULT_PRICE);
         } catch(err) {
             console.log(err);
         }
