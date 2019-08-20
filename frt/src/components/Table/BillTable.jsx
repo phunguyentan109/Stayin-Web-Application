@@ -41,7 +41,7 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdCha
                 <TableCell className={`${cssCell} bill-pay`}>
                     <div onClick={hdChangePay.bind(this, row._id)}>
                         <span>
-                            {row.pay ? <i className="far fa-handshake"/> : <i className="fas fa-comments-dollar"/>}
+                            {row.pay ? "" : <i className="fas fa-comments-dollar"/>}
                         </span>
                         {row.pay ? "Paid" : "Unpaid"}
                     </div>

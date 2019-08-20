@@ -106,15 +106,24 @@
     > div {
         display: flex;
         align-items: center;
+        width: 76px;
+        height: 25px;
+        border-radius: 20px;
+        color: ##f5f0fc;
+        cursor: pointer;
+        transition: .5s;
+        background-color: #876be7d1;
+
+        &:hover {
+            background-color: #5bb3eb;
+            color: #fffefe;
+        }
 
         > span {
-            width: 16px;
+            width: 27px;
             height: 16px;
-            border-radius: 20px;
-            margin-right: 8px;
 
             > i {
-                margin-left: -10px;
                 color: #ced17c;
                 font-size: 20px;
             }
