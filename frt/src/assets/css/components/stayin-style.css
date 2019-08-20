@@ -419,6 +419,20 @@
       font-size: 11px;
       color: gray; }
 
+.bill-electric {
+  display: flex !important;
+  align-items: center;
+  flex-wrap: nowrap; }
+  .bill-electric div {
+    display: flex;
+    flex-direction: column; }
+    .bill-electric div span {
+      margin-top: 5px;
+      color: #a8a8a8e3; }
+      .bill-electric div span i {
+        color: #d3d3d3e3;
+        margin-right: 5px; }
+
 .bill-active > div {
   display: flex;
   align-items: center; }
@@ -435,6 +449,26 @@
     margin-left: 10px;
     color: #ced17c;
     font-size: 17px; }
+
+.bill-pay > div {
+  display: flex;
+  align-items: center;
+  width: 76px;
+  height: 25px;
+  border-radius: 20px;
+  color: #d5d5d5;
+  cursor: pointer;
+  transition: .5s;
+  background-color: #876be7d1; }
+  .bill-pay > div:hover {
+    background-color: #5bb3eb;
+    color: #fffefe; }
+  .bill-pay > div > span {
+    width: 27px;
+    height: 16px; }
+    .bill-pay > div > span > i {
+      color: #ced17c;
+      font-size: 20px; }
 
 .bill-date > div {
   display: flex;

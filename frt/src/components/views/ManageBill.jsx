@@ -17,7 +17,7 @@ import TitleBox from "components/Box/TitleBox";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "assets/cardHeaderStyle";
 
-const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, bills, hdChange, hdRemove, hdEdit, table, ...props}) => (
+const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, bills, hdChange, hdRemove, hdEdit, table, hdChangePay, ...props}) => (
     <AppLayoutContain {...props}>
         {
             formIsOpen && <GridContainer>
@@ -62,6 +62,7 @@ const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, b
                                 tableHeaderColor="primary"
                                 tableHead={table.bill.header}
                                 tableData={bills}
+                                hdChangePay={hdChangePay}
                                 options={{
                                         remove: hdRemove,
                                         edit: hdEdit

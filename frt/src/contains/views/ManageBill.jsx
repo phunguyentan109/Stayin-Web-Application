@@ -73,6 +73,21 @@ function ManageBillContain({api, user, ...props}) {
         }
     }
 
+    async function hdChangePay(bill_id) {
+        try {
+            let {room_id} = props.match.params;
+
+            let billOne = await apiCall("get", api.getOne(user._id, room_id, bill_id));
+            let pay = billOne.pay
+
+            await apiCall("put", api.updatePay(user._id, room_id, bill_id), {pay: !pay});
+    
+            await load();
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     async function hdEdit(bill_id) {
         try {
             let {room_id} = props.match.params;
@@ -94,6 +109,7 @@ function ManageBillContain({api, user, ...props}) {
         hdRemove={hdRemove}
         hdChange={hdChange}
         hdEdit={hdEdit}
+        hdChangePay={hdChangePay}
     />
 }
 

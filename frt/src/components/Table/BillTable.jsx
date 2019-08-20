@@ -7,11 +7,11 @@ import PropTypes from "prop-types";
 import CellOption from "components/Table/CellOption";
 import EmptyCell from "./EmptyCell";
 
-const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...props}) => (
+const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdChangePay, ...props}) => (
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
-                <TableCell className={`${cssCell} custom-cell bill-electric`}>
+                <TableCell className={`${cssCell} bill-electric`}>
                     <div>
                         {row.electric.cost ? inCurrency(row.electric.cost) : <EmptyCell/>}
                         <span>
@@ -38,8 +38,13 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, ...pr
                         {row.inContract ? "Active" : "Unactive"}
                     </div>
                 </TableCell>
-                <TableCell className={cssCell}>
-                    {row.pay ? "Paid" : "unpaid"}
+                <TableCell className={`${cssCell} bill-pay`}>
+                    <div onClick={hdChangePay.bind(this, row._id)}>
+                        <span>
+                            {row.pay ? "" : <i className="fas fa-comments-dollar"/>}
+                        </span>
+                        {row.pay ? "Paid" : "Unpaid"}
+                    </div>
                 </TableCell>
                 {
                     options && <TableCell className={`${cssCell} options`}>
