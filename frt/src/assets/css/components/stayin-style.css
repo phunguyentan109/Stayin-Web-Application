@@ -393,6 +393,15 @@
       margin-top: 5px; }
       .custom-cell.people-name div span i {
         margin-right: 5px; }
+  .custom-cell.bill-electric div {
+    display: flex;
+    flex-direction: column; }
+    .custom-cell.bill-electric div span {
+      margin-top: 5px;
+      color: #a8a8a8e3; }
+      .custom-cell.bill-electric div span i {
+        color: #d3d3d3e3;
+        margin-right: 5px; }
   .custom-cell.room-name img {
     margin-right: 15px;
     border-radius: 5px;

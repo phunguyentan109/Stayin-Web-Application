@@ -26,6 +26,23 @@
         }
     }
 
+    &.bill-electric {
+        div {
+            display: flex;
+            flex-direction: column;
+
+            span {
+                margin-top: 5px;
+                // font-weight: 900;
+                color: #a8a8a8e3;
+                i {
+                    color: #d3d3d3e3;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+
     &.room-name {
         img {
             margin-right: 15px;
