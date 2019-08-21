@@ -3,6 +3,7 @@ import ManageRoom from "components/views/ManageRoom";
 import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
+import moment from "moment";
 
 const defaultRoom = {
     name: "",

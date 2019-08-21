@@ -5,10 +5,22 @@ import TableCell from "@material-ui/core/TableCell";
 import PropTypes from "prop-types";
 import CellOption from "components/Table/CellOption";
 import EmptyCell from "components/Table/EmptyCell";
+import moment from "moment";
 
 const ListPeople = ({people}) =>
     people.map((u, i) => <img src={u.user_id.avatar.link} alt="" key={i}/>
 )
+
+
+function getBillStatus() {
+    let dateLeft = moment().endOf("month") - moment();
+    if (dateLeft === 0) {
+        return "expire";
+    } else if (dateLeft < 5) {
+        return "near";
+    }
+    return "";
+}
 
 const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
     tableData.map((row, i) => (
@@ -30,7 +42,14 @@ const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
                 }
             </TableCell>
             <TableCell className={`${cssCell} bill-date`}>
-                { row.bill_id.length > 0 && row.people_id.length > 0 ? <span></span> : <EmptyCell/> }
+                { row.bill_id.length > 0
+                    ? <div>
+                        <span className={getBillStatus()}/>
+                        {moment(row.bill_id[row.bill_id.length-1].createdAt).format("DD-MM-YYYY")}
+                        {row.bill_id.filter(b => b.pay === false).length > 0 && <i className="fas fa-hand-holding-usd"></i>}
+                    </div>
+                    : <EmptyCell/>
+                }
             </TableCell>
             <TableCell className={cssCell}>
                 { row.price_id ? row.price_id.type : <EmptyCell/> }
