@@ -11,7 +11,6 @@ const ListPeople = ({people}) =>
     people.map((u, i) => <img src={u.user_id.avatar.link} alt="" key={i}/>
 )
 
-
 function getBillStatus() {
     let dateLeft = moment().endOf("month") - moment();
     if (dateLeft === 0) {
@@ -68,11 +67,3 @@ RoomTable.propTypes = {
 }
 
 export default withTable(RoomTable);
-
-{/* <div>
-    {i === 0 && <span></span>}
-    {i === 1 && <span className="near"></span>}
-    {i === 2 && <span className="expire"></span>}
-    {row.bill_date}
-    {i === 1 && <i className="fas fa-hand-holding-usd"></i>}
-</div> */}

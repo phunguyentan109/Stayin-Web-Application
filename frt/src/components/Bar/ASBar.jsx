@@ -1,6 +1,6 @@
 import React from "react";
 
-const ASBar = ({create, ...props}) => (
+const ASBar = ({create, search, hdChange, ...props}) => (
     <div className="as-bar">
         <div>
             {create && <button onClick={create}><i className="fas fa-plus"></i></button>}
@@ -11,7 +11,12 @@ const ASBar = ({create, ...props}) => (
             <p>Search:</p>
             <div>
                 <i className="fas fa-search"></i>
-                <input type="text" placeholder="Enter the room name here to search"/>
+                <input
+                    type="text"
+                    placeholder="Enter the room name here to search"
+                    value={search}
+                    onChange={hdChange}
+                />
             </div>
         </div>
     </div>
