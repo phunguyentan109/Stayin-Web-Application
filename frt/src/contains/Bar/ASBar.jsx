@@ -32,7 +32,7 @@ function ASBarContain({data, keys, setData, ...props}){
                 v = ""
             }
         }
-        return v.toLowerCase();
+        return v.toString().toLowerCase();
     }
 
     function getKey(obj) {

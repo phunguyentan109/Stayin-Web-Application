@@ -54,6 +54,8 @@ function ManagePeopleContain({api, user, ...props}) {
         userList={userList}
         hdRemove={hdRemove}
         rmUser={removeUser}
+        setPeople={setPeopleList}
+        peopleList={peopleList}
     />
 }
 
