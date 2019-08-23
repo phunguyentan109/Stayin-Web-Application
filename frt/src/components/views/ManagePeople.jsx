@@ -15,7 +15,6 @@ const ManagePeople = ({classes, table, list, userList, hdRemove, rmUser, setPeop
             <GridItem xs={12} sm={12} md={12}>
                 {
                     userList.length > 0 && <TableCard {...table.account.card} color="warning">
-                        <ASBar/>
                         <UserTable
                             tableHeaderColor="primary"
                             tableHead={table.account.header}
