@@ -5,13 +5,14 @@ function ASBarContain({data, keys, setData, ...props}){
     const [origin, setOrigin] = useState([]);
     const [search, setSearch] = useState("");
 
-    const hdChange = (e) => setSearch(e.target.value.toLowerCase());
+    const hdChange = (e) => setSearch(e.target.value);
 
     useEffect(() => {
         if(origin.length === 0) setOrigin(data);
         if(search.length > 0) {
-            let found = data.map(getKey)
-                .filter(d => d.vals.some(v => v.includes(search)))
+            let searchData = origin.length > 0 ? origin : data;
+            let found = searchData.map(getKey)
+                .filter(d => d.vals.some(v => v.includes(search.toLowerCase())))
                 .map(rs => rs.obj);
             setData(found);
         } else {
