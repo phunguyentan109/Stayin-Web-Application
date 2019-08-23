@@ -9,7 +9,7 @@ import PriceTable from "components/Table/PriceTable.jsx";
 import ConfirmBar from "components/Bar/ConfirmBar";
 import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
-import ASBar from "components/Bar/ASBar";
+import ASBar from "contains/Bar/ASBar";
 import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
@@ -17,7 +17,7 @@ import TitleBox from "components/Box/TitleBox";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "assets/cardHeaderStyle";
 
-const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, prices, hdChange, hdRemove, hdEdit, table, ...props}) => (
+const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, prices, setPrices, hdChange, hdRemove, hdEdit, table, ...props}) => (
     <AppLayoutContain {...props}>
     {
         formIsOpen && <GridContainer>
@@ -123,7 +123,12 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
         formIsOpen || <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
                 <TableCard {...table.price.card}>
-                    <ASBar create={toggleForm}/>
+                    <ASBar
+                        create={toggleForm}
+                        keys={["type", "electric", "water", "wifi", "duration", "house", "extra"]}
+                        data={prices}
+                        setData={setPrices}
+                    />
                     {
                         prices.length > 0
                         ? <PriceTable

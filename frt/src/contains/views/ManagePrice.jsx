@@ -84,6 +84,7 @@ function ManagePriceContain({api, user, ...props}) {
         {...props}
         price={price}
         prices={prices}
+        setPrices={setPrices}
         toggleForm={toggleForm}
         formIsOpen={formIsOpen}
         hdConfirm={hdConfirm}
