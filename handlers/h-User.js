@@ -7,15 +7,17 @@ exports.signUp = async(req, res, next) => {
         let vname = req.body.email.split("@")[0];
 
         let user = await db.User.create({viewname: vname, ...req.body});
+
         // add role for user
         let {_id, viewname, email, active, avatar} = user;
         let role = await db.Role.findOne({code: "001"});
         await db.UserRole.create({role: role._id, user: _id});
+
         // gen token for storing on client
         let token = genToken(_id, role);
+
         //send activate mail
-        let options = mail.options.activate(email, viewname, _id, req.headers.host);
-        await mail.send(...options);
+        await mail.activate(email, viewname, _id, req.headers.host);
 
         return res.status(200).json({_id, viewname, avatar, email, role, active, token});
     } catch(err) {

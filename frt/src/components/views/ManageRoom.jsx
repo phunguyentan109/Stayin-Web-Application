@@ -10,13 +10,13 @@ import PriceBox from "components/Box/PriceBox";
 import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
 import ConfirmBar from "components/Bar/ConfirmBar";
-import ASBar from "components/Bar/ASBar";
+import ASBar from "contains/Bar/ASBar";
 import PeopleBox from "components/Box/PeopleBox";
 import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
 
-const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, rooms, hdChange, hdRemove, hdEdit, table, people, assignPeople, price, selectPrice, ...props}) => (
+const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, rooms, hdChange, hdRemove, hdEdit, table, people, assignPeople, price, selectPrice, setRooms, ...props}) => (
     <AppLayoutContain {...props}>
         {
             formIsOpen && <GridContainer>
@@ -121,16 +121,23 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                             <GridContainer customCss="people-container">
                                 {
                                     people.length > 0
-                                    ? people.map((p, i) => (
-                                        <GridItem xs={12} sm={6} md={3} key={i}>
-                                            <PeopleBox
-                                                link={p.user_id.avatar.link}
-                                                name={p.user_id.viewname}
-                                                job={p.job}
-                                                add={assignPeople.bind(this, p)}
+                                    ? room.price_id && room.price_id.length > 0
+                                        ? people.map((p, i) => (
+                                            <GridItem xs={12} sm={6} md={3} key={i}>
+                                                <PeopleBox
+                                                    link={p.user_id.avatar.link}
+                                                    name={p.user_id.viewname}
+                                                    job={p.job}
+                                                    add={assignPeople.bind(this, p)}
+                                                />
+                                            </GridItem>
+                                        ))
+                                        : <GridItem xs={12} sm={12} md={12}>
+                                            <EmptyBox
+                                                height="100%"
+                                                message="Please select the room's price first."
                                             />
                                         </GridItem>
-                                    ))
                                     : <GridItem xs={12} sm={12} md={12}>
                                         <EmptyBox
                                             height="100%"
@@ -149,7 +156,12 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
             formIsOpen || <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                     <TableCard {...table.room.card}>
-                        <ASBar create={toggleForm}/>
+                        <ASBar
+                            keys={["name", "price_id.type"]}
+                            create={toggleForm}
+                            data={rooms}
+                            setData={setRooms}
+                        />
                         {
                             rooms.length > 0
                             ? <RoomTable

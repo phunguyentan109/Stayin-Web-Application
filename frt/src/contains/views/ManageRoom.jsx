@@ -3,12 +3,11 @@ import ManageRoom from "components/views/ManageRoom";
 import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
-import moment from "moment";
 
 const defaultRoom = {
     name: "",
     desc: "",
-    price_id: "",
+    price_id: null,
     people_id: []
 }
 
@@ -124,6 +123,7 @@ function ManageRoomContain({api, user, ...props}) {
         hdBill={hdBill}
         assignPeople={assignPeople}
         selectPrice={selectPrice}
+        setRooms={setRooms}
     />
 }
 

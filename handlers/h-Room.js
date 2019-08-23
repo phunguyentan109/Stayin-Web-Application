@@ -1,5 +1,6 @@
 const db = require("../models");
 const {pushId, assignId, spliceId} = require("../utils/dbSupport");
+const mail = require("../utils/mail");
 
 exports.get = async(req, res, next) => {
     try {
@@ -78,11 +79,21 @@ exports.update = async(req, res, next) => {
         // remove room id of old people
         for(let id of oldPeople) {
             await assignId("People", id, "room_id", false);
+
+            // send mail to notify people about removing from the room
+            let foundPeople = await db.People.findById(id).populate("user_id").exec();
+            let {email, viewname} = foundPeople.user_id;
+            await mail.leaveRoom(email, viewname, foundRoom.name);
         }
 
         // assign room id for new people
         for(let id of newPeople) {
             await assignId("People", id, "room_id", foundRoom._id);
+
+            // send mail to notify people about new place
+            let foundPeople = await db.People.findById(id).populate("user_id").exec();
+            let {email, viewname} = foundPeople.user_id;
+            await mail.getRoom(email, viewname, foundRoom.name);
         }
 
         // update room
