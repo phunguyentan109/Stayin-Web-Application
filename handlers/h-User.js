@@ -5,6 +5,7 @@ const mail = require("../utils/mail");
 exports.signUp = async(req, res, next) => {
     try {
         let vname = req.body.email.split("@")[0];
+
         let user = await db.User.create({viewname: vname, ...req.body});
 
         // add role for user
