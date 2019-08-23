@@ -9,7 +9,7 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import PriceBox from "components/Box/PriceBox";
 import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
-import ConfirmBar from "components/Bar/ConfirmBar";
+import ConfirmBar from "contains/Bar/ConfirmBar";
 import ASBar from "contains/Bar/ASBar";
 import PeopleBox from "components/Box/PeopleBox";
 import EmptyBox from "components/Box/EmptyBox";
