@@ -1,4 +1,15 @@
 const jwt = require("jsonwebtoken");
+const rs = require("request");
+
+exports.generateAvatar = (req, res, next) => {
+    const url = 'https://source.unsplash.com/random';
+    rs(url, (request, response) => {
+        req.body.avatar = {
+            link: `https://images.unsplash.com${response.request.path}`
+        }
+        return next();
+    });
+}
 
 exports.generateToken = (id, viewname, email, profileImg, roles) => {
     let userToken = jwt.sign({id, viewname, profileImg, roles}, process.env.SECRET);
