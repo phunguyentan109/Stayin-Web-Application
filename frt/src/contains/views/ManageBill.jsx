@@ -81,7 +81,7 @@ function ManageBillContain({api, user, ...props}) {
             let pay = billOne.pay
 
             await apiCall("put", api.updatePay(user._id, room_id, bill_id), {pay: !pay});
-    
+
             await load();
         } catch (err) {
             console.log(err);
@@ -103,6 +103,7 @@ function ManageBillContain({api, user, ...props}) {
         {...props}
         amount={bill.electric.amount}
         bills={bills}
+        setBills={setBills}
         toggleForm={toggleForm}
         formIsOpen={formIsOpen}
         hdConfirm={hdConfirm}

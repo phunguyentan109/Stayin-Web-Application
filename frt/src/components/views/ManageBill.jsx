@@ -9,7 +9,7 @@ import BillTable from "components/Table/BillTable.jsx";
 import ConfirmBar from "components/Bar/ConfirmBar";
 import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
-import ASBar from "components/Bar/ASBar";
+import ASBar from "contains/Bar/ASBar";
 import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
@@ -17,7 +17,7 @@ import TitleBox from "components/Box/TitleBox";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "assets/cardHeaderStyle";
 
-const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, bills, hdChange, hdRemove, hdEdit, table, hdChangePay, ...props}) => (
+const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, bills, setBills, hdChange, hdRemove, hdEdit, table, hdChangePay, ...props}) => (
     <AppLayoutContain {...props}>
         {
             formIsOpen && <GridContainer>
@@ -55,7 +55,12 @@ const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, b
             formIsOpen || <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                     <TableCard {...table.bill.card}>
-                        <ASBar create={toggleForm}/>
+                        <ASBar
+                            create={toggleForm}
+                            keys={["electric.cost", "electric.amount", "water", "house", "wifi"]}
+                            data={bills}
+                            setData={setBills}
+                        />
                         {
                             bills.length > 0
                             ? <BillTable
