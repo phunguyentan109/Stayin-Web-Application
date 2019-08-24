@@ -4,7 +4,7 @@ import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 
-const defaultRoom = {
+const DEFAULT_ROOM = {
     name: "",
     desc: "",
     price_id: null,
@@ -13,31 +13,10 @@ const defaultRoom = {
 
 function ManageRoomContain({api, user, ...props}) {
     const [rooms, setRooms] = useState([]);
-    const [room, setRoom] = useState(defaultRoom);
+    const [room, setRoom] = useState(DEFAULT_ROOM);
     const [formIsOpen, setOpenForm] = useState(false);
     const [people, setPeople] = useState([]);
     const [price, setPrice] = useState([]);
-
-    const toggleForm = () => setOpenForm(prev => !prev);
-
-    const hdChange = (e) => {
-        const {name, value} = e.target;
-        setRoom(prev => ({...prev, [name]: value}));
-    }
-
-    async function hdConfirm() {
-        try {
-            if(room._id) {
-                await apiCall("put", api.room.edit(user._id, room._id), room);
-            } else {
-                await apiCall("post", api.room.create(user._id), room);
-            }
-            await load();
-            setOpenForm(false);
-        } catch(err) {
-            console.log(err);
-        }
-    }
 
     useEffect(() => {
         let isLoaded = false;
@@ -49,13 +28,41 @@ function ManageRoomContain({api, user, ...props}) {
     async function load() {
         try {
             let roomList = await apiCall("get", api.room.get(user._id));
-            let peopleList = await apiCall("get", api.people.get(user._id));
             let priceList = await apiCall("get", api.price.get(user._id));
             priceList = priceList.map(pr => ({...pr, select: false}));
-            setRoom(defaultRoom);
-            setPeople(peopleList.filter(p => p.room_id === undefined));
             setRooms(roomList);
             setPrice(priceList);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    async function toggleForm() {
+        if(!formIsOpen) {
+            // If form is about to open => refresh the waiter list
+            let peopleList = await apiCall("get", api.people.get(user._id));
+            setPeople(peopleList.filter(p => p.room_id === undefined));
+        } else {
+            // If form is about to close => clear the filled in room data
+            setRoom(DEFAULT_ROOM);
+        }
+        setOpenForm(prev => !prev);
+    };
+
+    function hdChange(e) {
+        const {name, value} = e.target;
+        setRoom(prev => ({...prev, [name]: value}));
+    }
+
+    async function hdConfirm() {
+        try {
+            if(room._id) {
+                await apiCall("put", api.room.edit(user._id, room._id), room);
+            } else {
+                await apiCall("post", api.room.create(user._id), room);
+            }
+            await toggleForm();
+            await load();
         } catch(err) {
             console.log(err);
         }
@@ -84,7 +91,7 @@ function ManageRoomContain({api, user, ...props}) {
         try {
             let foundRoom = await apiCall("get", api.room.getOne(user._id, room_id));
             setRoom(foundRoom);
-            setOpenForm(true);
+            await toggleForm();
         } catch(err) {
             console.log(err);
         }

@@ -237,6 +237,11 @@
   cursor: pointer; }
   .price-box.select {
     border: 2px solid #b7b7b7; }
+  .price-box.disable {
+    border-color: #dedede;
+    background-color: #f5f5f5;
+    color: gray;
+    cursor: default; }
   .price-box > div {
     display: flex;
     align-items: center; }

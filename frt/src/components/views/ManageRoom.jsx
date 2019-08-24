@@ -72,6 +72,7 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                                                 {...pr}
                                                 select={pr._id === room.price_id}
                                                 choose={selectPrice.bind(this, pr._id)}
+                                                shouldDisable={room._id && room.people_id.length > 0}
                                             />
                                         </GridItem>
                                     ))
