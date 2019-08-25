@@ -3,6 +3,7 @@ import ManageRoom from "components/views/ManageRoom";
 import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
+import withNoti from "hocs/withNoti";
 
 const DEFAULT_ROOM = {
     name: "",
@@ -11,7 +12,7 @@ const DEFAULT_ROOM = {
     people_id: []
 }
 
-function ManageRoomContain({api, user, ...props}) {
+function ManageRoomContain({api, user, notify, ...props}) {
     const [rooms, setRooms] = useState([]);
     const [room, setRoom] = useState(DEFAULT_ROOM);
     const [formIsOpen, setOpenForm] = useState(false);
@@ -34,6 +35,7 @@ function ManageRoomContain({api, user, ...props}) {
             setPrice(priceList);
         } catch(err) {
             console.log(err);
+            notify();
         }
     }
 
@@ -64,6 +66,7 @@ function ManageRoomContain({api, user, ...props}) {
             await toggleForm();
             await load();
         } catch(err) {
+            notify();
             console.log(err);
         }
     }
@@ -138,4 +141,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default withAccess(connect(mapState, null)(ManageRoomContain));
+export default withAccess(connect(mapState, null)(withNoti(ManageRoomContain)));
