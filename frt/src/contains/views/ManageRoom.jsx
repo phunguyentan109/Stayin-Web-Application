@@ -34,7 +34,6 @@ function ManageRoomContain({api, user, notify, ...props}) {
             setRooms(roomList);
             setPrice(priceList);
         } catch(err) {
-            console.log(err);
             notify();
         }
     }
@@ -65,9 +64,9 @@ function ManageRoomContain({api, user, notify, ...props}) {
             }
             await toggleForm();
             await load();
+            return notify(true, true, "Adding new room successfully!");
         } catch(err) {
             notify();
-            console.log(err);
         }
     }
 
@@ -76,18 +75,15 @@ function ManageRoomContain({api, user, notify, ...props}) {
             if(window.confirm("Are you sure to remove this data?")){
                 await apiCall("delete", api.room.delete(user._id, room_id));
                 await load();
+                return notify(true, true, "Removing room successfully!");
             }
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
-    async function hdBill(room_id) {
-        try {
-            props.history.push(`/rooms/${room_id}/bills`);
-        } catch(err) {
-            console.log(err);
-        }
+    function hdBill(room_id) {
+        props.history.push(`/rooms/${room_id}/bills`);
     }
 
     async function hdEdit(room_id) {
@@ -96,7 +92,7 @@ function ManageRoomContain({api, user, notify, ...props}) {
             setRoom(foundRoom);
             await toggleForm();
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
