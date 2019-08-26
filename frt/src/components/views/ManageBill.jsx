@@ -13,19 +13,38 @@ import ASBar from "contains/Bar/ASBar";
 import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
+import TimeBox from "components/Box/TimeBox";
+// import TimeTable from "components/Table/TimeTable";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "assets/cardHeaderStyle";
 
 const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, bills, setBills, hdChange, hdRemove, hdEdit, table, hdChangePay, ...props}) => (
     <AppLayoutContain {...props}>
-        {
-            formIsOpen && <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
+        <GridContainer>
+            <GridItem xs={12} sm={12} md={3}>
+                <TitleBox {...form.timeBox} />
+                <TimeBox/>
+
+                {/* <TableCard {...table.contract.card}>
+                    {
+                        bills.length > 0
+                        ? <TimeTable
+                            tableHeaderColor="primary"
+                            tableHead={table.contract.header}
+                            tableData={bills.filter(v => v.electric.amount === 0)}
+                            hdChangePay={hdChangePay}
+                            options={{}}
+                            />
+                        : <EmptyBox message={table.bill.empty}/>
+                    }
+                </TableCard> */}
+
+            </GridItem>
+            {
+                formIsOpen && <GridItem xs={12} sm={12} md={9}>
                     <TitleBox {...form.box} />
                     <ConfirmBar cancel={toggleForm} confirm={hdConfirm}/>
-                </GridItem>
-                <GridItem xs={6} sm={12} md={6}>
                     <Card customCss="custom-card">
                         <CustomCardHeader
                             title="New Bill Information"
@@ -33,7 +52,7 @@ const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, b
                         />
                         <CardBody>
                             <GridContainer>
-                                <GridItem xs={6} sm={12} md={6}>
+                                <GridItem xs={12} sm={12} md={12}>
                                     <FormInput
                                         type="number"
                                         label="Electric/KWH"
@@ -48,12 +67,9 @@ const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, b
                         </CardBody>
                     </Card>
                 </GridItem>
-            </GridContainer>
-        }
-
-        {
-            formIsOpen || <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
+            }
+            {
+                formIsOpen || <GridItem xs={12} sm={12} md={9}>
                     <TableCard {...table.bill.card}>
                         <ASBar
                             create={toggleForm}
@@ -66,19 +82,19 @@ const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, b
                             ? <BillTable
                                 tableHeaderColor="primary"
                                 tableHead={table.bill.header}
-                                tableData={bills}
+                                tableData={bills.filter(v => v.electric.amount !== 0)}
                                 hdChangePay={hdChangePay}
                                 options={{
-                                        remove: hdRemove,
-                                        edit: hdEdit
-                                    }}
-                                />
+                                    remove: hdRemove,
+                                    edit: hdEdit
+                                }}
+                            />
                             : <EmptyBox message={table.bill.empty}/>
                         }
                     </TableCard>
                 </GridItem>
-            </GridContainer>
-        }
+            }
+        </GridContainer>
     </AppLayoutContain>
 );
 

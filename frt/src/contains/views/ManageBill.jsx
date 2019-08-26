@@ -15,6 +15,26 @@ function ManageBillContain({api, user, ...props}) {
     const [bill, setBill] = useState(DEFAULT_BILL);
     const [formIsOpen, setOpenForm] = useState(false);
 
+    useEffect(() => {
+        let isLoaded = false;
+        if(!isLoaded) load();
+        return () => {
+            isLoaded = true
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    async function load() {
+        const {room_id} = props.match.params;
+        try {
+            let billList = await apiCall("get", api.get(user._id, room_id));
+            setBills(billList.reverse());
+            setBill(DEFAULT_BILL);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
     const toggleForm = () => setOpenForm(prev => !prev);
 
     const hdChange = (e) => {
@@ -36,26 +56,6 @@ function ManageBillContain({api, user, ...props}) {
             }
             await load();
             setOpenForm(false);
-        } catch(err) {
-            console.log(err);
-        }
-    }
-
-    useEffect(() => {
-        let isLoaded = false;
-        if(!isLoaded) load();
-        return () => {
-            isLoaded = true
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    async function load() {
-        const {room_id} = props.match.params;
-        try {
-            let billList = await apiCall("get", api.get(user._id, room_id));
-            setBills(billList);
-            setBill(DEFAULT_BILL);
         } catch(err) {
             console.log(err);
         }

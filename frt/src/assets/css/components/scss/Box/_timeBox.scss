@@ -1,0 +1,11 @@
+.timeBox {
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    align-items: center;
+
+    > div {
+        display: flex;
+        align-items: center;
+    }
+}
