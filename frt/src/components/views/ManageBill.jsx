@@ -14,12 +14,22 @@ import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
 import TimeBox from "components/Box/TimeBox";
 
-const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, bills, setBills, hdChange, hdRemove, hdEdit, table, hdChangePay, ...props}) => (
+const ManageBill = ({formIsOpen, toggleForm, hdConfirm, form, amount, bills, setBills, hdChange, hdRemove, hdEdit, table, hdChangePay, getInvoiceDate, ...props}) => (
     <AppLayoutContain {...props}>
         <GridContainer>
             <GridItem xs={12} sm={12} md={3}>
                 <TitleBox {...form.timeBox}/>
-                <TimeBox/>
+                {
+                    bills.filter(v => v.inContract).reverse().map((v, i) => (
+                        <TimeBox
+                            hasBill={v.electric.amount !== 0}
+                            invoice={getInvoiceDate}
+                            date={v.pay.time}
+                            month={i+1}
+                            key={i}
+                        />
+                    ))
+                }
             </GridItem>
             {
                 formIsOpen && <GridItem xs={12} sm={12} md={9}>
@@ -58,7 +68,7 @@ const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, b
                             setData={setBills}
                         />
                         {
-                            bills.length > 0
+                            bills.filter(v => v.electric.amount !== 0).length > 0
                             ? <BillTable
                                 tableHeaderColor="primary"
                                 tableHead={table.bill.header}

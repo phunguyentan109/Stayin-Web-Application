@@ -330,21 +330,29 @@
     align-items: center; }
     .timeBox > div > i {
       margin-right: 20px;
-      font-size: 30px;
+      font-size: 25px;
       color: #a3a3a3; }
     .timeBox > div p {
-      margin: 0; }
+      margin: 0;
+      font-size: 13px; }
       .timeBox > div p:nth-of-type(1) {
+        color: #777777; }
+      .timeBox > div p:nth-of-type(2) {
         color: gray;
         font-size: 12px; }
-  .timeBox > span {
-    color: #b6b6b6; }
-    .timeBox > span > i {
+  .timeBox > #invoice {
+    color: #939393; }
+    .timeBox > #invoice > i {
       font-size: 13px;
       margin-right: 5px; }
-    .timeBox > span:hover {
+    .timeBox > #invoice > span {
+      font-size: 13px; }
+    .timeBox > #invoice:hover {
       text-decoration: underline;
       cursor: pointer; }
+  .timeBox > #notyet {
+    font-size: 13px;
+    color: #d3d3d3; }
 
 .empty-box {
   height: 200px;

@@ -3,6 +3,7 @@ import ManageBill from "components/views/ManageBill";
 import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
+import moment from "moment";
 
 const DEFAULT_BILL = {
     electric: {
@@ -99,6 +100,13 @@ function ManageBillContain({api, user, ...props}) {
         }
     }
 
+    function getInvoiceDate(date) {
+        let inContractBills = bills.filter(v => v.inContract);
+        let dates = inContractBills.map(v => moment(v.pay.time));
+        let upcomingDate = moment.min(dates);
+        return upcomingDate.isSame(date);
+    }
+
     return <ManageBill
         {...props}
         amount={bill.electric.amount}
@@ -111,6 +119,7 @@ function ManageBillContain({api, user, ...props}) {
         hdChange={hdChange}
         hdEdit={hdEdit}
         hdChangePay={hdChangePay}
+        getInvoiceDate={getInvoiceDate}
     />
 }
 
