@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AppLayoutContain from "contains/Layout/AppLayout";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -14,32 +13,13 @@ import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
 import TimeBox from "components/Box/TimeBox";
-// import TimeTable from "components/Table/TimeTable";
-
-import withStyles from "@material-ui/core/styles/withStyles";
-import styles from "assets/cardHeaderStyle";
 
 const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, bills, setBills, hdChange, hdRemove, hdEdit, table, hdChangePay, ...props}) => (
     <AppLayoutContain {...props}>
         <GridContainer>
             <GridItem xs={12} sm={12} md={3}>
-                <TitleBox {...form.timeBox} />
+                <TitleBox {...form.timeBox}/>
                 <TimeBox/>
-
-                {/* <TableCard {...table.contract.card}>
-                    {
-                        bills.length > 0
-                        ? <TimeTable
-                            tableHeaderColor="primary"
-                            tableHead={table.contract.header}
-                            tableData={bills.filter(v => v.electric.amount === 0)}
-                            hdChangePay={hdChangePay}
-                            options={{}}
-                            />
-                        : <EmptyBox message={table.bill.empty}/>
-                    }
-                </TableCard> */}
-
             </GridItem>
             {
                 formIsOpen && <GridItem xs={12} sm={12} md={9}>
@@ -98,8 +78,4 @@ const ManageBill = ({classes, formIsOpen, toggleForm, hdConfirm, form, amount, b
     </AppLayoutContain>
 );
 
-ManageBill.propTypes = {
-    classes: PropTypes.object
-};
-
-export default withStyles(styles)(ManageBill);
+export default ManageBill;
