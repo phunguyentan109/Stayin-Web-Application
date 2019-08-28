@@ -52,7 +52,7 @@ class AdminNavbarLinks extends React.Component {
         if (this.anchorProfile.contains(event.target)) {
             return;
         }
-        this.setState({ openProfile: false });
+        this.setState({ openProfile: true });
     };
 
     buttonRef = node => {
@@ -195,6 +195,12 @@ class AdminNavbarLinks extends React.Component {
                                                 className={classes.dropdownItem}
                                             >
                                                 Profile
+                                            </MenuItem>
+                                            <MenuItem
+                                                onClick={this.account}
+                                                className={classes.dropdownItem}
+                                            >
+                                                Account
                                             </MenuItem>
                                             <Divider light />
                                             <MenuItem
