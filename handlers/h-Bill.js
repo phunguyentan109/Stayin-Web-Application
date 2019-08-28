@@ -56,7 +56,6 @@ exports.create = async(req, res, next) => {
 
         return res.status(200).json(newBill);
     } catch (err) {
-        console.log(err);
         return next(err);
     }
 }

@@ -3,6 +3,7 @@ import ManageBill from "components/views/ManageBill";
 import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
+import moment from "moment";
 
 const DEFAULT_BILL = {
     electric: {
@@ -14,6 +15,26 @@ function ManageBillContain({api, user, ...props}) {
     const [bills, setBills] = useState([]);
     const [bill, setBill] = useState(DEFAULT_BILL);
     const [formIsOpen, setOpenForm] = useState(false);
+
+    useEffect(() => {
+        let isLoaded = false;
+        if(!isLoaded) load();
+        return () => {
+            isLoaded = true
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    async function load() {
+        const {room_id} = props.match.params;
+        try {
+            let billList = await apiCall("get", api.get(user._id, room_id));
+            setBills(billList.reverse());
+            setBill(DEFAULT_BILL);
+        } catch(err) {
+            console.log(err);
+        }
+    }
 
     const toggleForm = () => setOpenForm(prev => !prev);
 
@@ -36,26 +57,6 @@ function ManageBillContain({api, user, ...props}) {
             }
             await load();
             setOpenForm(false);
-        } catch(err) {
-            console.log(err);
-        }
-    }
-
-    useEffect(() => {
-        let isLoaded = false;
-        if(!isLoaded) load();
-        return () => {
-            isLoaded = true
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    async function load() {
-        const {room_id} = props.match.params;
-        try {
-            let billList = await apiCall("get", api.get(user._id, room_id));
-            setBills(billList);
-            setBill(DEFAULT_BILL);
         } catch(err) {
             console.log(err);
         }
@@ -99,6 +100,13 @@ function ManageBillContain({api, user, ...props}) {
         }
     }
 
+    function getInvoiceDate(date) {
+        let inContractBills = bills.filter(v => v.inContract);
+        let dates = inContractBills.map(v => moment(v.pay.time));
+        let upcomingDate = moment.min(dates);
+        return upcomingDate.isSame(date);
+    }
+
     return <ManageBill
         {...props}
         amount={bill.electric.amount}
@@ -111,6 +119,7 @@ function ManageBillContain({api, user, ...props}) {
         hdChange={hdChange}
         hdEdit={hdEdit}
         hdChangePay={hdChangePay}
+        getInvoiceDate={getInvoiceDate}
     />
 }
 

@@ -93,12 +93,12 @@
         margin-right: 10px;
         border-radius: 3px;
         transition: .2s; }
-        .as-bar > div:nth-of-type(1) > button:nth-of-type(1) {
+        .as-bar > div:nth-of-type(1) > button#add {
           margin-left: 10px; }
-          .as-bar > div:nth-of-type(1) > button:nth-of-type(1) > i {
+          .as-bar > div:nth-of-type(1) > button#add > i {
             color: gray;
             font-size: 14px; }
-        .as-bar > div:nth-of-type(1) > button:nth-of-type(2) > i {
+        .as-bar > div:nth-of-type(1) > button#remove > i {
           color: #e49a9a;
           font-size: 14px; }
         .as-bar > div:nth-of-type(1) > button:hover {
@@ -237,6 +237,11 @@
   cursor: pointer; }
   .price-box.select {
     border: 2px solid #b7b7b7; }
+  .price-box.disable {
+    border-color: #dedede;
+    background-color: #f5f5f5;
+    color: gray;
+    cursor: default; }
   .price-box > div {
     display: flex;
     align-items: center; }
@@ -313,6 +318,41 @@
     background-color: #d16969; }
   .people-box:hover > div:nth-of-type(1) > button.add {
     background-color: #7dc87d; }
+
+.timeBox {
+  display: flex;
+  background-color: white;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between; }
+  .timeBox > div {
+    display: flex;
+    align-items: center; }
+    .timeBox > div > i {
+      margin-right: 20px;
+      font-size: 25px;
+      color: #a3a3a3; }
+    .timeBox > div p {
+      margin: 0;
+      font-size: 13px; }
+      .timeBox > div p:nth-of-type(1) {
+        color: #777777; }
+      .timeBox > div p:nth-of-type(2) {
+        color: gray;
+        font-size: 12px; }
+  .timeBox > #invoice {
+    color: #939393; }
+    .timeBox > #invoice > i {
+      font-size: 13px;
+      margin-right: 5px; }
+    .timeBox > #invoice > span {
+      font-size: 13px; }
+    .timeBox > #invoice:hover {
+      text-decoration: underline;
+      cursor: pointer; }
+  .timeBox > #notyet {
+    font-size: 13px;
+    color: #d3d3d3; }
 
 .empty-box {
   height: 200px;
@@ -506,10 +546,10 @@
       border-radius: 5px;
       transition: .5s; }
       .options div > i.edit {
-        color: #cfcfcf;
+        color: #aec9d7;
         font-size: 15px; }
         .options div > i.edit:hover {
-          color: #9dc8e3; }
+          color: #89b2cd; }
       .options div > i.remove {
         color: #f4b7b7; }
         .options div > i.remove:hover {
