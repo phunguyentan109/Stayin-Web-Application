@@ -51,7 +51,7 @@ function ManageBillContain({api, user, ...props}) {
         const {amount} = bill.electric;
         try {
             if(bill._id){
-                await apiCall("put", api.update(user._id, room_id, bill._id), {amount})
+                await apiCall("put", api.update(user._id, room_id, bill._id), {amount});
             } else {
                 await apiCall("post", api.create(user._id, room_id), {amount});
             }
