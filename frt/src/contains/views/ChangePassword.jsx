@@ -12,11 +12,10 @@ const DEFAULT_PASSWORD = {
 
 function ChangePasswordContain({api, user, ...props}) {
     const [users, setUsers] = useState(DEFAULT_PASSWORD);
-    const [formIsOpen, setOpenForm] = useState(false);
-
-    const toggleForm = () => setOpenForm(prev => !prev);
+    const [confirm, setConfirm] = useState(false);
 
     const hdChange = (e) => {
+        setConfirm(true);
         const {name, value} = e.target;
         setUsers(prev => ({...prev, [name]: value}));
     }
@@ -31,7 +30,6 @@ function ChangePasswordContain({api, user, ...props}) {
 
     async function load() {
         try {
-            setOpenForm(true);
             setUsers(DEFAULT_PASSWORD);
         } catch(err) {
             console.log(err);
@@ -48,24 +46,18 @@ function ChangePasswordContain({api, user, ...props}) {
             } else {
                 alert("Password not the same or old password is valid !");
             }
-            return props.history.push("/dashboard");
+            return props.history.push("/profile");
         } catch(err) {
             console.log(err);
         }
     }
 
-    function hdCancel() {
-        return props.history.push("/dashboard");
-    }
-
     return <ChangePassword
         {...props}
         users={users}
-        toggleForm={toggleForm}
-        formIsOpen={formIsOpen}
         hdConfirm={hdConfirm}
         hdChange={hdChange}
-        hdCancel={hdCancel}
+        confirm={confirm}
     />
 }
 

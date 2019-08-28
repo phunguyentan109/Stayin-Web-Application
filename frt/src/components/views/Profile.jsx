@@ -11,7 +11,7 @@ import TitleBox from "components/Box/TitleBox";
 import CardAvatar from "components/Card/CardAvatar.jsx";
 import moment from "moment";
 
-const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, people, hdBirthday, ...props}) =>  (
+const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, people, hdBirthday, confirm, ...props}) =>  (
     <AppLayoutContain {...props}>
         <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
@@ -85,7 +85,9 @@ const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, peo
                         </GridContainer>
                     </CardBody>
                 </Card>
-                <ConfirmBar confirm={hdConfirm}/>
+                {
+                    confirm && <ConfirmBar confirm={hdConfirm}/>
+                }
             </GridItem>
 
             <GridItem xs={12} sm={12} md={4}>
@@ -98,7 +100,7 @@ const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, peo
                     <CardBody profile>
                         <h4>{profile.viewname}</h4>
                         <p>Email: <i>{profile.email}</i></p>
-                        <p>Phone: <span>{profile.phone}</span></p>
+                        <p>Phone: <span>0{profile.phone}</span></p>
                         <p>Job: <span>{people.job}</span></p>
                         <p>Birthdate: <span>{moment(people.birthDate).format("DD-MM-YYYY")}</span></p>
                         <p>Age: <span>{people.birthDate ? moment().diff(people.birthDate, "years") : 0} years old</span></p>

@@ -22,6 +22,7 @@ const DEFFAULT_PEOPLE = {
 function ProfileContain({api, user, ...props}) {
     const [people, setPeople] = useState(DEFFAULT_PEOPLE);
     const [profile, setProfile] = useState(DEFAULT_PROFILE);
+    const [confirm, setConfirm] = useState(false);
 
     useEffect(() => {
         let isLoaded = false;
@@ -33,16 +34,19 @@ function ProfileContain({api, user, ...props}) {
     }, []);
 
     const hdProfileChange = (e) => {
+        setConfirm(true);
         const {name, value} = e.target;
         setProfile(prev => ({...prev, [name]: value}));
     }
 
     const hdPeopleChange = (e) => {
+        setConfirm(true);
         const {name, value} = e.target;
         setPeople(prev => ({...prev, [name]: value}));
     }
 
     const hdBirthday = (e) => {
+        setConfirm(true);
         const {value} = e.target;
         setPeople(prev => ({
             ...prev,
@@ -55,6 +59,7 @@ function ProfileContain({api, user, ...props}) {
             await apiCall("put", api.user.update(user._id), profile);
             await apiCall("put", api.people.update(user._id, people._id), people);
             await load();
+            setConfirm(false);
         } catch(err) {
             console.log(err);
         }
@@ -86,6 +91,7 @@ function ProfileContain({api, user, ...props}) {
         hdPeopleChange={hdPeopleChange}
         hdBirthday={hdBirthday}
         hdConfirm={hdConfirm}
+        confirm={confirm}
     />
 }
 
