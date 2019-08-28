@@ -73,11 +73,39 @@ exports.remove = async(req, res, next) => {
 exports.getOne = async(req, res, next) => {
     try {
         let user = await db.User.findById(req.params.user_id);
-        let {_id, viewname, email, active, avatar} = user;
+        let {_id, viewname, email, active, avatar, phone} = user;
         let role = (await db.UserRole.findOne({user: _id}).populate("role").exec()).role;
-        return res.status(200).json({_id, viewname, avatar, email, role, active});
+        // get people_id
+        let people_id = (await db.People.findOne({user_id: _id}).populate().exec())._id;
+        return res.status(200).json({_id, viewname, avatar, email, role, active, phone, people_id});
     } catch(err) {
         return next(err);
+    }
+}
+
+exports.updatePassword = async(req, res, next) => {
+    try {
+        let user = await db.User.findById(req.params.user_id);
+
+        // verify old password and change password
+        let {password, newPassword} = req.body;
+        let match = await user.comparePassword(password);
+        if(match){
+            user.password = newPassword;
+            await user.save();
+            return res.status(200).json(user);
+        } else {
+            // return error if old password is not matched
+            return next({
+                status: 400,
+                message: err.code === 11000 ? "Sorry, the password is invalid" : err.message
+            })
+        }
+    } catch(err) {
+        return next({
+            status: 400,
+            message: err.code === 11000 ? "Sorry, the password is invalid" : err.message
+        });
     }
 }
 
@@ -97,6 +125,16 @@ exports.activate = async(req, res, next) => {
         })
     } catch(err) {
         console.log(err);
+        return next(err);
+    }
+}
+
+exports.update = async(req, res, next) => {
+    try {
+        let updateUser = await db.User.findByIdAndUpdate(req.params.user_id, req.body, {new: true});
+
+        return res.status(200).json(updateUser);
+    } catch(err) {
         return next(err);
     }
 }
