@@ -3,8 +3,8 @@ import React from "react";
 const ASBar = ({create, search, hdChange, ...props}) => (
     <div className="as-bar">
         <div>
-            {create && <button onClick={create}><i className="fas fa-plus"></i></button>}
-            <button><i className="fas fa-trash"></i></button>
+            {create && <button onClick={create} id="add"><i className="fas fa-plus"></i></button>}
+            <button id="remove"><i className="fas fa-trash"></i></button>
             <p><i className="fas fa-table"></i> <span>Showing 10 entries</span></p>
         </div>
         <div>

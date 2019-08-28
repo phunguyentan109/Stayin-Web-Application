@@ -18,6 +18,11 @@ export default {
         }
     },
     form: {
+        timeBox: {
+            title: "Contract Timeline",
+            subtitle: "List of bill date following the contract",
+            color: "success"
+        },
         box: {
             title: "Create New Bill",
             subtitle: "Here is a subtitle for this table"

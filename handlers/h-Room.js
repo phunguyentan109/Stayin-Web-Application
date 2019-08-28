@@ -1,6 +1,7 @@
 const db = require("../models");
 const {pushId, assignId, spliceId} = require("../utils/dbSupport");
 const mail = require("../utils/mail");
+const moment = require("moment");
 
 exports.get = async(req, res, next) => {
     try {
@@ -42,10 +43,29 @@ exports.create = async(req, res, next) => {
         let createdRoom = await db.Room.create(req.body);
         const {price_id, people_id} = req.body;
 
-        // add room_id to price and people_id
+        // add room_id to price and people
         await pushId("Price", price_id, "room_id", createdRoom._id);
         for(let id of people_id) {
             await assignId("People", id, "room_id", createdRoom._id);
+        }
+
+        if(people_id.length > 0) {
+            // generate bills (empty bills with pay date) following the price's duration
+            let price = await db.Price.findById(price_id);
+            let billList = [];
+            for(let i = 1; i <= price.duration; i++) {
+                let bill = await db.Bill.create({
+                    pay: {
+                        time: moment().add(i, "M")
+                    },
+                    room_id: createdRoom._id
+                })
+                billList.push(bill._id);
+            }
+
+            // save all created bill to room
+            createdRoom.bill_id = billList;
+            await createdRoom.save();
         }
 
         return res.status(200).json(createdRoom);

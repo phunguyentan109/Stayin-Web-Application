@@ -3,8 +3,9 @@ import ManagePeople from "components/views/ManagePeople";
 import withAccess from "hocs/withAccess";
 import {connect} from "react-redux";
 import {apiCall} from "services/api";
+import withNoti from "hocs/withNoti";
 
-function ManagePeopleContain({api, user, ...props}) {
+function ManagePeopleContain({api, user, notify, ...props}) {
     const [peopleList, setPeopleList] = useState([]);
     const [userList, setUserList] = useState([]);
 
@@ -22,7 +23,7 @@ function ManagePeopleContain({api, user, ...props}) {
             setUserList(users);
             setPeopleList(people);
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -31,9 +32,10 @@ function ManagePeopleContain({api, user, ...props}) {
             if(window.confirm("Do you want to remove this data?")){
                 await apiCall("delete", api.people.delete(user._id, people_id));
                 await load();
+                return notify(true, true, "Removing people's information successfully!");
             }
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -42,9 +44,10 @@ function ManagePeopleContain({api, user, ...props}) {
             if(window.confirm("Do you want to remove this data?")){
                 await apiCall("delete", api.account.delete(user_id));
                 await load();
+                return notify(true, true, "One user account is removed successfully!");
             }
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -63,4 +66,4 @@ function mapState({user}) {
     return {user: user.data};
 }
 
-export default withAccess(connect(mapState, null)(ManagePeopleContain));
+export default withAccess(connect(mapState, null)(withNoti(ManagePeopleContain)));
