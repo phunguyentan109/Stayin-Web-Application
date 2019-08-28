@@ -5,6 +5,8 @@ import ManagePeopleContain from "contains/views/ManagePeople";
 import ManageRoomContain from "contains/views/ManageRoom";
 import ManagePriceContain from "contains/views/ManagePrice";
 import ManageBillContain from "contains/views/ManageBill";
+import ChangePasswordContain from "contains/views/ChangePassword";
+import ProfileContain from "contains/views/Profile";
 
 import Login from "components/views/Login";
 
@@ -22,6 +24,8 @@ import manage_room from "./display/ManageRoom";
 import manage_people from "./display/ManagePeople";
 import manage_price from "./display/ManagePrice";
 import manage_bill from "./display/ManageBill";
+import change_password from "./display/ChangePassword";
+import profile from "./display/Profile";
 
 const sidebar = [
     {
@@ -84,8 +88,23 @@ const routes = [
         display: activate
     },
     {
+        path: "/account",
+        roles: [],
+        name: "Your Account",
+        component: ChangePasswordContain,
+        display: change_password
+    },
+    {
+        path: "/profile",
+        roles: [],
+        name: "User Profile Information",
+        component: ProfileContain,
+        display: profile
+    },
+    {
         path: "/rooms/:room_id/bills",
         roles: [],
+        name: "Manage Bill",
         component: ManageBillContain,
         display: manage_bill
     },
