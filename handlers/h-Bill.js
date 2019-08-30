@@ -77,7 +77,7 @@ exports.update  = async(req, res, next) => {
 
         // get room's price
         let room = await db.Room.findById(room_id).populate("price_id").exec();
-        let {electric} = room.price_id;
+        let {electric, water, extra, house, wifi} = room.price_id;
 
         // get last month used electric amount
         let prevAmount = bill.electric.amount - (bill.electric.cost / electric);
@@ -88,6 +88,11 @@ exports.update  = async(req, res, next) => {
             amount: amount,
             cost: (amount - prevAmount) * electric
         };
+        if(bill.water === 0) {
+            bill.water = water * room.people_id.length,
+            bill.house = house + (extra * (room.people_id.length - 1)),
+            bill.wifi = wifi;
+        }
         await bill.save();
 
         return res.status(200).json(bill);

@@ -331,28 +331,53 @@
     .timeBox > div > i {
       margin-right: 20px;
       font-size: 25px;
-      color: #a3a3a3; }
+      color: #c6c6c6; }
     .timeBox > div p {
       margin: 0;
       font-size: 13px; }
       .timeBox > div p:nth-of-type(1) {
-        color: #777777; }
+        color: #aaaaaa; }
       .timeBox > div p:nth-of-type(2) {
-        color: gray;
+        color: #aaaaaa;
         font-size: 12px; }
-  .timeBox > #invoice {
-    color: #939393; }
-    .timeBox > #invoice > i {
-      font-size: 13px;
-      margin-right: 5px; }
-    .timeBox > #invoice > span {
-      font-size: 13px; }
-    .timeBox > #invoice:hover {
-      text-decoration: underline;
-      cursor: pointer; }
-  .timeBox > #notyet {
+  .timeBox > span > span {
     font-size: 13px;
-    color: #d3d3d3; }
+    color: #c8c8c8; }
+  .timeBox.invoice > div > i {
+    color: #a3a3a3; }
+  .timeBox.invoice > div p:nth-of-type(1) {
+    color: #777777; }
+  .timeBox.invoice > div p:nth-of-type(2) {
+    color: gray; }
+  .timeBox.invoice > span {
+    padding: 3px 10px;
+    border: 1px solid #dedede;
+    border-radius: 5px; }
+    .timeBox.invoice > span > span {
+      color: #939393;
+      font-weight: 500;
+      font-size: 12px; }
+    .timeBox.invoice > span > i {
+      color: #939393;
+      font-size: 12px;
+      margin-right: 5px; }
+    .timeBox.invoice > span:hover {
+      cursor: pointer; }
+  .timeBox.inwork > span#working {
+    background-color: #f2f2f2;
+    padding: 3px 12px;
+    border: 1px solid #f2f2f2;
+    border-radius: 3px; }
+    .timeBox.inwork > span#working > span {
+      color: #959595;
+      font-weight: 500;
+      font-size: 12px; }
+    .timeBox.inwork > span#working > i {
+      color: #939393;
+      font-size: 12px;
+      margin-right: 5px; }
+    .timeBox.inwork > span#working:hover {
+      cursor: pointer; }
 
 .empty-box {
   height: 200px;

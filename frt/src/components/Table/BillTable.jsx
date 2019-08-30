@@ -4,7 +4,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import {inCurrency} from "services/utils";
 import PropTypes from "prop-types";
-import CellOption from "components/Table/CellOption";
+import {OptTips} from "components/Table/CellOption";
 import EmptyCell from "./EmptyCell";
 
 const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdChangePay, ...props}) => (
@@ -41,16 +41,31 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdCha
                 <TableCell className={`${cssCell} bill-pay`}>
                     <div onClick={hdChangePay.bind(this, row._id)}>
                         <span>
-                            {row.pay ? "" : <i className="fas fa-comments-dollar"/>}
+                            {row.pay.status ? "" : <i className="fas fa-comments-dollar"/>}
                         </span>
-                        {row.pay ? "Paid" : "Unpaid"}
+                        {row.pay.status ? "Paid" : "Unpaid"}
                     </div>
                 </TableCell>
-                {
-                    options && <TableCell className={`${cssCell} options`}>
-                        <CellOption options={options} use={row._id}/>
-                    </TableCell>
-                }
+                <TableCell>
+                    <div>
+                        {
+                            row.inContract || <OptTips text="Remove">
+                                <i
+                                    className="fas fa-times remove"
+                                    onClick={options.remove.bind(this, row._id)}
+                                />
+                            </OptTips>
+                        }
+                        {
+                            row.inContract && <OptTips text="Edit">
+                                <i
+                                    className="fas fa-edit edit"
+                                    onClick={options.edit.bind(this, row._id)}
+                                />
+                            </OptTips>
+                        }
+                    </div>
+                </TableCell>
         </TableRow>
     ))
 )

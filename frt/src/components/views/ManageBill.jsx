@@ -12,32 +12,32 @@ import ASBar from "contains/Bar/ASBar";
 import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
-import TimeBox from "components/Box/TimeBox";
+import Timeline from "components/Box/TimeBox";
 
-const ManageBill = ({formIsOpen, toggleForm, hdConfirm, form, amount, bills, setBills, hdChange, hdRemove, hdEdit, table, hdChangePay, getInvoiceDate, ...props}) => (
+const ManageBill = ({openForm, toggleForm, timeline, bill, amount, invoices, setInvoices, hd, ...props}) => (
     <AppLayoutContain {...props}>
         <GridContainer>
             <GridItem xs={12} sm={12} md={3}>
-                <TitleBox {...form.timeBox}/>
-                {
-                    bills.filter(v => v.inContract).reverse().map((v, i) => (
-                        <TimeBox
-                            hasBill={v.electric.amount !== 0}
-                            invoice={getInvoiceDate}
-                            date={v.pay.time}
-                            month={i+1}
-                            key={i}
-                        />
-                    ))
-                }
+                <TitleBox
+                    title="Contract Timeline"
+                    subtitle="List of bill date following the contract"
+                    color="success"
+                />
+                <Timeline
+                    time={timeline}
+                    inwork={bill._id}
+                />
             </GridItem>
             {
-                formIsOpen && <GridItem xs={12} sm={12} md={9}>
-                    <TitleBox {...form.box} />
-                    <ConfirmBar cancel={toggleForm} confirm={hdConfirm}/>
+                openForm && <GridItem xs={12} sm={12} md={9}>
+                    <TitleBox
+                        title="Create New Bill"
+                        subtitle="Here is a subtitle for this table"
+                    />
+                    <ConfirmBar cancel={toggleForm} confirm={hd.confirm}/>
                     <Card customCss="custom-card">
                         <CustomCardHeader
-                            title="New Bill Information"
+                            title="Bill Information"
                             subtitle="Please fill in suitable information for your bill"
                         />
                         <CardBody>
@@ -50,7 +50,7 @@ const ManageBill = ({formIsOpen, toggleForm, hdConfirm, form, amount, bills, set
                                         required
                                         name="electric"
                                         value={amount}
-                                        onChange={hdChange}
+                                        onChange={hd.change}
                                     />
                                 </GridItem>
                             </GridContainer>
@@ -59,27 +59,32 @@ const ManageBill = ({formIsOpen, toggleForm, hdConfirm, form, amount, bills, set
                 </GridItem>
             }
             {
-                formIsOpen || <GridItem xs={12} sm={12} md={9}>
-                    <TableCard {...table.bill.card}>
+                openForm || <GridItem xs={12} sm={12} md={9}>
+                    <TableCard
+                        title="Bill List"
+                        subtitle="Bill of room in your apartments"
+                    >
                         <ASBar
-                            create={toggleForm}
+                            create={timeline.length === 0 ? toggleForm : false}
                             keys={["electric.cost", "electric.amount", "water", "house", "wifi"]}
-                            data={bills}
-                            setData={setBills}
+                            data={invoices}
+                            setData={setInvoices}
                         />
                         {
-                            bills.filter(v => v.electric.amount !== 0).length > 0
+                            invoices.length > 0
                             ? <BillTable
                                 tableHeaderColor="primary"
-                                tableHead={table.bill.header}
-                                tableData={bills.filter(v => v.electric.amount !== 0)}
-                                hdChangePay={hdChangePay}
+                                tableHead={["ID", "Electric", "Water", "House", "Wifi", "Total", "Contract Info", "Payment Status", "Options"]}
+                                tableData={invoices}
+                                hdChangePay={() => {}}
                                 options={{
-                                    remove: hdRemove,
-                                    edit: hdEdit
+                                    remove: hd.remove,
+                                    edit: hd.edit
                                 }}
                             />
-                            : <EmptyBox message={table.bill.empty}/>
+                            : <EmptyBox
+                                message="There is no bill information to show here"
+                            />
                         }
                     </TableCard>
                 </GridItem>

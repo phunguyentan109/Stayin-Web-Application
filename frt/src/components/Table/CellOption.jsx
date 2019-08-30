@@ -42,4 +42,6 @@ const CellOption = ({options, use}) => (
     </div>
 )
 
+export {OptTips};
+
 export default CellOption;

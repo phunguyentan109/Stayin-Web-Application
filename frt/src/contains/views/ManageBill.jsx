@@ -3,7 +3,6 @@ import ManageBill from "components/views/ManageBill";
 import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
-import moment from "moment";
 
 const DEFAULT_BILL = {
     electric: {
@@ -12,7 +11,8 @@ const DEFAULT_BILL = {
 }
 
 function ManageBillContain({api, user, ...props}) {
-    const [bills, setBills] = useState([]);
+    const [invoices, setInvoices] = useState([]);
+    const [timeline, setTimeline] = useState([]);
     const [bill, setBill] = useState(DEFAULT_BILL);
     const [formIsOpen, setOpenForm] = useState(false);
 
@@ -29,14 +29,25 @@ function ManageBillContain({api, user, ...props}) {
         const {room_id} = props.match.params;
         try {
             let billList = await apiCall("get", api.get(user._id, room_id));
-            setBills(billList.reverse());
-            setBill(DEFAULT_BILL);
+            billList.reverse();
+            setInvoices(billList.filter(v => v.electric.amount !== 0));
+            setTimeline(billList.filter(v => v.electric.amount === 0)
+                .reverse()
+                .map((v, i) => ({
+                    date: v.pay.time,
+                    invoice: hdEdit.bind(this, v._id),
+                    month: i+1
+                })
+            ))
         } catch(err) {
             console.log(err);
         }
     }
 
-    const toggleForm = () => setOpenForm(prev => !prev);
+    const toggleForm = () => {
+        setOpenForm(prev => !prev);
+        setBill(DEFAULT_BILL);
+    };
 
     const hdChange = (e) => {
         const {value} = e.target;
@@ -56,7 +67,7 @@ function ManageBillContain({api, user, ...props}) {
                 await apiCall("post", api.create(user._id, room_id), {amount});
             }
             await load();
-            setOpenForm(false);
+            toggleForm();
         } catch(err) {
             console.log(err);
         }
@@ -74,52 +85,47 @@ function ManageBillContain({api, user, ...props}) {
         }
     }
 
-    async function hdChangePay(bill_id) {
-        try {
-            let {room_id} = props.match.params;
-
-            let billOne = await apiCall("get", api.getOne(user._id, room_id, bill_id));
-            let pay = billOne.pay
-
-            await apiCall("put", api.updatePay(user._id, room_id, bill_id), {pay: !pay});
-
-            await load();
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    // async function hdChangePay(bill_id) {
+    //     try {
+    //         let {room_id} = props.match.params;
+    //
+    //         let billOne = await apiCall("get", api.getOne(user._id, room_id, bill_id));
+    //         let pay = billOne.pay
+    //
+    //         await apiCall("put", api.updatePay(user._id, room_id, bill_id), {pay: !pay});
+    //
+    //         await load();
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }
 
     async function hdEdit(bill_id) {
         try {
             let {room_id} = props.match.params;
             let billOne = await apiCall("get", api.getOne(user._id, room_id, bill_id));
+            toggleForm();
             setBill(billOne);
-            setOpenForm(true);
         } catch (err) {
             console.log(err);
         }
     }
 
-    function getInvoiceDate(date) {
-        let inContractBills = bills.filter(v => v.inContract);
-        let dates = inContractBills.map(v => moment(v.pay.time));
-        let upcomingDate = moment.min(dates);
-        return upcomingDate.isSame(date);
-    }
-
     return <ManageBill
         {...props}
         amount={bill.electric.amount}
-        bills={bills}
-        setBills={setBills}
+        invoices={invoices}
+        setInvoices={setInvoices}
+        timeline={timeline}
+        bill={bill}
         toggleForm={toggleForm}
-        formIsOpen={formIsOpen}
-        hdConfirm={hdConfirm}
-        hdRemove={hdRemove}
-        hdChange={hdChange}
-        hdEdit={hdEdit}
-        hdChangePay={hdChangePay}
-        getInvoiceDate={getInvoiceDate}
+        openForm={formIsOpen}
+        hd={{
+            confirm: hdConfirm,
+            remove: hdRemove,
+            change: hdChange,
+            edit: hdEdit
+        }}
     />
 }
 
