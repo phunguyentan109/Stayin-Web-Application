@@ -34,6 +34,7 @@ function ManageBillContain({api, user, ...props}) {
             setTimeline(billList.filter(v => v.electric.amount === 0)
                 .reverse()
                 .map((v, i) => ({
+                    _id: v._id,
                     date: v.pay.time,
                     invoice: hdEdit.bind(this, v._id),
                     month: i+1
@@ -104,7 +105,7 @@ function ManageBillContain({api, user, ...props}) {
         try {
             let {room_id} = props.match.params;
             let billOne = await apiCall("get", api.getOne(user._id, room_id, bill_id));
-            toggleForm();
+            setOpenForm(true);
             setBill(billOne);
         } catch (err) {
             console.log(err);

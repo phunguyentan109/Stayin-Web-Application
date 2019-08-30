@@ -69,7 +69,6 @@
             }
         }
     }
-
 }
 
 .bill-electric {
@@ -83,7 +82,6 @@
 
         span {
             margin-top: 5px;
-            // font-weight: 900;
             color: #a8a8a8e3;
             i {
                 color: #d3d3d3e3;
@@ -93,58 +91,22 @@
     }
 }
 
-.bill-active {
+.payState {
     > div {
         display: flex;
         align-items: center;
-
-        > span {
-            width: 13px;
-            height: 13px;
-            border-radius: 20px;
-            margin-right: 8px;
-
-            &.active {
-                background-color: #3fe35aab;
-            }
-
-            &.unactive {
-                background-color: #d5d5d5;
-            }
-        }
-
-        > i {
-            margin-left: 10px;
-            color: #ced17c;
-            font-size: 17px;
-        }
-    }
-}
-
-.bill-pay {
-    > div {
-        display: flex;
-        align-items: center;
-        width: 76px;
-        height: 25px;
-        border-radius: 20px;
-        color: #f5f0fc;
         cursor: pointer;
-        transition: .5s;
-        background-color: #876be7d1;
-
-        &:hover {
-            background-color: #5bb3eb;
-            color: #fffefe;
-        }
 
         > span {
-            width: 27px;
-            height: 16px;
+            display: flex;
+            font-weight: bold;
+            color: #eb9494;
+            text-decoration: underline;
 
             > i {
-                color: #ced17c;
-                font-size: 20px;
+                margin-right: 8px;
+                color: #eb9494;
+                font-size: 16px;
             }
         }
     }

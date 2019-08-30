@@ -44,7 +44,7 @@ const TimeBox = ({date, invoice, month, canInvoice, inwork, ...props}) => {
     )
 }
 
-const Timeline = ({time, ...props}) => {
+const Timeline = ({time, idCheck, ...props}) => {
 
     function canInvoice(date) {
         let dates = time.map(v => moment(v.date));
@@ -57,6 +57,7 @@ const Timeline = ({time, ...props}) => {
             {...props}
             {...v}
             canInvoice={canInvoice(v.date)}
+            inwork={idCheck !== undefined && idCheck === v._id}
             key={i}
         />
     ))

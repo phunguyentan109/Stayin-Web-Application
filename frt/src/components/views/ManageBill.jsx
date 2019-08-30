@@ -25,7 +25,7 @@ const ManageBill = ({openForm, toggleForm, timeline, bill, amount, invoices, set
                 />
                 <Timeline
                     time={timeline}
-                    inwork={bill._id}
+                    idCheck={bill._id}
                 />
             </GridItem>
             {
@@ -74,7 +74,7 @@ const ManageBill = ({openForm, toggleForm, timeline, bill, amount, invoices, set
                             invoices.length > 0
                             ? <BillTable
                                 tableHeaderColor="primary"
-                                tableHead={["ID", "Electric", "Water", "House", "Wifi", "Total", "Contract Info", "Payment Status", "Options"]}
+                                tableHead={["ID", "Electric", "Water", "House", "Wifi", "Total", "Payment Status", "Options"]}
                                 tableData={invoices}
                                 hdChangePay={() => {}}
                                 options={{

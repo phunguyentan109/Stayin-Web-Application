@@ -49,7 +49,7 @@
     font-family: "Roboto", sans-serif;
     color: white;
     margin-right: 10px;
-    background-color: #e5e5e5;
+    background-color: #efefef;
     cursor: pointer; }
     .confirm-bar button > i {
       margin-right: 5px; }
@@ -500,42 +500,19 @@
         color: #d3d3d3e3;
         margin-right: 5px; }
 
-.bill-active > div {
-  display: flex;
-  align-items: center; }
-  .bill-active > div > span {
-    width: 13px;
-    height: 13px;
-    border-radius: 20px;
-    margin-right: 8px; }
-    .bill-active > div > span.active {
-      background-color: #3fe35aab; }
-    .bill-active > div > span.unactive {
-      background-color: #d5d5d5; }
-  .bill-active > div > i {
-    margin-left: 10px;
-    color: #ced17c;
-    font-size: 17px; }
-
-.bill-pay > div {
+.payState > div {
   display: flex;
   align-items: center;
-  width: 76px;
-  height: 25px;
-  border-radius: 20px;
-  color: #f5f0fc;
-  cursor: pointer;
-  transition: .5s;
-  background-color: #876be7d1; }
-  .bill-pay > div:hover {
-    background-color: #5bb3eb;
-    color: #fffefe; }
-  .bill-pay > div > span {
-    width: 27px;
-    height: 16px; }
-    .bill-pay > div > span > i {
-      color: #ced17c;
-      font-size: 20px; }
+  cursor: pointer; }
+  .payState > div > span {
+    display: flex;
+    font-weight: bold;
+    color: #eb9494;
+    text-decoration: underline; }
+    .payState > div > span > i {
+      margin-right: 8px;
+      color: #eb9494;
+      font-size: 16px; }
 
 .bill-date > div {
   display: flex;
