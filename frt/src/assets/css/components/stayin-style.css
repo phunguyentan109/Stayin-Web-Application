@@ -49,7 +49,7 @@
     font-family: "Roboto", sans-serif;
     color: white;
     margin-right: 10px;
-    background-color: #e5e5e5;
+    background-color: #efefef;
     cursor: pointer; }
     .confirm-bar button > i {
       margin-right: 5px; }
@@ -331,28 +331,53 @@
     .timeBox > div > i {
       margin-right: 20px;
       font-size: 25px;
-      color: #a3a3a3; }
+      color: #c6c6c6; }
     .timeBox > div p {
       margin: 0;
       font-size: 13px; }
       .timeBox > div p:nth-of-type(1) {
-        color: #777777; }
+        color: #aaaaaa; }
       .timeBox > div p:nth-of-type(2) {
-        color: gray;
+        color: #aaaaaa;
         font-size: 12px; }
-  .timeBox > #invoice {
-    color: #939393; }
-    .timeBox > #invoice > i {
-      font-size: 13px;
-      margin-right: 5px; }
-    .timeBox > #invoice > span {
-      font-size: 13px; }
-    .timeBox > #invoice:hover {
-      text-decoration: underline;
-      cursor: pointer; }
-  .timeBox > #notyet {
+  .timeBox > span > span {
     font-size: 13px;
-    color: #d3d3d3; }
+    color: #c8c8c8; }
+  .timeBox.invoice > div > i {
+    color: #a3a3a3; }
+  .timeBox.invoice > div p:nth-of-type(1) {
+    color: #777777; }
+  .timeBox.invoice > div p:nth-of-type(2) {
+    color: gray; }
+  .timeBox.invoice > span {
+    padding: 3px 10px;
+    border: 1px solid #dedede;
+    border-radius: 5px; }
+    .timeBox.invoice > span > span {
+      color: #939393;
+      font-weight: 500;
+      font-size: 12px; }
+    .timeBox.invoice > span > i {
+      color: #939393;
+      font-size: 12px;
+      margin-right: 5px; }
+    .timeBox.invoice > span:hover {
+      cursor: pointer; }
+  .timeBox.inwork > span#working {
+    background-color: #f2f2f2;
+    padding: 3px 12px;
+    border: 1px solid #f2f2f2;
+    border-radius: 3px; }
+    .timeBox.inwork > span#working > span {
+      color: #959595;
+      font-weight: 500;
+      font-size: 12px; }
+    .timeBox.inwork > span#working > i {
+      color: #939393;
+      font-size: 12px;
+      margin-right: 5px; }
+    .timeBox.inwork > span#working:hover {
+      cursor: pointer; }
 
 .empty-box {
   height: 200px;
@@ -475,42 +500,28 @@
         color: #d3d3d3e3;
         margin-right: 5px; }
 
-.bill-active > div {
-  display: flex;
-  align-items: center; }
-  .bill-active > div > span {
-    width: 13px;
-    height: 13px;
-    border-radius: 20px;
-    margin-right: 8px; }
-    .bill-active > div > span.active {
-      background-color: #3fe35aab; }
-    .bill-active > div > span.unactive {
-      background-color: #d5d5d5; }
-  .bill-active > div > i {
-    margin-left: 10px;
-    color: #ced17c;
-    font-size: 17px; }
-
-.bill-pay > div {
+.payState > div {
   display: flex;
   align-items: center;
-  width: 76px;
-  height: 25px;
-  border-radius: 20px;
-  color: #f5f0fc;
-  cursor: pointer;
-  transition: .5s;
-  background-color: #876be7d1; }
-  .bill-pay > div:hover {
-    background-color: #5bb3eb;
-    color: #fffefe; }
-  .bill-pay > div > span {
-    width: 27px;
-    height: 16px; }
-    .bill-pay > div > span > i {
-      color: #ced17c;
-      font-size: 20px; }
+  cursor: pointer; }
+  .payState > div.expired {
+    cursor: default; }
+    .payState > div.expired:hover {
+      text-decoration: none; }
+  .payState > div > i {
+    margin-right: 8px;
+    color: #c6c6c6;
+    font-size: 16px; }
+  .payState > div > span {
+    color: #c6c6c6; }
+  .payState > div.unpaid > i {
+    color: #eb9494; }
+  .payState > div.unpaid > span {
+    color: #eb9494;
+    font-weight: bold;
+    text-decoration: underline; }
+  .payState > div.unpaid:hover {
+    text-decoration: underline; }
 
 .bill-date > div {
   display: flex;

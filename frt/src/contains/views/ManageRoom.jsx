@@ -122,11 +122,13 @@ function ManageRoomContain({api, user, notify, ...props}) {
         price={price}
         toggleForm={toggleForm}
         formIsOpen={formIsOpen}
-        hdConfirm={hdConfirm}
-        hdRemove={hdRemove}
-        hdChange={hdChange}
-        hdEdit={hdEdit}
-        hdBill={hdBill}
+        hd={{
+            edit: hdEdit,
+            bill: hdBill,
+            remove: hdRemove,
+            change: hdChange,
+            confirm: hdConfirm
+        }}
         assignPeople={assignPeople}
         selectPrice={selectPrice}
         setRooms={setRooms}
