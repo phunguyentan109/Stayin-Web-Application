@@ -42,16 +42,19 @@ exports.create = async(req, res, next) => {
                 amount: amount,
                 cost: (amount - prevAmount) * price.electric
             },
-            water: price.water * room.people_id.length,
-            house: price.house + (price.extra * (room.people_id.length - 1)),
+            water: price.water * (room.people_id.length !== 0 ? room.people_id.length : 1),
+            house: price.house + (price.extra * (room.people_id.length !== 0 ? room.peole_id.length - 1 : 0)),
             wifi: price.wifi
         }
+        console.log(bill);
         let newBill = await db.Bill.create(bill);
 
         // save bill_id to room
         await pushId("Room", room_id, "bill_id", newBill._id);
         // save room_id to bill
         newBill.room_id = req.params.room_id;
+        newBill.pay.status = true;
+        newBill.inContract = false;
         await newBill.save();
 
         return res.status(200).json(newBill);

@@ -7,6 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+import EmptyBox from "components/Box/EmptyBox";
 // core components
 import tableStyle from "assets/jss/material-dashboard-react/components/tableStyle.jsx";
 
@@ -14,8 +15,9 @@ export default function withTable(WrappedComponent) {
     function CustomTable({classes, tableHead, tableHeaderColor, ...props}) {
         return (
             <div className={`${classes.tableResponsive} table-interact-separate`}>
-                <Table className={classes.table}>
-                    {tableHead !== undefined ? (
+                {
+                    props.tableData.length > 0
+                    ? <Table className={classes.table}>
                         <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
                             <TableRow className={classes.tableHeadRow}>
                                 {tableHead.map((prop, key) => {
@@ -30,15 +32,16 @@ export default function withTable(WrappedComponent) {
                                 })}
                             </TableRow>
                         </TableHead>
-                    ) : null}
-                    <TableBody>
-                        <WrappedComponent
-                            cssRow={classes.tableRowBody}
-                            cssCell={classes.tableCell}
-                            {...props}
-                        />
-                    </TableBody>
-                </Table>
+                        <TableBody>
+                            <WrappedComponent
+                                cssRow={classes.tableRowBody}
+                                cssCell={classes.tableCell}
+                                {...props}
+                            />
+                        </TableBody>
+                    </Table>
+                    : <EmptyBox message="There is no data here."/>
+                }
             </div>
         );
     }

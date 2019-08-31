@@ -504,19 +504,23 @@
   display: flex;
   align-items: center;
   cursor: pointer; }
+  .payState > div.expired {
+    cursor: default; }
+    .payState > div.expired:hover {
+      text-decoration: none; }
   .payState > div > i {
     margin-right: 8px;
     color: #c6c6c6;
     font-size: 16px; }
   .payState > div > span {
     color: #c6c6c6; }
-  .payState > div:hover {
-    text-decoration: underline; }
-  .payState > div#unpaid > i {
+  .payState > div.unpaid > i {
     color: #eb9494; }
-  .payState > div#unpaid > span {
+  .payState > div.unpaid > span {
     color: #eb9494;
     font-weight: bold;
+    text-decoration: underline; }
+  .payState > div.unpaid:hover {
     text-decoration: underline; }
 
 .bill-date > div {

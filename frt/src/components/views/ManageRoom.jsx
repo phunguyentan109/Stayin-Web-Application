@@ -12,17 +12,17 @@ import FormInput from "components/CustomInput/FormInput";
 import ConfirmBar from "contains/Bar/ConfirmBar";
 import ASBar from "contains/Bar/ASBar";
 import PeopleBox from "components/Box/PeopleBox";
-import EmptyBox from "components/Box/EmptyBox";
 import TableCard from "components/Card/TableCard";
 import TitleBox from "components/Box/TitleBox";
+import EmptyBox from "components/Box/EmptyBox";
 
-const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, rooms, hdChange, hdRemove, hdEdit, table, people, assignPeople, price, selectPrice, setRooms, ...props}) => (
+const ManageRoom = ({formIsOpen, toggleForm, hd, form, room, rooms, table, people, assignPeople, price, selectPrice, setRooms, ...props}) => (
     <AppLayoutContain {...props}>
         {
             formIsOpen && <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                     <TitleBox {...form.box} />
-                    <ConfirmBar cancel={toggleForm} confirm={hdConfirm}/>
+                    <ConfirmBar cancel={toggleForm} confirm={hd.confirm}/>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                     <Card customCss="custom-card">
@@ -34,10 +34,10 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                                         type="text"
                                         label="Room Name"
                                         placeholder="Room Name"
-                                        required
                                         name="name"
                                         value={room.name}
-                                        onChange={hdChange}
+                                        onChange={hd.change}
+                                        required
                                     />
                                     <FormInput
                                         type="text"
@@ -49,7 +49,7 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                                         }}
                                         name="desc"
                                         value={room.desc}
-                                        onChange={hdChange}
+                                        onChange={hd.change}
                                     />
                                 </GridItem>
                             </GridContainer>
@@ -163,27 +163,23 @@ const ManageRoom = ({formIsOpen, toggleForm, hdConfirm, hdBill, form, room, room
                             data={rooms}
                             setData={setRooms}
                         />
-                        {
-                            rooms.length > 0
-                            ? <RoomTable
-                                tableHeaderColor="primary"
-                                tableHead={table.room.header}
-                                tableData={rooms}
-                                options={{
-                                    remove: hdRemove,
-                                    edit: hdEdit,
-                                    more: [
-                                        {
-                                            icon: "fas fa-file-invoice-dollar",
-                                            name: "View all bills",
-                                            className: "edit",
-                                            fn: hdBill
-                                        }
-                                    ]
-                                }}
-                            />
-                            : <EmptyBox message={table.room.empty}/>
-                        }
+                        <RoomTable
+                            tableHeaderColor="primary"
+                            tableHead={table.room.header}
+                            tableData={rooms}
+                            options={{
+                                remove: hd.remove,
+                                edit: hd.edit,
+                                more: [
+                                    {
+                                        icon: "fas fa-file-invoice-dollar",
+                                        name: "View all bills",
+                                        className: "edit",
+                                        fn: hd.bill
+                                    }
+                                ]
+                            }}
+                        />
                     </TableCard>
                 </GridItem>
             </GridContainer>

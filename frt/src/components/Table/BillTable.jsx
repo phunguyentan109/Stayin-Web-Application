@@ -33,12 +33,19 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdPay
                     {inCurrency(row.electric.cost + row.water + row.house + row.wifi)}
                 </TableCell>
                 <TableCell className={`${cssCell} payState`}>
-                    <div id={row.pay.status ? "" : "unpaid"}>
-                        {row.inContract && <i className="fas fa-file-invoice-dollar"/>}
-                        <span onClick={hdPay.bind(this, row._id, !row.pay.status)}>
-                            {row.pay.status ? "Paid" : "Unpaid"}
-                        </span>
-                    </div>
+                    {
+                        row.inContract && <div className={row.pay.status ? "" : "unpaid"}>
+                            {row.inContract && <i className="fas fa-file-invoice-dollar"/>}
+                            <span onClick={hdPay.bind(this, row._id, !row.pay.status)}>
+                                {row.pay.status ? "Paid" : "Unpaid"}
+                            </span>
+                        </div>
+                    }
+                    {
+                        row.inContract || <div className={`expired ${row.pay.status ? "" : "unpaid"}`}>
+                            <span>{row.pay.status ? "Paid" : "Unpaid"}</span>
+                        </div>
+                    }
                 </TableCell>
                 <TableCell className={`${cssCell} options`}>
                     <div>

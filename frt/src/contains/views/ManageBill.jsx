@@ -82,7 +82,7 @@ function ManageBillContain({api, user, notify, ...props}) {
             await load();
             return notify("Payment status has been changed successfully!", true);
         } catch(err) {
-            notify("The status can't be updated because the contract has expired or connection error.");
+            notify("The status can't be updated because the contract has expired or due to poor connection.");
         }
     }
 
@@ -93,8 +93,9 @@ function ManageBillContain({api, user, notify, ...props}) {
                 await apiCall("delete", api.delete(user._id, room_id, bill_id));
                 await load();
             }
+            return notify("Delete bill successfully!", true);
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -105,7 +106,7 @@ function ManageBillContain({api, user, notify, ...props}) {
             setOpenForm(true);
             setBill(billOne);
         } catch (err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -135,7 +136,6 @@ function ManageBillContain({api, user, notify, ...props}) {
             confirm: hdConfirm,
             remove: hdRemove,
             change: hdChange,
-            edit: hdEdit,
             pay: hdPay,
             reset: hdReset
         }}

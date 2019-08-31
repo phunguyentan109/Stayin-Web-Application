@@ -23,10 +23,18 @@ const ManageBill = ({openForm, toggleForm, timeline, bill, amount, invoices, set
                     subtitle="List of bill date following the contract"
                     color="success"
                 />
-                <Timeline
-                    time={timeline}
-                    idCheck={bill._id}
-                />
+                {
+                    timeline.length > 0
+                    ? <Timeline
+                        time={timeline}
+                        idCheck={bill._id}
+                    />
+                    : <Card>
+                        <CardBody>
+                            <EmptyBox message="There is no people living in this room."/>
+                        </CardBody>
+                    </Card>
+                }
             </GridItem>
             {
                 openForm && <GridItem xs={12} sm={12} md={9}>

@@ -97,6 +97,14 @@
         align-items: center;
         cursor: pointer;
 
+        &.expired {
+            cursor: default;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
         > i {
             margin-right: 8px;
             color: #c6c6c6;
@@ -107,11 +115,8 @@
             color: #c6c6c6;
         }
 
-        &:hover {
-            text-decoration: underline;
-        }
 
-        &#unpaid {
+        &.unpaid {
             > i {
                 color: #eb9494;
             }
@@ -119,6 +124,10 @@
             > span {
                 color: #eb9494;
                 font-weight: bold;
+                text-decoration: underline;
+            }
+
+            &:hover {
                 text-decoration: underline;
             }
         }
