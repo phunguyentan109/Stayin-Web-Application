@@ -111,7 +111,7 @@ const routes = [
         display: manage_bill
     },
     {
-        path: "/mailer",
+        path: "/contact",
         roles: [],
         name: "Send mail to user",
         component: SendUser,
