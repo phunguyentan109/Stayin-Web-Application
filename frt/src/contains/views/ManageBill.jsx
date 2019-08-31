@@ -64,7 +64,7 @@ function ManageBillContain({api, user, notify, ...props}) {
             const {room_id} = props.match.params;
             const {amount} = bill.electric;
             if(bill._id){
-                await apiCall("put", api.update(user._id, room_id, bill._id), {amount})
+                await apiCall("put", api.update(user._id, room_id, bill._id), {amount});
             } else {
                 await apiCall("post", api.create(user._id, room_id), {amount});
             }
