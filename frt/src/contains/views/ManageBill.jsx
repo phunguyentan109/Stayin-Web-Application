@@ -3,6 +3,7 @@ import ManageBill from "components/views/ManageBill";
 import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
+import withNoti from "hocs/withNoti";
 
 const DEFAULT_BILL = {
     electric: {
@@ -10,7 +11,7 @@ const DEFAULT_BILL = {
     }
 }
 
-function ManageBillContain({api, user, ...props}) {
+function ManageBillContain({api, user, notify, ...props}) {
     const [invoices, setInvoices] = useState([]);
     const [timeline, setTimeline] = useState([]);
     const [bill, setBill] = useState(DEFAULT_BILL);
@@ -41,7 +42,7 @@ function ManageBillContain({api, user, ...props}) {
                 })
             ))
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -58,10 +59,10 @@ function ManageBillContain({api, user, ...props}) {
         }));
     }
 
-    async function hdConfirm() {
-        const {room_id} = props.match.params;
-        const {amount} = bill.electric;
+    async function hdConfirm(id, status) {
         try {
+            const {room_id} = props.match.params;
+            const {amount} = bill.electric;
             if(bill._id){
                 await apiCall("put", api.update(user._id, room_id, bill._id), {amount})
             } else {
@@ -71,6 +72,17 @@ function ManageBillContain({api, user, ...props}) {
             toggleForm();
         } catch(err) {
             console.log(err);
+        }
+    }
+
+    async function hdPay(bill_id, status) {
+        try {
+            const {room_id} = props.match.params;
+            await apiCall("put", api.update(user._id, room_id, bill_id), {status});
+            await load();
+            return notify("Payment status has been changed successfully!", true);
+        } catch(err) {
+            notify("The status can't be updated because the contract has expired or connection error.");
         }
     }
 
@@ -86,21 +98,6 @@ function ManageBillContain({api, user, ...props}) {
         }
     }
 
-    // async function hdChangePay(bill_id) {
-    //     try {
-    //         let {room_id} = props.match.params;
-    //
-    //         let billOne = await apiCall("get", api.getOne(user._id, room_id, bill_id));
-    //         let pay = billOne.pay
-    //
-    //         await apiCall("put", api.updatePay(user._id, room_id, bill_id), {pay: !pay});
-    //
-    //         await load();
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
-
     async function hdEdit(bill_id) {
         try {
             let {room_id} = props.match.params;
@@ -109,6 +106,19 @@ function ManageBillContain({api, user, ...props}) {
             setBill(billOne);
         } catch (err) {
             console.log(err);
+        }
+    }
+
+    async function hdReset(bill_id) {
+        try {
+            if(window.confirm("Are you sure to reset this bill's information? (The reset bill date will once again appear in the timeline)")) {
+                const {room_id} = props.match.params;
+                await apiCall("put", api.update(user._id, room_id, bill_id), {reset: true})
+                await load();
+                return notify("Reset bill successfully!", true);
+            }
+        } catch(err) {
+            notify();
         }
     }
 
@@ -125,7 +135,9 @@ function ManageBillContain({api, user, ...props}) {
             confirm: hdConfirm,
             remove: hdRemove,
             change: hdChange,
-            edit: hdEdit
+            edit: hdEdit,
+            pay: hdPay,
+            reset: hdReset
         }}
     />
 }
@@ -134,4 +146,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default withAccess(connect(mapState, null)(ManageBillContain));
+export default withAccess(connect(mapState, null)(withNoti(ManageBillContain)));

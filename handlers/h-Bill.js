@@ -75,41 +75,37 @@ exports.update  = async(req, res, next) => {
         const {bill_id, room_id} = req.params;
         let bill = await db.Bill.findById(bill_id);
 
-        // get room's price
-        let room = await db.Room.findById(room_id).populate("price_id").exec();
-        let {electric, water, extra, house, wifi} = room.price_id;
+        let {amount, status, reset} = req.body;
+        if(!reset) {
+            // get room's price
+            let room = await db.Room.findById(room_id).populate("price_id").exec();
+            let {electric, water, extra, house, wifi} = room.price_id;
 
-        // get last month used electric amount
-        let prevAmount = bill.electric.amount - (bill.electric.cost / electric);
-
-        // update bill data
-        let {amount} = req.body;
-        bill.electric = {
-            amount: amount,
-            cost: (amount - prevAmount) * electric
-        };
-        if(bill.water === 0) {
-            bill.water = water * room.people_id.length,
-            bill.house = house + (extra * (room.people_id.length - 1)),
-            bill.wifi = wifi;
+            // update amount
+            if(amount) {
+                // get last month used electric amount
+                let prevAmount = bill.electric.amount - (bill.electric.cost / electric);
+                bill.electric = {
+                    amount: amount,
+                    cost: (amount - prevAmount) * electric
+                };
+            }
+            // update payment status
+            if(status !== undefined) bill.pay.status = status;
+            // calculate others missing bill fee
+            if(bill.water === 0) {
+                bill.water = water * room.people_id.length,
+                bill.house = house + (extra * (room.people_id.length - 1)),
+                bill.wifi = wifi;
+            }
+        } else {
+            bill.pay.status = false;
+            bill.house = 0;
+            bill.water = 0;
+            bill.electric.amount = 0;
+            bill.electric.cost = 0;
+            bill.wifi = 0;
         }
-        await bill.save();
-
-        return res.status(200).json(bill);
-    } catch(err) {
-        return next(err);
-    }
-}
-
-exports.updatePay  = async(req, res, next) => {
-    try {
-        const {bill_id, room_id} = req.params;
-        let bill = await db.Bill.findById(bill_id);
-
-        // update pay
-        let {pay} = req.body;
-        bill.pay = pay;
-
         await bill.save();
 
         return res.status(200).json(bill);

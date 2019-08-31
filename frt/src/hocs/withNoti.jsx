@@ -20,7 +20,7 @@ export default function withNoti(WrappedComponent){
             };
         }, [notice.open]);
 
-        function toggleNotice(open=true, success=false, message=DEFAULT_MSG) {
+        function toggleNotice(message=DEFAULT_MSG, success=false, open=true) {
             if(!open) return setNotice(prev => ({...prev, open}))
             return setNotice({
                 open, message,
@@ -34,7 +34,7 @@ export default function withNoti(WrappedComponent){
                     {...notice}
                     icon={AddAlert}
                     place="tc"
-                    closeNotification={toggleNotice.bind(this, false)}
+                    closeNotification={toggleNotice.bind(this, "", false, false)}
                     close
                 />
                 <WrappedComponent {...props} notify={toggleNotice}/>

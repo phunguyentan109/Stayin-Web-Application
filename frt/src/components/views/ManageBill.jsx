@@ -76,10 +76,10 @@ const ManageBill = ({openForm, toggleForm, timeline, bill, amount, invoices, set
                                 tableHeaderColor="primary"
                                 tableHead={["ID", "Electric", "Water", "House", "Wifi", "Total", "Payment Status", "Options"]}
                                 tableData={invoices}
-                                hdChangePay={() => {}}
+                                hdPay={hd.pay}
                                 options={{
                                     remove: hd.remove,
-                                    edit: hd.edit
+                                    edit: hd.reset
                                 }}
                             />
                             : <EmptyBox

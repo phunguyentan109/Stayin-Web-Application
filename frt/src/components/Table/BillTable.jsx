@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import {OptTips} from "components/Table/CellOption";
 import EmptyCell from "./EmptyCell";
 
-const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdChangePay, ...props}) => (
+const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdPay, ...props}) => (
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
@@ -33,12 +33,11 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdCha
                     {inCurrency(row.electric.cost + row.water + row.house + row.wifi)}
                 </TableCell>
                 <TableCell className={`${cssCell} payState`}>
-                    <div onClick={hdChangePay.bind(this, row._id)}>
-                        {
-                            row.pay.status
-                            ? <span>Paid</span>
-                            : <span><i className="fas fa-file-invoice-dollar"/> Unpaid</span>
-                        }
+                    <div id={row.pay.status ? "" : "unpaid"}>
+                        {row.inContract && <i className="fas fa-file-invoice-dollar"/>}
+                        <span onClick={hdPay.bind(this, row._id, !row.pay.status)}>
+                            {row.pay.status ? "Paid" : "Unpaid"}
+                        </span>
                     </div>
                 </TableCell>
                 <TableCell className={`${cssCell} options`}>
@@ -52,9 +51,9 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdCha
                             </OptTips>
                         }
                         {
-                            row.inContract && <OptTips text="Edit">
+                            row.inContract && i === 0 && <OptTips text="Reset">
                                 <i
-                                    className="fas fa-edit edit"
+                                    className="fas fa-redo-alt edit"
                                     onClick={options.edit.bind(this, row._id)}
                                 />
                             </OptTips>
