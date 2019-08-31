@@ -12,7 +12,4 @@ router.route("/:bill_id")
 .delete(mw.User.isCorrect, mw.User.isPermit, hdl.Bill.remove)
 .put(mw.User.isCorrect, mw.User.isPermit, hdl.Bill.update);
 
-router.route("/:bill_id/pay")
-.put(mw.User.isCorrect, mw.User.isPermit, hdl.Bill.updatePay);
-
 module.exports = router;

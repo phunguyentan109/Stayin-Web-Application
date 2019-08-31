@@ -4,10 +4,10 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import {inCurrency} from "services/utils";
 import PropTypes from "prop-types";
-import CellOption from "components/Table/CellOption";
+import {OptTips} from "components/Table/CellOption";
 import EmptyCell from "./EmptyCell";
 
-const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdChangePay, ...props}) => (
+const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdPay, ...props}) => (
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
             <TableCell className={cssCell}>{i+1}</TableCell>
@@ -32,25 +32,41 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdCha
                 <TableCell className={cssCell}>
                     {inCurrency(row.electric.cost + row.water + row.house + row.wifi)}
                 </TableCell>
-                <TableCell className={`${cssCell} bill-active`}>
+                <TableCell className={`${cssCell} payState`}>
+                    {
+                        row.inContract && <div className={row.pay.status ? "" : "unpaid"}>
+                            {row.inContract && <i className="fas fa-file-invoice-dollar"/>}
+                            <span onClick={hdPay.bind(this, row._id, !row.pay.status)}>
+                                {row.pay.status ? "Paid" : "Unpaid"}
+                            </span>
+                        </div>
+                    }
+                    {
+                        row.inContract || <div className={`expired ${row.pay.status ? "" : "unpaid"}`}>
+                            <span>{row.pay.status ? "Paid" : "Unpaid"}</span>
+                        </div>
+                    }
+                </TableCell>
+                <TableCell className={`${cssCell} options`}>
                     <div>
-                        {row.inContract ? <span className="active"/> : <span className="unactive"/>}
-                        {row.inContract ? "Active" : "Unactive"}
+                        {
+                            row.inContract || <OptTips text="Remove">
+                                <i
+                                    className="fas fa-times remove"
+                                    onClick={options.remove.bind(this, row._id)}
+                                />
+                            </OptTips>
+                        }
+                        {
+                            row.inContract && i === 0 && <OptTips text="Reset">
+                                <i
+                                    className="fas fa-redo-alt edit"
+                                    onClick={options.edit.bind(this, row._id)}
+                                />
+                            </OptTips>
+                        }
                     </div>
                 </TableCell>
-                <TableCell className={`${cssCell} bill-pay`}>
-                    <div onClick={hdChangePay.bind(this, row._id)}>
-                        <span>
-                            {row.pay ? "" : <i className="fas fa-comments-dollar"/>}
-                        </span>
-                        {row.pay ? "Paid" : "Unpaid"}
-                    </div>
-                </TableCell>
-                {
-                    options && <TableCell className={`${cssCell} options`}>
-                        <CellOption options={options} use={row._id}/>
-                    </TableCell>
-                }
         </TableRow>
     ))
 )
