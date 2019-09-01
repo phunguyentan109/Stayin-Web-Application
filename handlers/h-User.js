@@ -128,6 +128,26 @@ exports.activate = async(req, res, next) => {
     }
 }
 
+exports.sendUser = async(req, res, next) => {
+    try {
+        let {title, content, user_id} = req.body;
+        user_id = user_id.map(p => p._id);
+
+        // get user mail from user_id
+        for(let id of user_id) {
+            user = await db.User.findById(id);
+
+            let {email, viewname} = user;
+            await mail.sendUser(email, viewname, content, title);
+        }
+
+        return res.status(200).json({viewname});
+    } catch(err) {
+        console.log(err);
+        return next(err);
+    }
+}
+
 exports.update = async(req, res, next) => {
     try {
         let updateUser = await db.User.findByIdAndUpdate(req.params.user_id, req.body, {new: true});
