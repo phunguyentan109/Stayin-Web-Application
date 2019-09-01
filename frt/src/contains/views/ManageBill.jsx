@@ -70,8 +70,10 @@ function ManageBillContain({api, user, notify, ...props}) {
             }
             await load();
             toggleForm();
+            return notify("A new bill is created successfully!", true);
         } catch(err) {
             console.log(err);
+            return notify(err);
         }
     }
 
