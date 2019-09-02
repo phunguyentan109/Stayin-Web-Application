@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 import {Switch, Route, withRouter, Redirect} from "react-router-dom";
 import routes from "contents/index";
 
@@ -20,4 +21,8 @@ const Page = (props) => {
     )
 }
 
-export default withRouter(Page);
+function mapState({user}) {
+    return {user: user.data}
+}
+
+export default connect(mapState)(withRouter(Page));
