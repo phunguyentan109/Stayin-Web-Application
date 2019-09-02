@@ -1,9 +1,9 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
 
-export default class Middleware {
+export default class PageMW {
 
-    routeToDisplay(rtype = [], routeComponent, uRole = "002", props) {
+    routeToAccess(rtype = [], routeComponent, uRole = "002", props) {
         const {pathname} = props.location;
 
         const routeType = {

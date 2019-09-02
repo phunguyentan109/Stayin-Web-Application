@@ -32,7 +32,7 @@ import send_User from "./display/sendUser";
 const sidebar = [
     {
         path: "/dashboard",
-        roles: [],
+        access: ["ownerAccess", "peopleAccess"],
         name: "Dashboard",
         component: DashboardContain,
         icon: Dashboard,
@@ -40,7 +40,7 @@ const sidebar = [
     },
     {
         path: "/people",
-        roles: [],
+        access: ["ownerAccess"],
         name: "Manage People",
         component: ManagePeopleContain,
         icon: Person,
@@ -48,7 +48,7 @@ const sidebar = [
     },
     {
         path: "/rooms",
-        roles: [],
+        access: ["ownerAccess"],
         name: "Manage Room",
         component: ManageRoomContain,
         icon: Home,
@@ -56,7 +56,7 @@ const sidebar = [
     },
     {
         path: "/price",
-        roles: [],
+        access: ["ownerAccess"],
         name: "Manage Price",
         component: ManagePriceContain,
         icon: AttachMoney,
@@ -67,59 +67,59 @@ const sidebar = [
 const routes = [
     {
         path: "/login",
-        roles: [],
+        access: ["guestAccess"],
         component: Login,
         display: login
     },
     {
         path: "/register",
-        roles: [],
+        access: ["guestAccess"],
         component: Login,
         display: register
     },
     {
         path: "/activate/:user_id",
-        roles: [],
+        access: ["guestAccess"],
         component: ActivatedContain,
         display: activated
     },
     {
         path: "/activate",
-        roles: [],
+        access: ["guestAccess"],
         component: ActivateContain,
         display: activate
     },
     {
         path: "/account",
-        roles: [],
+        access: [],
         name: "Your Account",
         component: ChangePasswordContain,
         display: change_password
     },
     {
         path: "/profile",
-        roles: [],
+        access: [],
         name: "User Profile Information",
         component: ProfileContain,
         display: profile
     },
     {
         path: "/rooms/:room_id/bills",
-        roles: [],
+        access: [],
         name: "Manage Bill",
         component: ManageBillContain,
         display: manage_bill
     },
     {
         path: "/contact",
-        roles: [],
+        access: ["ownerAccess"],
         name: "Send mail to user",
         component: SendUser,
         display: send_User
     },
-    {
-        path: "/", to: "/dashboard", redirect: true
-    }
+    // {
+    //     path: "/", to: "/dashboard", redirect: true
+    // }
 ]
 
 export {sidebar};
