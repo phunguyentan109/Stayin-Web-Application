@@ -1,0 +1,52 @@
+.contact-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+
+    &.select {
+        border: 2px solid #b7b7b7;
+    }
+
+    > div {
+        display: flex;
+        align-items: center;
+
+        > img {
+            margin-left: 15px;
+            margin-right: 20px;
+            width: 45px;
+            height: 45px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            border: none;
+        }
+
+        > div {
+            display: flex;
+            flex-direction: column;
+
+            > p {
+                margin: 0;
+                font-weight: 400;
+                font-size: 14px;
+            }
+
+            > small {
+                font-size: 11px;
+            }
+        }
+    }
+
+    > i {
+        color: gray;
+        font-size: 17px;
+        margin-right: 10px;
+    }
+}

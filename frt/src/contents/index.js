@@ -7,7 +7,7 @@ import ManagePriceContain from "contains/views/ManagePrice";
 import ManageBillContain from "contains/views/ManageBill";
 import ChangePasswordContain from "contains/views/ChangePassword";
 import ProfileContain from "contains/views/Profile";
-import SendUser from "contains/views/SendUser";
+import Contact from "contains/views/Contact";
 
 import Login from "components/views/Login";
 
@@ -27,7 +27,7 @@ import manage_price from "./display/ManagePrice";
 import manage_bill from "./display/ManageBill";
 import change_password from "./display/ChangePassword";
 import profile from "./display/Profile";
-import send_User from "./display/sendUser";
+import contact_User from "./display/Contact";
 
 const sidebar = [
     {
@@ -114,8 +114,11 @@ const routes = [
         path: "/contact",
         access: ["ownerAccess"],
         name: "Send mail to user",
-        Component: SendUser,
-        display: send_User
+        component: Contact,
+        display: contact_User
+    },
+    {
+        path: "/", to: "/dashboard", redirect: true
     }
 ]
 
