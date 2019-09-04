@@ -1,5 +1,5 @@
 const db = require("../models");
-const {pushId, assignId, spliceId} = require("../utils/dbSupport");
+const {pushId, assignId, spliceId, casDeleteMany} = require("../utils/dbSupport");
 const mail = require("../utils/mail");
 const moment = require("moment");
 
@@ -34,7 +34,7 @@ exports.getOne = async(req, res, next) => {
             .exec();
         return res.status(200).json(one);
     } catch(err) {
-        console.log(err);
+        return next(err);
     }
 }
 
@@ -116,18 +116,47 @@ exports.update = async(req, res, next) => {
             await mail.getRoom(email, viewname, foundRoom.name);
         }
 
-        // update room
-        foundRoom.people_id = [...curPeople, ...newPeople];
-        foundRoom.name = name;
-        foundRoom.desc = desc;
-        if(foundRoom.price_id !== price_id) {
-            await spliceId("Price", foundRoom.price_id, "room_id", foundRoom._id);
-            foundRoom.price_id = price_id;
-            await pushId("Price", price_id, "room_id", foundRoom._id);
+        let updatePeople_id = [...curPeople, ...newPeople];
+        let billList = [];
+        if(updatePeople_id.length > 0) {
+            // Generate bill timeline in case the room is in used after a time
+            if(foundRoom.people_id.length === 0) {
+                let price = await db.Price.findById(foundRoom.price_id);
+                let billList = [];
+                for(let i = 1; i <= price.duration; i++) {
+                    let bill = await db.Bill.create({
+                        pay: {
+                            time: moment().add(i, "M")
+                        },
+                        room_id: foundRoom._id
+                    })
+                    billList.push(bill._id);
+                }
+            }
+        } else {
+            // Removing bill timeline in case the room is empty after editing
+            if(foundRoom.people_id.length !== 0) {
+                let foundBills = await db.Bill.find({water: 0});
+                let foundBill_ids = foundBills.map(v => v._id);
+                await casDeleteMany("Bill", foundBill_ids);
+            }
         }
-        await foundRoom.save();
 
-        return res.status(200).json(foundRoom);
+        // Room data has been modified so we need to retrieve room data again
+        let updatedRoom = await db.Room.findById(room_id);
+        // update room
+        updatedRoom.bill_id = billList;
+        updatedRoom.people_id = updatePeople_id;
+        updatedRoom.name = name;
+        updatedRoom.desc = desc;
+        if(updatedRoom.price_id !== price_id) {
+            await spliceId("Price", updatedRoom.price_id, "room_id", updatedRoom._id);
+            updatedRoom.price_id = price_id;
+            await pushId("Price", price_id, "room_id", updatedRoom._id);
+        }
+        await updatedRoom.save();
+
+        return res.status(200).json(updatedRoom);
     } catch(err){
         return next(err);
     }

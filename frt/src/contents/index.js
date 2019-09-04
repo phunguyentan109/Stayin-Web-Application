@@ -32,33 +32,33 @@ import contact_User from "./display/Contact";
 const sidebar = [
     {
         path: "/dashboard",
-        roles: [],
+        access: ["ownerAccess", "peopleAccess"],
         name: "Dashboard",
-        component: DashboardContain,
+        Component: DashboardContain,
         icon: Dashboard,
         display: dashboard
     },
     {
         path: "/people",
-        roles: [],
+        access: ["ownerAccess"],
         name: "Manage People",
-        component: ManagePeopleContain,
+        Component: ManagePeopleContain,
         icon: Person,
         display: manage_people
     },
     {
         path: "/rooms",
-        roles: [],
+        access: ["ownerAccess"],
         name: "Manage Room",
-        component: ManageRoomContain,
+        Component: ManageRoomContain,
         icon: Home,
         display: manage_room
     },
     {
         path: "/price",
-        roles: [],
+        access: ["ownerAccess"],
         name: "Manage Price",
-        component: ManagePriceContain,
+        Component: ManagePriceContain,
         icon: AttachMoney,
         display: manage_price
     }
@@ -67,52 +67,52 @@ const sidebar = [
 const routes = [
     {
         path: "/login",
-        roles: [],
-        component: Login,
+        access: ["guestAccess"],
+        Component: Login,
         display: login
     },
     {
         path: "/register",
-        roles: [],
-        component: Login,
+        access: ["guestAccess"],
+        Component: Login,
         display: register
     },
     {
         path: "/activate/:user_id",
-        roles: [],
-        component: ActivatedContain,
+        access: ["guestAccess"],
+        Component: ActivatedContain,
         display: activated
     },
     {
         path: "/activate",
-        roles: [],
-        component: ActivateContain,
+        access: ["guestAccess"],
+        Component: ActivateContain,
         display: activate
     },
     {
         path: "/account",
-        roles: [],
+        access: ["ownerAccess", "peopleAccess"],
         name: "Your Account",
-        component: ChangePasswordContain,
+        Component: ChangePasswordContain,
         display: change_password
     },
     {
         path: "/profile",
-        roles: [],
+        access: ["ownerAccess", "peopleAccess"],
         name: "User Profile Information",
-        component: ProfileContain,
+        Component: ProfileContain,
         display: profile
     },
     {
         path: "/rooms/:room_id/bills",
-        roles: [],
+        access: ["ownerAccess"],
         name: "Manage Bill",
-        component: ManageBillContain,
+        Component: ManageBillContain,
         display: manage_bill
     },
     {
         path: "/contact",
-        roles: [],
+        access: ["ownerAccess"],
         name: "Send mail to user",
         component: Contact,
         display: contact_User
