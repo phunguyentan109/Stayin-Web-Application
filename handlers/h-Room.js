@@ -122,7 +122,6 @@ exports.update = async(req, res, next) => {
             // Generate bill timeline in case the room is in used after a time
             if(foundRoom.people_id.length === 0) {
                 let price = await db.Price.findById(foundRoom.price_id);
-                let billList = [];
                 for(let i = 1; i <= price.duration; i++) {
                     let bill = await db.Bill.create({
                         pay: {
@@ -136,9 +135,12 @@ exports.update = async(req, res, next) => {
         } else {
             // Removing bill timeline in case the room is empty after editing
             if(foundRoom.people_id.length !== 0) {
-                let foundBills = await db.Bill.find({water: 0});
+                let foundBills = await db.Bill.find({room_id: foundRoom._id, water: 0});
                 let foundBill_ids = foundBills.map(v => v._id);
                 await casDeleteMany("Bill", foundBill_ids);
+
+                // close contract (no active bill)
+                await db.Bill.updateMany({room_id: foundRoom._id, inContract: true}, {inContract: false, "pay.status": true});
             }
         }
 

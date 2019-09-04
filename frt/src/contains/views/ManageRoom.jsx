@@ -31,7 +31,6 @@ function ManageRoomContain({api, user, notify, ...props}) {
             let roomList = await apiCall("get", api.room.get(user._id));
             let priceList = await apiCall("get", api.price.get(user._id));
             priceList = priceList.map(pr => ({...pr, select: false}));
-            console.log(roomList);
             setRooms(roomList);
             setPrice(priceList);
         } catch(err) {
