@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import ManagePeople from "components/views/ManagePeople";
-import withAccess from "hocs/withAccess";
 import {connect} from "react-redux";
 import {apiCall} from "services/api";
 import withNoti from "hocs/withNoti";
@@ -66,4 +65,4 @@ function mapState({user}) {
     return {user: user.data};
 }
 
-export default withAccess(connect(mapState, null)(withNoti(ManagePeopleContain)));
+export default connect(mapState, null)(withNoti(ManagePeopleContain));

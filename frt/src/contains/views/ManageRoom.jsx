@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import ManageRoom from "components/views/ManageRoom";
-import withAccess from "hocs/withAccess";
+// import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 import withNoti from "hocs/withNoti";
@@ -59,12 +59,13 @@ function ManageRoomContain({api, user, notify, ...props}) {
         try {
             if(room._id) {
                 await apiCall("put", api.room.edit(user._id, room._id), room);
+                notify("Modify room data successfully!", true);
             } else {
                 await apiCall("post", api.room.create(user._id), room);
+                notify("Adding new room successfully!", true);
             }
             await toggleForm();
             await load();
-            return notify(true, true, "Adding new room successfully!");
         } catch(err) {
             notify();
         }
@@ -75,7 +76,7 @@ function ManageRoomContain({api, user, notify, ...props}) {
             if(window.confirm("Are you sure to remove this data?")){
                 await apiCall("delete", api.room.delete(user._id, room_id));
                 await load();
-                return notify(true, true, "Removing room successfully!");
+                return notify("Removing room successfully!", true);
             }
         } catch(err) {
             notify();
@@ -139,4 +140,5 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default withAccess(connect(mapState, null)(withNoti(ManageRoomContain)));
+// export default withAccess(connect(mapState, null)(withNoti(ManageRoomContain)));
+export default connect(mapState, null)(withNoti(ManageRoomContain));

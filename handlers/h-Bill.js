@@ -4,7 +4,8 @@ const {pushId} = require("../utils/dbSupport");
 
 exports.get = async(req, res, next) => {
     try{
-        let bills = await db.Bill.find();
+        const {room_id} = req.params;
+        let bills = await db.Bill.find({room_id});
         return res.status(200).json(bills);
     } catch(err){
         return next(err);
@@ -22,17 +23,17 @@ exports.getOne = async(req, res, next) => {
 
 exports.create = async(req, res, next) => {
     try {
-        // Get this month entered data
         let {amount} = req.body;
         let {room_id} = req.params;
+
         // find previous bill
         let room = await db.Room.findById(room_id).populate("bill_id").populate("price_id").exec();
         let price = room.price_id;
         let prevAmount = 0;
         if(room.bill_id && room.bill_id.length > 0) {
             let bills = room.bill_id;
-            let lastDate = moment.max(bills.map(bill => moment(bill.createdAt)));
-            let prevBill = bills.filter(b => moment(b.createdAt).isSame(lastDate))[0];
+            let lastDate = moment.max(bills.map(bill => moment(bill.pay.time)));
+            let prevBill = bills.filter(b => moment(b.pay.time).isSame(lastDate))[0];
             prevAmount = prevBill.electric.amount;
         }
 
@@ -46,7 +47,6 @@ exports.create = async(req, res, next) => {
             house: price.house + (price.extra * (room.people_id.length !== 0 ? room.peole_id.length - 1 : 0)),
             wifi: price.wifi
         }
-        console.log(bill);
         let newBill = await db.Bill.create(bill);
 
         // save bill_id to room
@@ -77,6 +77,7 @@ exports.update  = async(req, res, next) => {
     try {
         const {bill_id, room_id} = req.params;
         let bill = await db.Bill.findById(bill_id);
+        let bills = await db.Bill.find({room_id});
 
         let {amount, status, reset} = req.body;
         if(!reset) {
@@ -87,14 +88,25 @@ exports.update  = async(req, res, next) => {
             // update amount
             if(amount) {
                 // get last month used electric amount
-                let prevAmount = bill.electric.amount - (bill.electric.cost / electric);
+                let lastDate = moment.max(bills.filter(v => v.water !== 0).map(b => moment(b.pay.time)));
+                let prevBill = bills.filter(b => moment(b.pay.time).isSame(lastDate))[0];
+                let prevAmount = prevBill.electric.amount;
+
+                if(amount <= prevAmount) {
+                    return next({
+                        status: 400,
+                        message: "The entered amount must be greater than the previous month's amount."
+                    })
+                }
                 bill.electric = {
                     amount: amount,
                     cost: (amount - prevAmount) * electric
                 };
             }
+
             // update payment status
             if(status !== undefined) bill.pay.status = status;
+
             // calculate others missing bill fee
             if(bill.water === 0) {
                 bill.water = water * room.people_id.length,

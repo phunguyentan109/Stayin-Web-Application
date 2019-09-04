@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import ManageBill from "components/views/ManageBill";
-import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 import withNoti from "hocs/withNoti";
@@ -70,8 +69,10 @@ function ManageBillContain({api, user, notify, ...props}) {
             }
             await load();
             toggleForm();
+            return notify("A new bill is created successfully!", true);
         } catch(err) {
             console.log(err);
+            return notify(err);
         }
     }
 
@@ -146,4 +147,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default withAccess(connect(mapState, null)(withNoti(ManageBillContain)));
+export default connect(mapState, null)(withNoti(ManageBillContain));
