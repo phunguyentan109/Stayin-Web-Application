@@ -36,8 +36,7 @@ function ManageBillContain({api, user, notify, ...props}) {
                 .map((v, i) => ({
                     _id: v._id,
                     date: v.pay.time,
-                    invoice: hdEdit.bind(this, v._id),
-                    month: i+1
+                    invoice: hdEdit.bind(this, v._id)
                 })
             ))
         } catch(err) {

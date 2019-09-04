@@ -21,6 +21,12 @@ function getBillStatus() {
     return "";
 }
 
+function getUpcomingBillDate(bills) {
+    let unfinishedBills = bills.filter(v => v.water === 0);
+    let upcomingDate = moment.min(unfinishedBills.map(b => moment(b.pay.time)));
+    return moment(upcomingDate).format("DD-MM-YYYY");
+}
+
 const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
@@ -44,7 +50,7 @@ const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
                 { row.bill_id.length > 0
                     ? <div>
                         <span className={getBillStatus()}/>
-                        {moment(row.bill_id[row.bill_id.length-1].createdAt).format("DD-MM-YYYY")}
+                        {getUpcomingBillDate(row.bill_id)}
                         {row.bill_id.filter(b => b.pay === false).length > 0 && <i className="fas fa-hand-holding-usd"></i>}
                     </div>
                     : <EmptyCell/>
