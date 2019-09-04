@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import Profile from "components/views/Profile";
-import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 import moment from "moment";
@@ -99,4 +98,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default withAccess(connect(mapState, null)(ProfileContain))
+export default connect(mapState, null)(ProfileContain);

@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
 import {authUser} from "store/actions/user";
-import withAccess from "hocs/withAccess";
 
 export default function withAuth(WrappedComponent) {
     function Authentication({api, authUser, user, ...props}) {
@@ -24,5 +23,5 @@ export default function withAuth(WrappedComponent) {
         />
     }
 
-    return connect(null, {authUser})(withAccess(Authentication));
+    return connect(null, {authUser})(Authentication);
 }

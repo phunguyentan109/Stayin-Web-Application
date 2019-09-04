@@ -34,7 +34,7 @@ const sidebar = [
         path: "/dashboard",
         access: ["ownerAccess", "peopleAccess"],
         name: "Dashboard",
-        component: DashboardContain,
+        Component: DashboardContain,
         icon: Dashboard,
         display: dashboard
     },
@@ -42,7 +42,7 @@ const sidebar = [
         path: "/people",
         access: ["ownerAccess"],
         name: "Manage People",
-        component: ManagePeopleContain,
+        Component: ManagePeopleContain,
         icon: Person,
         display: manage_people
     },
@@ -50,7 +50,7 @@ const sidebar = [
         path: "/rooms",
         access: ["ownerAccess"],
         name: "Manage Room",
-        component: ManageRoomContain,
+        Component: ManageRoomContain,
         icon: Home,
         display: manage_room
     },
@@ -58,7 +58,7 @@ const sidebar = [
         path: "/price",
         access: ["ownerAccess"],
         name: "Manage Price",
-        component: ManagePriceContain,
+        Component: ManagePriceContain,
         icon: AttachMoney,
         display: manage_price
     }
@@ -68,58 +68,55 @@ const routes = [
     {
         path: "/login",
         access: ["guestAccess"],
-        component: Login,
+        Component: Login,
         display: login
     },
     {
         path: "/register",
         access: ["guestAccess"],
-        component: Login,
+        Component: Login,
         display: register
     },
     {
         path: "/activate/:user_id",
         access: ["guestAccess"],
-        component: ActivatedContain,
+        Component: ActivatedContain,
         display: activated
     },
     {
         path: "/activate",
         access: ["guestAccess"],
-        component: ActivateContain,
+        Component: ActivateContain,
         display: activate
     },
     {
         path: "/account",
-        access: [],
+        access: ["ownerAccess", "peopleAccess"],
         name: "Your Account",
-        component: ChangePasswordContain,
+        Component: ChangePasswordContain,
         display: change_password
     },
     {
         path: "/profile",
-        access: [],
+        access: ["ownerAccess", "peopleAccess"],
         name: "User Profile Information",
-        component: ProfileContain,
+        Component: ProfileContain,
         display: profile
     },
     {
         path: "/rooms/:room_id/bills",
-        access: [],
+        access: ["ownerAccess"],
         name: "Manage Bill",
-        component: ManageBillContain,
+        Component: ManageBillContain,
         display: manage_bill
     },
     {
         path: "/contact",
         access: ["ownerAccess"],
         name: "Send mail to user",
-        component: SendUser,
+        Component: SendUser,
         display: send_User
-    },
-    // {
-    //     path: "/", to: "/dashboard", redirect: true
-    // }
+    }
 ]
 
 export {sidebar};

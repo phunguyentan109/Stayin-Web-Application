@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import ChangePassword from "components/views/ChangePassword";
-import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 
@@ -65,4 +64,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default withAccess(connect(mapState, null)(ChangePasswordContain));
+export default connect(mapState, null)(ChangePasswordContain);

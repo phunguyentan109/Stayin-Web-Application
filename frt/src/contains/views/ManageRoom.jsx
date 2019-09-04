@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import ManageRoom from "components/views/ManageRoom";
-import withAccess from "hocs/withAccess";
+// import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 import withNoti from "hocs/withNoti";
@@ -140,4 +140,5 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default withAccess(connect(mapState, null)(withNoti(ManageRoomContain)));
+// export default withAccess(connect(mapState, null)(withNoti(ManageRoomContain)));
+export default connect(mapState, null)(withNoti(ManageRoomContain));
