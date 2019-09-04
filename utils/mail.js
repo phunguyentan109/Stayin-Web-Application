@@ -70,7 +70,7 @@ This is the automatic email from the system, please do not reply.`;
 	return await send(to, subject, text);
 }
 
-async function sendUser(to, viewname, content, title) {
+async function contactUser(to, viewname, content, title) {
 	let subject = emoji.emojify(`:calling: Owner had sent - ${title} - Staywell`);
 	let text = `
 Good day ${viewname}, this mail comes from Staywell,
@@ -79,4 +79,4 @@ ${content}.`;
 	return await send(to, subject, text);
 }
 
-module.exports = {send, activate, getRoom, leaveRoom, sendUser}
+module.exports = {send, activate, getRoom, leaveRoom, contactUser}

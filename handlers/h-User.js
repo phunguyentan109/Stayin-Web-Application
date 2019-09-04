@@ -134,7 +134,7 @@ exports.activate = async(req, res, next) => {
     }
 }
 
-exports.sendUser = async(req, res, next) => {
+exports.contact = async(req, res, next) => {
     try {
         let {title, content, user_id} = req.body;
         user_id = user_id.map(p => p._id);
@@ -144,7 +144,7 @@ exports.sendUser = async(req, res, next) => {
             user = await db.User.findById(id);
 
             let {email, viewname} = user;
-            await mail.sendUser(email, viewname, content, title);
+            await mail.contactUser(email, viewname, content, title);
         }
 
         return res.status(200).json({viewname});
