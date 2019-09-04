@@ -8,15 +8,14 @@ import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
-import {sidebar} from "contents/index";
 import dashboardStyle from "assets/jss/material-dashboard-react/layouts/dashboardStyle.jsx";
 import logo from "assets/img/reactlogo.png";
 
-const AppLayout = ({classes, st, hdDrawerToggle, mainPanel, ...rest}) => {
+const AppLayout = ({classes, st, hdDrawerToggle, mainPanel, verifyNavItem, ...rest}) => {
     return (
         <div className={classes.wrapper}>
             <Sidebar
-                routes={sidebar}
+                routes={verifyNavItem()}
                 logoText={"Staywell"}
                 logo={logo}
                 image={st.image}
@@ -27,7 +26,7 @@ const AppLayout = ({classes, st, hdDrawerToggle, mainPanel, ...rest}) => {
             />
             <div className={classes.mainPanel} ref={mainPanel}>
                 <Navbar
-                    routes={sidebar}
+                    routes={verifyNavItem()}
                     handleDrawerToggle={hdDrawerToggle}
                     {...rest}
                 />

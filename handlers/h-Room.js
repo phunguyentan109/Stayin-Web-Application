@@ -65,8 +65,8 @@ exports.create = async(req, res, next) => {
 
             // save all created bill to room
             createdRoom.bill_id = billList;
-            await createdRoom.save();
         }
+        await createdRoom.save();
 
         return res.status(200).json(createdRoom);
     } catch(err) {

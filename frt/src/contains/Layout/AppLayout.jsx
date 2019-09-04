@@ -3,6 +3,11 @@ import PerfectScrollbar from "perfect-scrollbar";
 import AppLayout from "components/Layout/AppLayout";
 import image from "assets/img/sidebar-4.jpg";
 
+// custom import
+import {connect} from "react-redux";
+import {getAccess} from "services/credentialVerify";
+import {sidebar} from "contents/index";
+
 let ps;
 
 class AppLayoutContain extends Component {
@@ -65,14 +70,26 @@ class AppLayoutContain extends Component {
         window.removeEventListener("resize", this.resizeFunction);
     }
 
+    verifyNavItem = () => {
+        const {isPermit} = this.props;
+        return sidebar.filter(v => isPermit(v.access));
+    }
+
     render() {
         return <AppLayout
             st={this.state}
             {...this.props}
             hdDrawerToggle={this.handleDrawerToggle}
             mainPanel={this.mainPanel}
+            verifyNavItem= {this.verifyNavItem}
         />
     }
 }
 
-export default AppLayoutContain;
+function mapState({user}) {
+    return {
+        isPermit: getAccess(user.data.role)
+    }
+}
+
+export default connect(mapState, null)(AppLayoutContain);

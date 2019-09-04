@@ -85,13 +85,7 @@ const Sidebar = ({ ...props }) => {
     );
     var brand = (
         <div className={classes.logo}>
-            <a
-                href="/dashboard"
-                className={classNames(classes.logoLink, {
-                    [classes.logoLinkRTL]: props.rtlActive
-                })}
-                target="_blank"
-            >
+            <a href="/dashboard" className={classes.logoLink} target="_blank">
                 <div className={classes.logoImage}>
                     <img src={logo} alt="logo" className={classes.img} />
                 </div>
@@ -104,12 +98,10 @@ const Sidebar = ({ ...props }) => {
             <Hidden mdUp implementation="css">
                 <Drawer
                     variant="temporary"
-                    anchor={props.rtlActive ? "left" : "right"}
+                    anchor="right"
                     open={props.open}
                     classes={{
-                        paper: classNames(classes.drawerPaper, {
-                            [classes.drawerPaperRTL]: props.rtlActive
-                        })
+                        paper: classes.drawerPaper
                     }}
                     onClose={props.handleDrawerToggle}
                     ModalProps={{
@@ -118,7 +110,7 @@ const Sidebar = ({ ...props }) => {
                 >
                     {brand}
                     <div className={classes.sidebarWrapper}>
-                        {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
+                        <AdminNavbarLinks />
                         {links}
                     </div>
                     {image !== undefined ? (
@@ -131,13 +123,11 @@ const Sidebar = ({ ...props }) => {
             </Hidden>
             <Hidden smDown implementation="css">
                 <Drawer
-                    anchor={props.rtlActive ? "right" : "left"}
+                    anchor="left"
                     variant="permanent"
                     open
                     classes={{
-                        paper: classNames(classes.drawerPaper, {
-                            [classes.drawerPaperRTL]: props.rtlActive
-                        })
+                        paper: classes.drawerPaper
                     }}
                 >
                     {brand}

@@ -21,6 +21,10 @@ function getBillStatus() {
     return "";
 }
 
+function getUpcomingBillDate(dates) {
+    console.log(dates);
+}
+
 const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
     tableData.map((row, i) => (
         <TableRow className={cssRow} key={i}>
@@ -41,6 +45,7 @@ const RoomTable = ({tableData, cssRow, cssCell, options, ...props}) => (
                 }
             </TableCell>
             <TableCell className={`${cssCell} bill-date`}>
+                {getUpcomingBillDate(row.bill_id)}
                 { row.bill_id.length > 0
                     ? <div>
                         <span className={getBillStatus()}/>
