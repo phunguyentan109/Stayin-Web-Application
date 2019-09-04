@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import SendUser from "components/views/SendUser";
+import Contact from "components/views/Contact";
 import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
@@ -10,7 +10,7 @@ const DEFAULT_MAIL = {
     content: "",
 }
 
-function SendUserContain({api, user, ...props}) {
+function ContactContain({api, user, ...props}) {
     const [userList, setUserList] = useState([]);
     const [mail, setMail] = useState(DEFAULT_MAIL);
     const [confirm, setConfirm] = useState(false);
@@ -44,7 +44,7 @@ function SendUserContain({api, user, ...props}) {
     function hdSelectUser(users) {
         // let choose = [...mail.user_id, user_id];
 
-        setMail(prev => ({
+        return setMail(prev => ({
             ...prev,
             user_id: [...prev.user_id, users]
         }));
@@ -67,7 +67,7 @@ function SendUserContain({api, user, ...props}) {
         }
     }
 
-    return <SendUser
+    return <Contact
         {...props}
         hdChange={hdChange}
         confirm={confirm}
@@ -82,4 +82,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default withAccess(connect(mapState, null)(SendUserContain))
+export default withAccess(connect(mapState, null)(ContactContain))

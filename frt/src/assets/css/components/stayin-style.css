@@ -224,6 +224,44 @@
       color: white;
       text-decoration: underline; }
 
+.contact-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #c0c0c0;
+  border-radius: 5px;
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer; }
+  .contact-box.select {
+    border: 2px solid #b7b7b7; }
+  .contact-box > div {
+    display: flex;
+    align-items: center; }
+    .contact-box > div > img {
+      margin-left: 15px;
+      margin-right: 20px;
+      width: 45px;
+      height: 45px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      border: none; }
+    .contact-box > div > div {
+      display: flex;
+      flex-direction: column; }
+      .contact-box > div > div > p {
+        margin: 0;
+        font-weight: 400;
+        font-size: 14px; }
+      .contact-box > div > div > small {
+        font-size: 11px; }
+  .contact-box > i {
+    color: gray;
+    font-size: 17px;
+    margin-right: 10px; }
+
 .price-box {
   display: flex;
   justify-content: space-between;
