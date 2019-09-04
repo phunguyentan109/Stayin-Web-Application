@@ -3,7 +3,7 @@ import moment from "moment";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 
-const TimeBox = ({date, invoice, month, canInvoice, inwork, ...props}) => {
+const TimeBox = ({date, invoice, canInvoice, inwork, ...props}) => {
 
     function style() {
         let css = "timeBox";
@@ -19,7 +19,7 @@ const TimeBox = ({date, invoice, month, canInvoice, inwork, ...props}) => {
                         <i className="far fa-calendar-alt"></i>
                         <div>
                             <p><b>{moment(date).format("dddd Do MMM, YYYY")}</b></p>
-                            <p>End of month {month}</p>
+                            <p>End of month</p>
                         </div>
                     </div>
                     {
