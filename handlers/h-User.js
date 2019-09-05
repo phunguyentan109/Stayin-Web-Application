@@ -138,7 +138,6 @@ exports.activate = async(req, res, next) => {
             message: "Oops! Something went wrong!"
         })
     } catch(err) {
-        console.log(err);
         return next(err);
     }
 }
