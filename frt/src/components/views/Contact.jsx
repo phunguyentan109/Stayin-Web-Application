@@ -62,7 +62,7 @@ const Contact = ({form, hd, confirm, userList, mail, selectUser,...props}) => (
                         subtitle="This will be used for send mail for your member"
                     />
                     <CardBody>
-                        <GridContainer customCss="people-container">
+                        <GridContainer customCss="price-container">
                             {
                                 userList.length > 0
                                 ? userList.map((us, i) => (

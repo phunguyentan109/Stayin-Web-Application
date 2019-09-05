@@ -139,17 +139,17 @@ exports.activate = async(req, res, next) => {
 exports.contact = async(req, res, next) => {
     try {
         let {title, content, user_id} = req.body;
-        user_id = user_id.map(p => p._id);
+        let listUser = [];
 
         // get user mail from user_id
         for(let id of user_id) {
-            user = await db.User.findById(id);
-
+            let user = await db.User.findById(id);
             let {email, viewname} = user;
-            await mail.contactUser(email, viewname, content, title);
+            listUser.push(viewname);
+            mail.contactUser(email, viewname, content, title);
         }
 
-        return res.status(200).json({viewname});
+        return res.status(200).json(listUser);
     } catch(err) {
         console.log(err);
         return next(err);

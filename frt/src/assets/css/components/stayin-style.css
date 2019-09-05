@@ -238,6 +238,8 @@
       border-radius: 55%;
       margin-bottom: 10px;
       border: none; }
+      .contact-box > div:nth-of-type(1) > img.select {
+        box-shadow: 3px 3px 2px #848181; }
     .contact-box > div:nth-of-type(1) > button {
       position: absolute;
       border: none;
@@ -252,8 +254,7 @@
       height: 20px;
       border-radius: 55%; }
       .contact-box > div:nth-of-type(1) > button.remove {
-        background-color: #8ee78e8a;
-        box-shadow: 3px 3px 2px #848181; }
+        background-color: #8ee78e8a; }
         .contact-box > div:nth-of-type(1) > button.remove > i {
           font-size: 11px;
           color: white; }
@@ -278,9 +279,9 @@
       font-weight: 400;
       color: #a1a1a1; }
   .contact-box:hover > div:nth-of-type(1) > button.remove {
-    background-color: #d16969; }
-  .contact-box:hover > div:nth-of-type(1) > button.add {
     background-color: #7dc87d; }
+  .contact-box:hover > div:nth-of-type(1) > button.add {
+    background-color: #a5a3a3; }
 
 .price-box {
   display: flex;
