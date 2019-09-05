@@ -114,11 +114,8 @@ const routes = [
         path: "/contact",
         access: ["ownerAccess"],
         name: "Send mail to user",
-        component: Contact,
+        Component: Contact,
         display: contact_User
-    },
-    {
-        path: "/", to: "/dashboard", redirect: true
     }
 ]
 

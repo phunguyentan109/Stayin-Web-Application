@@ -11,7 +11,7 @@ import TitleBox from "components/Box/TitleBox";
 import CardAvatar from "components/Card/CardAvatar.jsx";
 import moment from "moment";
 
-const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, people, hdBirthday, confirm, ...props}) =>  (
+const Profile = ({form, hd, profile, people, confirm, withAccess, ...props}) =>  (
     <AppLayoutContain {...props}>
         <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
@@ -34,7 +34,7 @@ const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, peo
                                     required
                                     name="viewname"
                                     value={profile.viewname}
-                                    onChange={hdProfileChange}
+                                    onChange={hd.profileChange}
                                 />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={5}>
@@ -45,7 +45,7 @@ const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, peo
                                     required
                                     name="email"
                                     value={profile.email}
-                                    onChange={hdProfileChange}
+                                    onChange={hd.profileChange}
                                 />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={4}>
@@ -56,11 +56,11 @@ const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, peo
                                     required
                                     name="phone"
                                     value={profile.phone}
-                                    onChange={hdProfileChange}
+                                    onChange={hd.profileChange}
                                 />
                             </GridItem>
                         </GridContainer>
-                        <GridContainer>
+                        {withAccess(["peopleAccess"]) && <GridContainer>
                             <GridItem xs={12} sm={12} md={6}>
                                 <FormInput
                                     type="text"
@@ -69,7 +69,7 @@ const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, peo
                                     required
                                     name="job"
                                     value={people.job}
-                                    onChange={hdPeopleChange}
+                                    onChange={hd.peopleChange}
                                 />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={6}>
@@ -79,14 +79,14 @@ const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, peo
                                     required
                                     name="birthDate"
                                     value={people.birthDate}
-                                    onChange={hdBirthday}
+                                    onChange={hd.birthday}
                                 />
                             </GridItem>
-                        </GridContainer>
+                        </GridContainer>}
                     </CardBody>
                 </Card>
                 {
-                    confirm && <ConfirmBar confirm={hdConfirm}/>
+                    confirm && <ConfirmBar confirm={hd.confirm}/>
                 }
             </GridItem>
 
@@ -101,9 +101,13 @@ const Profile = ({form, hdProfileChange, hdPeopleChange, hdConfirm, profile, peo
                         <h4>{profile.viewname}</h4>
                         <p>Email: <i>{profile.email}</i></p>
                         <p>Phone: <span>0{profile.phone}</span></p>
-                        <p>Job: <span>{people.job}</span></p>
-                        <p>Birthdate: <span>{moment(people.birthDate).format("DD-MM-YYYY")}</span></p>
-                        <p>Age: <span>{people.birthDate ? moment().diff(people.birthDate, "years") : 0} years old</span></p>
+                        {
+                            withAccess(["peopleAccess"]) && <div>
+                                <p>Job: <span>{people.job}</span></p>
+                                <p>Birthdate: <span>{moment(people.birthDate).format("DD-MM-YYYY")}</span></p>
+                                <p>Age: <span>{people.birthDate ? moment().diff(people.birthDate, "years") : 0} years old</span></p>
+                            </div>
+                        }
                     </CardBody>
                 </Card>
             </GridItem>
