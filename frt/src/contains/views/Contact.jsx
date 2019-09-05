@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Contact from "components/views/Contact";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
+import withNoti from "hocs/withNoti";
 
 const DEFAULT_MAIL = {
     user_id: [],
@@ -9,11 +10,10 @@ const DEFAULT_MAIL = {
     content: "",
 }
 
-function ContactContain({api, user, ...props}) {
+function ContactContain({api, user, notify, ...props}) {
     const [userList, setUserList] = useState([]);
     const [mail, setMail] = useState(DEFAULT_MAIL);
     const [confirm, setConfirm] = useState(false);
-
     useEffect(() => {
         let isLoaded = false;
         if(!isLoaded) load();
@@ -26,7 +26,7 @@ function ContactContain({api, user, ...props}) {
     const hdChange = (e) => {
         setConfirm(true);
         const {name, value} = e.target;
-        setUserList(prev => ({...prev, [name]: value}));
+        setMail(prev => ({...prev, [name]: value}));
     }
 
     async function load() {
@@ -36,23 +36,15 @@ function ContactContain({api, user, ...props}) {
 
             setUserList(userData);
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
-    function hdSelectUser(users) {
-        // let choose = [...mail.user_id, user_id];
-
+    function selectUser(users) {
         return setMail(prev => ({
             ...prev,
             user_id: [...prev.user_id, users]
         }));
-
-        // to render component
-        // for(let id of userList) {
-        //     mail.user_id.indexOf(id)
-        //
-        // }
     }
 
     async function hdConfirm() {
@@ -60,20 +52,23 @@ function ContactContain({api, user, ...props}) {
              apiCall("post", api.user.post(user._id), userList);
              await load();
              setConfirm(false);
-
+            return notify("Your contact ware sent successfully!", true);
         } catch(err) {
             console.log(err);
+            return notify(err);
         }
     }
 
     return <Contact
         {...props}
-        hdChange={hdChange}
         confirm={confirm}
         userList={userList}
         mail={mail}
-        hdSelectUser={hdSelectUser}
-        hdConfirm={hdConfirm}
+        selectUser={selectUser}
+        hd={{
+            change: hdChange,
+            confirm: hdConfirm
+        }}
     />
 }
 
@@ -81,4 +76,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default connect(mapState, null)(ContactContain);
+export default connect(mapState, null)(withNoti(ContactContain));

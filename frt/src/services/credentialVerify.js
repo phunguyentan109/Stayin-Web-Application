@@ -24,10 +24,10 @@ function getDirectPath({code = "002"} = {}) {
     return "/login";
 }
 
-function isPermit(role){
-    let userRole = role;
-    return function(code) {
-        return userRole === code;
+function isPermit({role = "002"} = {}){
+    let uCode = role;
+    return function(vCode) {
+        return uCode === vCode;
     }
 }
 

@@ -17,13 +17,13 @@ import TitleBox from "components/Box/TitleBox";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "assets/cardHeaderStyle";
 
-const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, prices, setPrices, hdChange, hdRemove, hdEdit, table, ...props}) => (
+const ManagePrice = ({classes, formIsOpen, toggleForm, hd, form, price, prices, setPrices, table, ...props}) => (
     <AppLayoutContain {...props}>
     {
         formIsOpen && <GridContainer>
              <GridItem xs={12} sm={12} md={12}>
                 <TitleBox {...form.box} />
-                <ConfirmBar cancel={toggleForm} confirm={hdConfirm}/>
+                <ConfirmBar cancel={toggleForm} confirm={hd.confirm}/>
             </GridItem>
             <GridItem xs={12} sm={12} md={12}>
                 <Card customCss="custom-card">
@@ -41,7 +41,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                     required
                                     name="type"
                                     value={price.type}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={3}>
@@ -52,7 +52,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                     required
                                     name="extra"
                                     value={price.extra}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                             </GridItem>
                             <GridItem xs={6} sm={12} md={3}>
@@ -63,7 +63,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                     required
                                     name="duration"
                                     value={price.duration}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                     disabled={price.room_id && price.room_id.length > 0}
                                 />
                             </GridItem>
@@ -75,7 +75,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                     required
                                     name="water"
                                     value={price.water}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={3}>
@@ -86,7 +86,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                     required
                                     name="house"
                                     value={price.house}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={3}>
@@ -97,7 +97,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                     required
                                     name="electric"
                                     value={price.electric}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                     disabled={price.room_id && price.room_id.length > 0}
                                 />
                             </GridItem>
@@ -109,7 +109,7 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                                     required
                                     name="wifi"
                                     value={price.wifi}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                             </GridItem>
                         </GridContainer>
@@ -136,8 +136,8 @@ const ManagePrice = ({classes, formIsOpen, toggleForm, hdConfirm, form, price, p
                             tableHead={table.price.header}
                             tableData={prices}
                             options={{
-                                    remove: hdRemove,
-                                    edit: hdEdit
+                                    remove: hd.remove,
+                                    edit: hd.edit
                                 }}
                             />
                         : <EmptyBox message={table.price.empty}/>

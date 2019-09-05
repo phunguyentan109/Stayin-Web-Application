@@ -3,6 +3,8 @@ import Profile from "components/views/Profile";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 import moment from "moment";
+import withNoti from "hocs/withNoti";
+import {getAccess} from "services/credentialVerify";
 
 const DEFAULT_PROFILE = {
     viewname: "",
@@ -18,7 +20,7 @@ const DEFFAULT_PEOPLE = {
     job: ""
 }
 
-function ProfileContain({api, user, ...props}) {
+function ProfileContain({api, user, notify, ...props}) {
     const [people, setPeople] = useState(DEFFAULT_PEOPLE);
     const [profile, setProfile] = useState(DEFAULT_PROFILE);
     const [confirm, setConfirm] = useState(false);
@@ -56,29 +58,34 @@ function ProfileContain({api, user, ...props}) {
     async function hdConfirm() {
         try {
             await apiCall("put", api.user.update(user._id), profile);
-            await apiCall("put", api.people.update(user._id, people._id), people);
-            await load();
+            if(props.withAccess(["peopleAccess"])) {
+                await apiCall("put", api.people.update(user._id, people._id), people);
+                await load();
+            }
             setConfirm(false);
+            return notify("Update profile successfully!", true);
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
     async function load() {
         try {
             let profileData = await apiCall("get", api.user.getOne(user._id));
-            let peopleData = await apiCall("get", api.people.getOne(user._id, profileData.people_id));
             setProfile({
                 ...profileData,
                 phone: profileData.phone ? profileData.phone - 0 : 0
             });
-            setPeople(prev => ({
-                ...prev,
-                ...peopleData,
-                birthDate: moment(peopleData.birthDate).format("YYYY-MM-DD")
-            }));
+            if(props.withAccess(["peopleAccess"])) {
+                let peopleData = await apiCall("get", api.people.getOne(user._id, profileData.people_id));
+                setPeople(prev => ({
+                    ...prev,
+                    ...peopleData,
+                    birthDate: moment(peopleData.birthDate).format("YYYY-MM-DD")
+                }));
+            }
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -86,16 +93,21 @@ function ProfileContain({api, user, ...props}) {
         {...props}
         profile={profile}
         people={people}
-        hdProfileChange={hdProfileChange}
-        hdPeopleChange={hdPeopleChange}
-        hdBirthday={hdBirthday}
-        hdConfirm={hdConfirm}
+        hd={{
+            profileChange: hdProfileChange,
+            peopleChange: hdPeopleChange,
+            birthDay: hdBirthday,
+            confirm: hdConfirm
+        }}
         confirm={confirm}
     />
 }
 
 function mapState({user}) {
-    return {user: user.data}
+    return {
+        user: user.data,
+        withAccess: getAccess(user.data.role)
+    }
 }
 
-export default connect(mapState, null)(ProfileContain);
+export default connect(mapState, null)(withNoti(ProfileContain));

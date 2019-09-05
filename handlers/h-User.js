@@ -75,7 +75,7 @@ exports.remove = async(req, res, next) => {
 exports.getOne = async(req, res, next) => {
     try {
         let user = await db.User.findById(req.params.user_id);
-        let {_id, viewname, active, avatar} = user;
+        let {_id, viewname, email, active, avatar, phone} = user;
 
         // get role
         let userRole = await db.UserRole.findOne({user: _id}).populate("role").exec();
@@ -86,7 +86,9 @@ exports.getOne = async(req, res, next) => {
         if(role && role.code !== "000"){
             people_id = (await db.People.findOne({user_id: _id}).populate().exec())._id;
         }
-        return res.status(200).json({_id, viewname, avatar, role, active, people_id});
+
+        // return email and phone for updating profile
+        return res.status(200).json({_id, viewname, email, avatar, role, active, phone, people_id});
     } catch(err) {
         return next(err);
     }
