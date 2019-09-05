@@ -101,7 +101,12 @@
             cursor: default;
 
             &:hover {
-                text-decoration: none;
+
+                > span {
+                    color: gray;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
             }
         }
 
@@ -128,7 +133,9 @@
             }
 
             &:hover {
-                text-decoration: underline;
+                > span {
+                    color: #eb9494;
+                }
             }
         }
     }

@@ -54,7 +54,6 @@ function ContactContain({api, user, notify, ...props}) {
              setConfirm(false);
             return notify("Your contact ware sent successfully!", true);
         } catch(err) {
-            console.log(err);
             return notify(err);
         }
     }
