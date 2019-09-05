@@ -11,7 +11,7 @@ import EmptyBox from "components/Box/EmptyBox";
 import TitleBox from "components/Box/TitleBox";
 import ContactBox from "components/Box/ContactBox";
 
-const Contact = ({form, hdChange, hdConfirm, confirm, hdSelectUser, userList, mail, ...props}) => (
+const Contact = ({form, hd, confirm, userList, mail, selectUser,...props}) => (
     <AppLayoutContain {...props}>
         <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
@@ -34,7 +34,7 @@ const Contact = ({form, hdChange, hdConfirm, confirm, hdSelectUser, userList, ma
                                     required
                                     name="title"
                                     value={mail.title}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                                 <FormInput
                                     type="text"
@@ -47,7 +47,7 @@ const Contact = ({form, hdChange, hdConfirm, confirm, hdSelectUser, userList, ma
                                     required
                                     name="content"
                                     value={mail.content}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                             </GridItem>
 
@@ -62,15 +62,15 @@ const Contact = ({form, hdChange, hdConfirm, confirm, hdSelectUser, userList, ma
                         subtitle="This will be used for send mail for your member"
                     />
                     <CardBody>
-                        <GridContainer customCss="price-container">
+                        <GridContainer customCss="people-container">
                             {
                                 userList.length > 0
                                 ? userList.map((us, i) => (
-                                    <GridItem xs={12} sm={6} md={6} key={i}>
+                                    <GridItem xs={12} sm={4} md={4} key={i}>
                                         <ContactBox
                                             {...us}
-                                            select={us._id === mail.user_id}
-                                            choose={hdSelectUser.bind(this, us._id)}
+                                            select={mail.user_id.indexOf(us._id) !== -1}
+                                            choose={selectUser.bind(this, us._id)}
                                         />
                                     </GridItem>
                                 ))
@@ -87,7 +87,7 @@ const Contact = ({form, hdChange, hdConfirm, confirm, hdSelectUser, userList, ma
             </GridItem>
             <GridItem xs={12} sm={12} md={12}>
                 {
-                    confirm && <ConfirmBar confirm={hdConfirm}/>
+                    confirm && <ConfirmBar confirm={hd.confirm}/>
                 }
             </GridItem>
         </GridContainer>

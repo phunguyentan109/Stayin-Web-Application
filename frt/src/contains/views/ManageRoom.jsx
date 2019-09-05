@@ -140,5 +140,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-// export default withAccess(connect(mapState, null)(withNoti(ManageRoomContain)));
 export default connect(mapState, null)(withNoti(ManageRoomContain));

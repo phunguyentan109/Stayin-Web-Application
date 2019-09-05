@@ -226,41 +226,61 @@
 
 .contact-box {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  border: 1px solid #c0c0c0;
-  border-radius: 5px;
-  padding: 8px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  position: relative;
-  cursor: pointer; }
-  .contact-box.select {
-    border: 2px solid #b7b7b7; }
-  .contact-box > div {
-    display: flex;
-    align-items: center; }
-    .contact-box > div > img {
-      margin-left: 15px;
-      margin-right: 20px;
-      width: 45px;
-      height: 45px;
-      border-radius: 3px;
+  margin-bottom: 20px; }
+  .contact-box > div:nth-of-type(1) {
+    position: relative; }
+    .contact-box > div:nth-of-type(1) > img {
+      width: 70px;
+      height: 70px;
+      border-radius: 55%;
       margin-bottom: 10px;
       border: none; }
-    .contact-box > div > div {
-      display: flex;
-      flex-direction: column; }
-      .contact-box > div > div > p {
-        margin: 0;
-        font-weight: 400;
-        font-size: 14px; }
-      .contact-box > div > div > small {
-        font-size: 11px; }
-  .contact-box > i {
-    color: gray;
-    font-size: 17px;
-    margin-right: 10px; }
+    .contact-box > div:nth-of-type(1) > button {
+      position: absolute;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 20px;
+      padding: 3px 5px;
+      bottom: 15px;
+      right: 3px;
+      transition: .2s;
+      width: 20px;
+      height: 20px;
+      border-radius: 55%; }
+      .contact-box > div:nth-of-type(1) > button.remove {
+        background-color: #8ee78e8a;
+        box-shadow: 3px 3px 2px #848181; }
+        .contact-box > div:nth-of-type(1) > button.remove > i {
+          font-size: 11px;
+          color: white; }
+      .contact-box > div:nth-of-type(1) > button.add {
+        background-color: #c4c4c4a3; }
+        .contact-box > div:nth-of-type(1) > button.add > i {
+          font-size: 11px;
+          color: white; }
+  .contact-box > div:nth-of-type(2) {
+    border-top: 1px solid #e9e9e9;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .contact-box > div:nth-of-type(2) > p {
+      margin: 0;
+      font-weight: 700;
+      color: gray; }
+    .contact-box > div:nth-of-type(2) > small {
+      font-size: 12px;
+      font-weight: 400;
+      color: #a1a1a1; }
+  .contact-box:hover > div:nth-of-type(1) > button.remove {
+    background-color: #d16969; }
+  .contact-box:hover > div:nth-of-type(1) > button.add {
+    background-color: #7dc87d; }
 
 .price-box {
   display: flex;

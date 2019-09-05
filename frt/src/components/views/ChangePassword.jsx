@@ -9,7 +9,7 @@ import CustomCardHeader from "components/Card/CustomCardHeader";
 import FormInput from "components/CustomInput/FormInput";
 import TitleBox from "components/Box/TitleBox";
 
-const ChangePassword = ({hdConfirm, form, users, hdChange, confirm, ...props}) => (
+const ChangePassword = ({hd, form, users, confirm, ...props}) => (
     <AppLayoutContain {...props}>
         <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
@@ -31,7 +31,7 @@ const ChangePassword = ({hdConfirm, form, users, hdChange, confirm, ...props}) =
                                     required
                                     name="password"
                                     value={users.password}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                             </GridItem>
                         </GridContainer>
@@ -43,7 +43,7 @@ const ChangePassword = ({hdConfirm, form, users, hdChange, confirm, ...props}) =
                                     required
                                     name="newPassword"
                                     value={users.newPassword}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                             </GridItem>
                             <GridItem xs={6} sm={12} md={6}>
@@ -53,7 +53,7 @@ const ChangePassword = ({hdConfirm, form, users, hdChange, confirm, ...props}) =
                                     required
                                     name="confirmPassword"
                                     value={users.confirmPassword}
-                                    onChange={hdChange}
+                                    onChange={hd.change}
                                 />
                             </GridItem>
                         </GridContainer>
@@ -63,7 +63,7 @@ const ChangePassword = ({hdConfirm, form, users, hdChange, confirm, ...props}) =
 
             <GridItem xs={12} sm={12} md={3}>
                 {
-                    confirm && <ConfirmBar confirm={hdConfirm}/>
+                    confirm && <ConfirmBar confirm={hd.confirm}/>
                 }
             </GridItem>
         </GridContainer>

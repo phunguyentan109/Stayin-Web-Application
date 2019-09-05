@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import ChangePassword from "components/views/ChangePassword";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
+import withNoti from "hocs/withNoti";
 
 const DEFAULT_PASSWORD = {
     password: "",
@@ -9,7 +10,7 @@ const DEFAULT_PASSWORD = {
     confirmPassword: ""
 }
 
-function ChangePasswordContain({api, user, ...props}) {
+function ChangePasswordContain({api, user, notify, ...props}) {
     const [users, setUsers] = useState(DEFAULT_PASSWORD);
     const [confirm, setConfirm] = useState(false);
 
@@ -25,13 +26,14 @@ function ChangePasswordContain({api, user, ...props}) {
         return () => {
             isLoaded = true
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     async function load() {
         try {
             setUsers(DEFAULT_PASSWORD);
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -43,19 +45,23 @@ function ChangePasswordContain({api, user, ...props}) {
                 await apiCall("put", api.updatePassword(user._id), users);
                 await load();
             } else {
-                alert("Password not the same or old password is valid !");
+                return notify("Password not the same or old password is valid !", false);
             }
-            return props.history.push("/profile");
+            // return props.history.push("/profile");
+            return notify("Change password successfully!", true);
         } catch(err) {
             console.log(err);
+            return notify(err);
         }
     }
 
     return <ChangePassword
         {...props}
         users={users}
-        hdConfirm={hdConfirm}
-        hdChange={hdChange}
+        hd={{
+            confirm: hdConfirm,
+            change: hdChange
+        }}
         confirm={confirm}
     />
 }
@@ -64,4 +70,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default connect(mapState, null)(ChangePasswordContain);
+export default connect(mapState, null)(withNoti(ChangePasswordContain));

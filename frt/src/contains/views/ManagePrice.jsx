@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import ManagePrice from "components/views/ManagePrice";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
+import withNoti from "hocs/withNoti";
 
 const DEFAULT_PRICE = {
     type: "",
@@ -13,7 +14,7 @@ const DEFAULT_PRICE = {
     duration: ""
 }
 
-function ManagePriceContain({api, user, ...props}) {
+function ManagePriceContain({api, user, notify, ...props}) {
     const [prices, setPrices] = useState([]);
     const [price, setPrice] = useState(DEFAULT_PRICE);
     const [formIsOpen, setOpenForm] = useState(false);
@@ -34,8 +35,10 @@ function ManagePriceContain({api, user, ...props}) {
             }
             await load();
             setOpenForm(false);
+            return notify("A new price is created successfully!", true);
         } catch(err) {
             console.log(err);
+            notify();
         }
     }
 
@@ -54,7 +57,7 @@ function ManagePriceContain({api, user, ...props}) {
             setPrices(priceList);
             setPrice(DEFAULT_PRICE);
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -64,8 +67,9 @@ function ManagePriceContain({api, user, ...props}) {
                 await apiCall("delete", api.delete(user._id, price_id));
                 await load();
             }
+            return notify("Delete price successfully!", true);
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -75,7 +79,7 @@ function ManagePriceContain({api, user, ...props}) {
             setPrice(priceOne);
             setOpenForm(true);
         } catch(err) {
-            console.log(err);
+            notify();
         }
     }
 
@@ -86,10 +90,12 @@ function ManagePriceContain({api, user, ...props}) {
         setPrices={setPrices}
         toggleForm={toggleForm}
         formIsOpen={formIsOpen}
-        hdConfirm={hdConfirm}
-        hdRemove={hdRemove}
-        hdChange={hdChange}
-        hdEdit={hdEdit}
+        hd={{
+            confirm: hdConfirm,
+            remove: hdRemove,
+            change: hdChange,
+            edit: hdEdit
+        }}
     />
 }
 
@@ -97,4 +103,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default connect(mapState, null)(ManagePriceContain);
+export default connect(mapState, null)(withNoti(ManagePriceContain));
