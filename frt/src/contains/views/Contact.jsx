@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import Contact from "components/views/Contact";
-import withAccess from "hocs/withAccess";
 import {apiCall} from "services/api";
 import {connect} from "react-redux";
 
@@ -82,4 +81,4 @@ function mapState({user}) {
     return {user: user.data}
 }
 
-export default withAccess(connect(mapState, null)(ContactContain))
+export default connect(mapState, null)(ContactContain);
