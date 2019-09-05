@@ -45,11 +45,6 @@ function ContactContain({api, user, notify, ...props}) {
             ...prev,
             user_id: [...prev.user_id, users]
         }));
-        // to render component
-        // for(let id of userList) {
-        //     mail.user_id.indexOf(id)
-        //
-        // }
     }
 
     async function hdConfirm() {
@@ -59,7 +54,6 @@ function ContactContain({api, user, notify, ...props}) {
              setConfirm(false);
             return notify("Your contact ware sent successfully!", true);
         } catch(err) {
-            console.log(err);
             return notify(err);
         }
     }

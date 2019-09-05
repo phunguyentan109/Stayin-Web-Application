@@ -564,8 +564,10 @@
   cursor: pointer; }
   .payState > div.expired {
     cursor: default; }
-    .payState > div.expired:hover {
-      text-decoration: none; }
+    .payState > div.expired:hover > span {
+      color: gray;
+      text-decoration: underline;
+      cursor: pointer; }
   .payState > div > i {
     margin-right: 8px;
     color: #c6c6c6;
@@ -578,8 +580,8 @@
     color: #eb9494;
     font-weight: bold;
     text-decoration: underline; }
-  .payState > div.unpaid:hover {
-    text-decoration: underline; }
+  .payState > div.unpaid:hover > span {
+    color: #eb9494; }
 
 .bill-date > div {
   display: flex;
