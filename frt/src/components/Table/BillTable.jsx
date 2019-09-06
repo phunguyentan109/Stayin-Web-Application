@@ -43,7 +43,9 @@ const BillTable = ({tableData, cssRow, cssCell, hdRemove, hdEdit, options, hdPay
                     }
                     {
                         row.inContract || <div className={`expired ${row.pay.status ? "" : "unpaid"}`}>
-                            <span>{row.pay.status ? "Paid" : "Unpaid"}</span>
+                            <span onClick={hdPay.bind(this, row._id, !row.pay.status)}>
+                                {row.pay.status ? "Paid" : "Unpaid"}
+                            </span>
                         </div>
                     }
                 </TableCell>

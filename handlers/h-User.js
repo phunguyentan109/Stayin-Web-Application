@@ -6,19 +6,15 @@ exports.signUp = async(req, res, next) => {
     try {
         let vname = req.body.email.split("@")[0];
         let user = await db.User.create({viewname: vname, ...req.body});
-
-        // add role for user
         let {_id, viewname, email, active, avatar} = user;
-        let role = await db.Role.findOne({code: "001"});
-        await db.UserRole.create({role: role._id, user: _id});
 
         // gen token for storing on client
-        let token = genToken(_id, role);
+        let token = genToken(_id);
 
         //send activate mail
         await mail.activate(email, viewname, _id, req.headers.host);
 
-        return res.status(200).json({_id, viewname, avatar, email, role, active, token});
+        return res.status(200).json({_id, viewname, avatar, email, active, token});
     } catch(err) {
         return next({
             status: 400,
@@ -31,10 +27,17 @@ exports.logIn = async(req, res, next) => {
     try {
         let user = await db.User.findOne({email: req.body.email});
         let {_id, viewname, email, active, avatar} = user;
+        // compare password
         let match = await user.comparePassword(req.body.password);
         if(match){
-            let role = (await db.UserRole.findOne({user: _id}).populate("role").exec()).role;
+
+            // get role of user
+            let userRole = await db.UserRole.findOne({user: _id}).populate("role").exec();
+            let role = userRole.role ? userRole.role : false;
+
+            // gen token to store on client
             let token = genToken(_id, role);
+
             return res.status(200).json({_id, viewname, avatar, email, role, active, token});
         } else {
             return next({
@@ -84,11 +87,12 @@ exports.getOne = async(req, res, next) => {
         let {_id, viewname, email, active, avatar, phone} = user;
 
         // get role
-        let role = (await db.UserRole.findOne({user: _id}).populate("role").exec()).role;
+        let userRole = await db.UserRole.findOne({user: _id}).populate("role").exec();
+        let role = userRole ? userRole.role : false;
 
         // get people_id
         let people_id = false;
-        if(role.code !== "000"){
+        if(role && role.code !== "000"){
             people_id = (await db.People.findOne({user_id: _id}).populate().exec())._id;
         }
 
@@ -130,7 +134,12 @@ exports.activate = async(req, res, next) => {
         let user = await db.User.findById(req.params.user_id);
         if(user) {
             user.active = true;
+
+            // add role for user
+            let role = await db.Role.findOne({code: "001"});
+            await db.UserRole.create({role: role._id, user: user._id});
             await user.save();
+
             // create people
             people = await db.People.create({user_id: user._id});
             return res.status(200).json({user, people});
@@ -140,7 +149,6 @@ exports.activate = async(req, res, next) => {
             message: "Oops! Something went wrong!"
         })
     } catch(err) {
-        console.log(err);
         return next(err);
     }
 }
@@ -160,7 +168,6 @@ exports.contact = async(req, res, next) => {
 
         return res.status(200).json(listUser);
     } catch(err) {
-        console.log(err);
         return next(err);
     }
 }

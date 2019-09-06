@@ -31,7 +31,7 @@ function ManagePeopleContain({api, user, notify, ...props}) {
             if(window.confirm("Do you want to remove this data?")){
                 await apiCall("delete", api.people.delete(user._id, people_id));
                 await load();
-                return notify(true, true, "Removing people's information successfully!");
+                return notify("Removing people's information successfully!", true);
             }
         } catch(err) {
             notify();
@@ -43,7 +43,7 @@ function ManagePeopleContain({api, user, notify, ...props}) {
             if(window.confirm("Do you want to remove this data?")){
                 await apiCall("delete", api.account.delete(user_id));
                 await load();
-                return notify(true, true, "One user account is removed successfully!");
+                return notify("One user account is removed successfully!", true);
             }
         } catch(err) {
             notify();

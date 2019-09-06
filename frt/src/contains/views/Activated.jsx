@@ -4,7 +4,7 @@ import {apiCall} from "services/api";
 import {activateUser} from "store/actions/user";
 import {connect} from "react-redux";
 
-function ActivatedContain(props) {
+function ActivatedContain({api, ...props}) {
 
     useEffect(() => {
         let checkActive = false
@@ -16,15 +16,13 @@ function ActivatedContain(props) {
     async function verify() {
         const {user_id} = props.match.params;
         try {
-            let user = await apiCall("get", `/api/user/${user_id}`);
+            let user = await apiCall("get", api.getOne(user_id));
             if(!user.active) {
-                let newUser = await apiCall("put", `/api/user/${user_id}/activate`);
+                let newUser = await apiCall("put", api.activate(user_id));
                 await props.activateUser(newUser.user._id);
             }
-            return props.history.push("/dashboard");
         } catch(err) {
             console.log(err);
-            props.history.push("/dashboard");
         }
     }
 
