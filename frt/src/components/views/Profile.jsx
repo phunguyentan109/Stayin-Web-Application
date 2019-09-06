@@ -37,17 +37,19 @@ const Profile = ({form, hd, profile, people, confirm, withAccess, ...props}) => 
                                     onChange={hd.profileChange}
                                 />
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={5}>
-                                <FormInput
-                                    type="email"
-                                    label="Email"
-                                    placeholder="Enter your email"
-                                    required
-                                    name="email"
-                                    value={profile.email}
-                                    onChange={hd.profileChange}
-                                />
-                            </GridItem>
+                            {
+                                withAccess(["peopleAccess"]) && <GridItem xs={12} sm={12} md={5}>
+                                    <FormInput
+                                        type="email"
+                                        label="Email"
+                                        placeholder="Enter your email"
+                                        required
+                                        name="email"
+                                        value={profile.email}
+                                        onChange={hd.profileChange}
+                                    />
+                                </GridItem>
+                            }
                             <GridItem xs={12} sm={12} md={4}>
                                 <FormInput
                                     type="number"
@@ -60,29 +62,31 @@ const Profile = ({form, hd, profile, people, confirm, withAccess, ...props}) => 
                                 />
                             </GridItem>
                         </GridContainer>
-                        {withAccess(["peopleAccess"]) && <GridContainer>
-                            <GridItem xs={12} sm={12} md={6}>
-                                <FormInput
-                                    type="text"
-                                    label="Job"
-                                    placeholder="Enter your Job"
-                                    required
-                                    name="job"
-                                    value={people.job}
-                                    onChange={hd.peopleChange}
-                                />
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={6}>
-                                <FormInput
-                                    type="date"
-                                    label="Birthdate"
-                                    required
-                                    name="birthDate"
-                                    value={people.birthDate}
-                                    onChange={hd.birthday}
-                                />
-                            </GridItem>
-                        </GridContainer>}
+                        {
+                            withAccess(["peopleAccess"]) && <GridContainer>
+                                <GridItem xs={12} sm={12} md={6}>
+                                    <FormInput
+                                        type="text"
+                                        label="Job"
+                                        placeholder="Enter your Job"
+                                        required
+                                        name="job"
+                                        value={people.job}
+                                        onChange={hd.peopleChange}
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={6}>
+                                    <FormInput
+                                        type="date"
+                                        label="Birthdate"
+                                        required
+                                        name="birthDate"
+                                        value={people.birthDate}
+                                        onChange={hd.birthDay}
+                                    />
+                                </GridItem>
+                            </GridContainer>
+                        }
                     </CardBody>
                 </Card>
                 {

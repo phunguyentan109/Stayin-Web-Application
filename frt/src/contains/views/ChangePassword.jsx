@@ -32,6 +32,7 @@ function ChangePasswordContain({api, user, notify, ...props}) {
     async function load() {
         try {
             setUsers(DEFAULT_PASSWORD);
+            setConfirm(false);
         } catch(err) {
             notify();
         }
@@ -39,16 +40,18 @@ function ChangePasswordContain({api, user, notify, ...props}) {
 
     async function hdConfirm() {
         try {
-            let {newPassword, confirmPassword} = users;
-
-            if(newPassword === confirmPassword){
-                await apiCall("put", api.updatePassword(user._id), users);
-                await load();
+            if(users.password && users.newPassword && users.confirmPassword){
+                let {newPassword, confirmPassword} = users;
+                if(newPassword === confirmPassword){
+                    await apiCall("put", api.updatePassword(user._id), users);
+                    await load();
+                    notify("Change password successfully!", true);
+                } else {
+                    notify("Password not the same or old password is valid !", false);
+                }
             } else {
-                return notify("Password not the same or old password is valid !", false);
+                notify("Please complete your password!", false);
             }
-            // return props.history.push("/profile");
-            return notify("Change password successfully!", true);
         } catch(err) {
             console.log(err);
             return notify(err);

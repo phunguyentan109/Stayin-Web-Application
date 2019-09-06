@@ -42,7 +42,7 @@ const Contact = ({form, hd, confirm, userList, mail, selectUser,...props}) => (
                                     placeholder="Enter your mail content"
                                     area={{
                                             cols: 1,
-                                            rows: 5
+                                            rows: 6
                                     }}
                                     required
                                     name="content"

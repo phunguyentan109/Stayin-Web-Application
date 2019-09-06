@@ -16,6 +16,10 @@
                 border-radius: 55%;
                 margin-bottom: 10px;
                 border: none;
+
+                &.select {
+                    box-shadow: 3px 3px 2px #848181;
+                }
             }
 
             > button {
@@ -34,8 +38,6 @@
 
                 &.remove {
                     background-color: #8ee78e8a;
-                    box-shadow: 3px 3px 2px #848181;
-
 
                     > i {
                         font-size: 11px;
@@ -81,11 +83,11 @@
         > div:nth-of-type(1) {
             > button {
                 &.remove {
-                    background-color: #d16969;
+                    background-color: #7dc87d;
                 }
 
                 &.add {
-                    background-color: #7dc87d;
+                    background-color: #a5a3a3;
                 }
             }
         }
