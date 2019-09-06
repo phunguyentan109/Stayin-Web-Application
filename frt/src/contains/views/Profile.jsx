@@ -57,13 +57,17 @@ function ProfileContain({api, user, notify, ...props}) {
 
     async function hdConfirm() {
         try {
-            await apiCall("put", api.user.update(user._id), profile);
-            if(props.withAccess(["peopleAccess"])) {
-                await apiCall("put", api.people.update(user._id, people._id), people);
+            if(profile.viewname && profile.email && profile.phone) {
+                await apiCall("put", api.user.update(user._id), profile);
+                if(props.withAccess(["peopleAccess"])) {
+                    await apiCall("put", api.people.update(user._id, people._id), people);
+                }
                 await load();
+                setConfirm(false);
+                notify("Update profile successfully!", true);
+            } else {
+                notify("Please complete your profile!", false);
             }
-            setConfirm(false);
-            return notify("Update profile successfully!", true);
         } catch(err) {
             notify();
         }

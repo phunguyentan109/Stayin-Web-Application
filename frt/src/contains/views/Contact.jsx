@@ -31,13 +31,29 @@ function ContactContain({api, user, notify, ...props}) {
     async function load() {
         try {
             let userData = await apiCall("get", api.user.get());
+            console.log(userData);
             userData = userData.map(us => ({...us, select: false}));
-
             setUserList(userData);
             setConfirm(false);
             setMail(DEFAULT_MAIL);
         } catch(err) {
             notify();
+        }
+    }
+
+    async function hdConfirm() {
+        try {
+            if(mail.title !== "" && mail.content !== "") {
+                await apiCall("post", api.user.post(user._id), mail);
+                await load();
+
+                notify("Your contact ware sent successfully!", true);
+            } else {
+                notify("Please fill in contact information!", false);
+            }
+        } catch(err) {
+            console.log(err);
+            return notify(err);
         }
     }
 
@@ -64,22 +80,6 @@ function ContactContain({api, user, notify, ...props}) {
                 ...prev,
                 user_id: [...prev.user_id, u_id]
             }));
-        }
-    }
-
-    async function hdConfirm() {
-        try {
-            if(mail.title !== "" && mail.content !== "") {
-                await apiCall("post", api.user.post(user._id), mail);
-                await load();
-
-                notify("Your contact ware sent successfully!", true);
-            } else {
-                notify("Please fill in contact information!", false);
-            }
-        } catch(err) {
-            console.log(err);
-            return notify(err);
         }
     }
 

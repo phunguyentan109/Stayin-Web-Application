@@ -42,7 +42,7 @@ const Contact = ({form, hd, confirm, userList, mail, selectUser,...props}) => (
                                     placeholder="Enter your mail content"
                                     area={{
                                             cols: 1,
-                                            rows: 5
+                                            rows: 6
                                     }}
                                     required
                                     name="content"
@@ -62,7 +62,7 @@ const Contact = ({form, hd, confirm, userList, mail, selectUser,...props}) => (
                         subtitle="This will be used for send mail for your member"
                     />
                     <CardBody>
-                        <GridContainer customCss="price-container">
+                        <GridContainer customCss="people-container">
                             {
                                 userList.length > 0
                                 ? userList.map((us, i) => (

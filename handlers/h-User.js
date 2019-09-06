@@ -59,6 +59,15 @@ exports.get = async(req, res, next) => {
     }
 }
 
+exports.getAll = async(req, res, next) => {
+    try {
+        let users = await db.User.find().exec();
+        return res.status(200).json(users);
+    } catch (err) {
+        return next(err);
+    }
+}
+
 exports.remove = async(req, res, next) => {
     try {
         let user = await db.User.findById(req.params.user_id);
