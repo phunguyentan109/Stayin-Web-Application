@@ -1,7 +1,7 @@
 export default {
     api: {
         user: {
-            get: () => `/api/user`,
+            get: () => `/api/user/getAll`,
             post: (user_id) => `/api/user/${user_id}/contact`,
         }
     },
