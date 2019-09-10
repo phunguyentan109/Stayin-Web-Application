@@ -8,6 +8,7 @@ import ManageBillContain from "contains/views/ManageBill";
 import ChangePasswordContain from "contains/views/ChangePassword";
 import ProfileContain from "contains/views/Profile";
 import Contact from "contains/views/Contact";
+import MyRoom from "contains/views/MyRoom";
 
 import Login from "components/views/Login";
 
@@ -28,6 +29,7 @@ import manage_bill from "./display/ManageBill";
 import change_password from "./display/ChangePassword";
 import profile from "./display/Profile";
 import contact_User from "./display/Contact";
+import my_Room from "./display/MyRoom";
 
 const sidebar = [
     {
@@ -116,6 +118,13 @@ const routes = [
         name: "Send mail to user",
         Component: Contact,
         display: contact_User
+    },
+    {
+        path: "/myroom",
+        access: ["peopleAccess"],
+        name: "Room detail",
+        Component: MyRoom,
+        display: my_Room
     }
 ]
 

@@ -90,6 +90,7 @@ function ManageRoomContain({api, user, notify, ...props}) {
     async function hdEdit(room_id) {
         try {
             let foundRoom = await apiCall("get", api.room.getOne(user._id, room_id));
+            console.log(foundRoom);
             setRoom(foundRoom);
             await toggleForm();
         } catch(err) {

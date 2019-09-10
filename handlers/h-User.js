@@ -172,6 +172,34 @@ exports.contact = async(req, res, next) => {
     }
 }
 
+exports.userRoom = async(req, res, next) => {
+    try {
+        let peopleData = await db.People.findOne({user_id: req.params.user_id}).exec();
+        let {room_id} = peopleData;
+
+        return res.status(200).json(room_id);
+    } catch(err) {
+        return next(err);
+    }
+}
+
+exports.amountElectric = async(req, res, next) => {
+    try {
+        let {amount} = req.body;
+        let user = await db.User.findById(req.params.user_id);
+        let {viewname} = user;
+        // get room name
+        let roomData = await db.People.findOne({user_id: user._id}).populate("room_id").exec();
+        let roomName = roomData.room_id.name
+
+        mail.amountElectric(viewname, roomName, amount);
+
+        return res.status(200).json(amount);
+    } catch(err) {
+        return next(err);
+    }
+}
+
 exports.update = async(req, res, next) => {
     try {
         let updateUser = await db.User.findByIdAndUpdate(req.params.user_id, req.body, {new: true});

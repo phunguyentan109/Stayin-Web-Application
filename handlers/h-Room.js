@@ -38,6 +38,24 @@ exports.getOne = async(req, res, next) => {
     }
 }
 
+
+exports.getRoom = async(req, res, next) => {
+    try {
+        let userRoom = await db.Room.findById(req.params.room_id)
+            .populate("price_id")
+            .populate({
+                path: "people_id",
+                populate: {
+                    path: "user_id"
+                }
+            })
+            .exec();
+        return res.status(200).json(userRoom);
+    } catch(err) {
+        return next(err);
+    }
+}
+
 exports.create = async(req, res, next) => {
     try {
         let createdRoom = await db.Room.create(req.body);
