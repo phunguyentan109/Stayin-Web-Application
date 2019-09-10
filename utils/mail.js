@@ -4,6 +4,7 @@ const emoji = require("node-emoji");
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const {GMAILUSER, CLIENTID, CLIENTSECRET, REFRESHTOKEN, GGOAUTHLINK} = process.env;
+const moment = require("moment");
 
 exports.genToken = async() => {
 	let buf = await crypto.randomBytes(20);
@@ -79,4 +80,13 @@ ${content}.`;
 	return await send(to, subject, text);
 }
 
-module.exports = {send, activate, getRoom, leaveRoom, contactUser}
+async function amountElectric(viewname, roomName, amount) {
+	let subject = emoji.emojify(`:zap: ${viewname} from ${roomName} had sent - Amount eletric in this month - Staywell`);
+	let text = `
+Hello Owner, this mail of ${viewname} comes from ${roomName},
+
+Electric number at ${moment().format("DD-MM-YYYY")} is ${amount}.`;
+	return await send(GMAILUSER, subject, text);
+}
+
+module.exports = {send, activate, getRoom, leaveRoom, contactUser, amountElectric}
