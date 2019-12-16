@@ -6,7 +6,6 @@ const cors = require("cors");
 const mw = require("./middleware");
 const hdl = require("./handlers");
 const path = require('path');
-require("./seed")();
 
 app.use(express.static(path.join(__dirname, 'frt/build')));
 
@@ -26,7 +25,8 @@ app.use((req, res, next) => {
     next(err);
 });
 
-
 app.use(hdl.Error.handle);
 
-app.listen(process.env.PORT, () => console.log(`[ SERVER IS STARTED ON PORT ${process.env.PORT} ]`));
+app.listen(process.env.PORT, () =>
+    console.log(`[ SERVER IS STARTED ON PORT ${process.env.PORT} ]`)
+);
