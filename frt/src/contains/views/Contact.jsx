@@ -52,7 +52,6 @@ function ContactContain({api, user, notify, ...props}) {
                 notify("Please fill in contact information!", false);
             }
         } catch(err) {
-            console.log(err);
             return notify(err);
         }
     }

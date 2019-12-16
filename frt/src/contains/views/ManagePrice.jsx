@@ -37,7 +37,6 @@ function ManagePriceContain({api, user, notify, ...props}) {
             setOpenForm(false);
             return notify("A new price is created successfully!", true);
         } catch(err) {
-            console.log(err);
             notify();
         }
     }

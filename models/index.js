@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 mongoose.Promise = Promise;
-mongoose.connect(process.env.DB_URL, {useNewUrlParser: true});
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 module.exports.User = require("./m-User");
 module.exports.Room = require("./m-Room");

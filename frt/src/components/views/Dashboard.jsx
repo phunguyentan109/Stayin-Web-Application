@@ -32,13 +32,13 @@ import CardBody from "../Card/CardBody.jsx";
 import CardFooter from "../Card/CardFooter.jsx";
 import AppLayoutContain from "contains/Layout/AppLayout";
 
-import { bugs, website, server } from "../../variables/general.jsx";
+import { bugs, website, server } from "../../services/variables/general.jsx";
 
 import {
   dailySalesChart,
   emailsSubscriptionChart,
   completedTasksChart
-} from "../../variables/charts.jsx";
+} from "../../services/variables/charts.jsx";
 
 import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
